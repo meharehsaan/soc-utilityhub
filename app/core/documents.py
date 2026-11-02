@@ -106,6 +106,6 @@ def respond(result: dict[str, Any]) -> Response:
 def scalar_label(value: Any) -> str:
     if isinstance(value, str):
         return value
-    if isinstance(value, (int, Decimal)):
+    if type(value) in {int, Decimal}:
         return str(value)
     return dump_document(value, pretty=False)
