@@ -1,0 +1,24 @@
+<!doctype html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="color-scheme" content="dark light">
+  <meta name="description" content="Focused utilities for everyday security operations. No account. No saved history.">
+  <title>{% block title %}Utility Hub · Your analyst workbench{% endblock %}</title>
+  <script src="/static/js/theme.js"></script>
+  <link rel="icon" href="/static/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="/static/css/app.css">
+  {% block head %}{% endblock %}
+</head>
+<body data-page="{{ page }}">
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="site-header">
+    <a class="brand" href="/" aria-label="Utility Hub home"><span class="brand-mark" aria-hidden="true">u<span>h</span></span><span>utility<span class="brand-muted">hub</span><small>THE ANALYST'S WORKBENCH</small></span></a>
+    <nav aria-label="Main navigation"><a class="nav-link {% if page == 'home' %}active{% endif %}" href="/">Workbench</a><a class="nav-link {% if page == 'guide' %}active{% endif %}" href="/guide">How it works</a><span class="nav-divider"></span><button id="theme-toggle" class="icon-button" type="button" aria-label="Switch to light mode"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2m0 16v2M2 12h2m16 0h2M5 5l1.5 1.5m11 11L19 19M5 19l1.5-1.5m11-11L19 5"/></svg></button></nav>
+  </header>
+  <main id="main" class="site-main">{% block content %}{% endblock %}</main>
+  <footer class="site-footer"><span><span class="status-dot"></span>No accounts. No saved history.</span><span>Small tools for the details that matter.<span class="footer-mark"> UH / 01</span></span></footer>
+  {% block scripts %}{% endblock %}
+</body>
+</html>
