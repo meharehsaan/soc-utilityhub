@@ -4,7 +4,14 @@ from typing import Any
 import jmespath
 from jmespath.exceptions import JMESPathError
 
-from app.core.documents import DuplicateKey, check_nodes, dump_document, load_document, scalar_label
+from app.core.documents import (
+    DuplicateKey,
+    check_nodes,
+    child_pointer,
+    dump_document,
+    load_document,
+    scalar_label,
+)
 from app.core.errors import ToolError
 from app.schemas.json import JsonOptions
 
@@ -23,11 +30,18 @@ SAFE_QUERY_NODES = {
 
 
 # Produce a typed tree whose scalar labels preserve exact values in JavaScript.
-def tree_node(value: Any, key: str = "$", path: str = "") -> dict:
+def tree_node(value: Any, key: str = "$", path: str = "", budget: list[int] | None = None) -> dict:
+    if budget is None:
+        budget = [0]
+    label = "" if isinstance(value, (dict, list)) else scalar_label(value)
+    budget[0] += (
+        len(key.encode("utf-8")) + len(path.encode("utf-8")) + len(label.encode("utf-8")) + 128
+    )
+    if budget[0] > 4 * 1024 * 1024:
+        raise ToolError("JSON tree exceeds its 4 MiB construction budget.", "work_limit", 413)
     if isinstance(value, dict):
         children = [
-            tree_node(item, name, path + "/" + name.replace("~", "~0").replace("/", "~1"))
-            for name, item in value.items()
+            tree_node(item, name, child_pointer(path, name), budget) for name, item in value.items()
         ]
         return {
             "key": key,
@@ -42,7 +56,10 @@ def tree_node(value: Any, key: str = "$", path: str = "") -> dict:
             "path": path,
             "kind": "array",
             "count": len(value),
-            "children": [tree_node(item, str(i), path + f"/{i}") for i, item in enumerate(value)],
+            "children": [
+                tree_node(item, str(i), child_pointer(path, str(i)), budget)
+                for i, item in enumerate(value)
+            ],
         }
     kind = (
         "string"
@@ -67,9 +84,9 @@ def project(value: Any, expression: str) -> Any:
                 raise ToolError(
                     "Use field, index, slice, or wildcard projections; functions and constructed objects are not enabled."
                 )
-            pending.extend(node.get("children", []))
+            pending.extend(child for child in node.get("children", []) if isinstance(child, dict))
         result = query.search(value)
-    except JMESPathError as exc:
+    except (JMESPathError, ValueError, TypeError) as exc:
         raise ToolError("Invalid JMESPath projection.") from exc
     check_nodes(result)
     return result

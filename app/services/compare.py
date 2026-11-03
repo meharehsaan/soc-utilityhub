@@ -1,7 +1,7 @@
 import difflib
 from typing import Any
 
-from app.core.documents import DuplicateKey, dump_document, load_document
+from app.core.documents import DuplicateKey, child_pointer, dump_document, load_document
 from app.core.errors import ToolError
 from app.schemas.compare import CompareOptions
 
@@ -20,6 +20,13 @@ def index_lines(text: str, options: CompareOptions) -> dict[str, str]:
     return result
 
 
+# Cap cumulative diff text before repeated paths or removed subtrees consume memory.
+def append_change(changes: list[str], message: str) -> None:
+    if len(changes) >= 2000 or sum(map(len, changes)) + len(message) > 512 * 1024:
+        raise ToolError("Structural diff exceeds its bounded output budget.", "work_limit", 413)
+    changes.append(message)
+
+
 # Compare JSON types, values, and ordered array positions with bounded change reporting.
 def json_changes(a: Any, b: Any, changes: list[str], ignore_order: bool, path: str = "$") -> None:
     if len(changes) >= 2000:
@@ -29,16 +36,16 @@ def json_changes(a: Any, b: Any, changes: list[str], ignore_order: bool, path: s
     if type(a) is not type(b) and not (
         type(a).__name__ in {"int", "Decimal"} and type(b).__name__ in {"int", "Decimal"}
     ):
-        changes.append(
-            f"{path}: {dump_document(a, pretty=False)} → {dump_document(b, pretty=False)}"
+        append_change(
+            changes, f"{path}: {dump_document(a, pretty=False)} → {dump_document(b, pretty=False)}"
         )
     elif isinstance(a, dict):
         if not ignore_order and list(a) != list(b):
-            changes.append(f"{path}: object key order differs")
+            append_change(changes, f"{path}: object key order differs")
         for key in a:
-            pointer = path + "/" + key.replace("~", "~0").replace("/", "~1")
+            pointer = child_pointer(path, key)
             if key not in b:
-                changes.append(f"{pointer}: removed {dump_document(a[key], pretty=False)}")
+                append_change(changes, f"{pointer}: removed {dump_document(a[key], pretty=False)}")
             else:
                 json_changes(a[key], b[key], changes, ignore_order, pointer)
             if len(changes) >= 2000:
@@ -47,7 +54,10 @@ def json_changes(a: Any, b: Any, changes: list[str], ignore_order: bool, path: s
                 )
         for key in b:
             if key not in a:
-                changes.append(f"{path}/{key}: added {dump_document(b[key], pretty=False)}")
+                append_change(
+                    changes,
+                    f"{child_pointer(path, key)}: added {dump_document(b[key], pretty=False)}",
+                )
                 if len(changes) >= 2000:
                     raise ToolError(
                         "More than 2,000 structural changes; narrow the documents.",
@@ -57,18 +67,24 @@ def json_changes(a: Any, b: Any, changes: list[str], ignore_order: bool, path: s
     elif isinstance(a, list):
         for i in range(max(len(a), len(b))):
             if i >= len(a):
-                changes.append(f"{path}/{i}: added {dump_document(b[i], pretty=False)}")
+                append_change(
+                    changes,
+                    f"{child_pointer(path, str(i))}: added {dump_document(b[i], pretty=False)}",
+                )
             elif i >= len(b):
-                changes.append(f"{path}/{i}: removed {dump_document(a[i], pretty=False)}")
+                append_change(
+                    changes,
+                    f"{child_pointer(path, str(i))}: removed {dump_document(a[i], pretty=False)}",
+                )
             else:
-                json_changes(a[i], b[i], changes, ignore_order, f"{path}/{i}")
+                json_changes(a[i], b[i], changes, ignore_order, child_pointer(path, str(i)))
             if len(changes) >= 2000:
                 raise ToolError(
                     "More than 2,000 structural changes; narrow the documents.", "work_limit", 413
                 )
     elif a != b:
-        changes.append(
-            f"{path}: {dump_document(a, pretty=False)} → {dump_document(b, pretty=False)}"
+        append_change(
+            changes, f"{path}: {dump_document(a, pretty=False)} → {dump_document(b, pretty=False)}"
         )
 
 

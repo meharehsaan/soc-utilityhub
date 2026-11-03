@@ -201,7 +201,11 @@ def inspect_logs(options: LogsOptions) -> dict:
     if options.export == "csv":
         buffer = io.StringIO(newline="")
         writer = csv.writer(buffer, lineterminator="\n")
-        writer.writerow(columns)
+        writer.writerow(
+            [spreadsheet_cell(column) for column in columns]
+            if options.spreadsheet_safe
+            else columns
+        )
         for record in projected:
             row = [cell_text(record.get(column, "")) for column in columns]
             writer.writerow(

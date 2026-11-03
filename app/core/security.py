@@ -71,11 +71,18 @@ class SafetyMiddleware:
                     )
             if method in {"POST", "PUT", "PATCH", "DELETE"}:
                 origin = headers.get("origin")
+                try:
+                    parsed_origin = urlsplit(origin) if origin else None
+                except ValueError as exc:
+                    raise ToolError("Invalid Origin header.", "cross_site", 403) from exc
                 if headers.get("sec-fetch-site") == "cross-site" or (
-                    origin
+                    parsed_origin
                     and (
-                        urlsplit(origin).netloc.lower() != headers.get("host", "").lower()
-                        or urlsplit(origin).scheme != scope["scheme"]
+                        parsed_origin.netloc.lower() != headers.get("host", "").lower()
+                        or parsed_origin.scheme != scope["scheme"]
+                        or parsed_origin.path not in {"", "/"}
+                        or parsed_origin.query
+                        or parsed_origin.fragment
                     )
                 ):
                     raise ToolError("Cross-site submissions are not accepted.", "cross_site", 403)

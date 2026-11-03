@@ -1,4 +1,4 @@
-from decimal import Decimal
+from decimal import Decimal, InvalidOperation
 from typing import Any
 
 import simplejson as json
@@ -8,6 +8,7 @@ from app.core.errors import ToolError
 
 MAX_NODES = 20000
 MAX_DEPTH = 64
+MAX_POINTER = 1024
 
 
 class DuplicateKey(ValueError):
@@ -62,11 +63,25 @@ def check_nodes(value: Any) -> None:
             if len(pending) + len(current) > MAX_NODES:
                 raise ToolError("Document exceeds 20,000 values.", "too_many_values", 413)
             pending.extend(current.values())
+            if any(len(key) > 256 for key in current):
+                raise ToolError(
+                    "JSON object keys are limited to 256 characters.", "work_limit", 413
+                )
             pending.extend(current.keys())
         elif isinstance(current, list):
             if len(pending) + len(current) > MAX_NODES:
                 raise ToolError("Document exceeds 20,000 values.", "too_many_values", 413)
             pending.extend(current)
+
+
+# Bound escaped JSON Pointer growth before repeating paths across descendants.
+def child_pointer(path: str, key: str) -> str:
+    escaped = key.replace("~", "~0").replace("/", "~1")
+    if len(path) + len(escaped) + 1 > MAX_POINTER:
+        raise ToolError(
+            "JSON paths exceed 1,024 characters; narrow the document.", "work_limit", 413
+        )
+    return path + "/" + escaped
 
 
 # Decode strict JSON with exact integers and decimals and useful safe errors.
@@ -76,6 +91,12 @@ def load_document(text: str) -> Any:
         value = json.loads(text, use_decimal=True, object_pairs_hook=unique_object, allow_nan=False)
     except json.JSONDecodeError as exc:
         raise ToolError(f"Invalid JSON at line {exc.lineno}, column {exc.colno}.") from exc
+    except DuplicateKey:
+        raise
+    except (ValueError, InvalidOperation) as exc:
+        raise ToolError(
+            "A JSON number exceeds the parser's supported limits.", "work_limit", 413
+        ) from exc
     check_nodes(value)
     return value
 

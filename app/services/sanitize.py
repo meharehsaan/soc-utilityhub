@@ -31,6 +31,11 @@ def pattern_replacements(options: SanitizeOptions) -> list[Replacement]:
             for match in regex.finditer(EMAIL if kind == "email" else IP, options.text, timeout=1):
                 source = match.group()
                 if kind == "ip":
+                    source = source.rstrip(".")
+                    if source.count(":") == 1 and "." in source:
+                        address, port = source.rsplit(":", 1)
+                        if port.isdigit():
+                            source = address
                     try:
                         ipaddress.ip_address(source)
                     except ValueError:
@@ -146,9 +151,13 @@ def sanitize(options: SanitizeOptions) -> dict:
             "meta": {"matches": 0, "distinct_values": 0},
             "warnings": ["No selected pattern matches were found."],
         }
-    expression = "|".join(
-        f"(?P<m{i}>{regex.escape(item.source)})" for i, item in enumerate(entries)
-    )
+    alternatives = []
+    for i, item in enumerate(entries):
+        literal = regex.escape(item.source)
+        if options.mode == "patterns" and item.category == "ip":
+            literal = rf"(?<![\w:.]){literal}(?!\w|\.[0-9])"
+        alternatives.append(f"(?P<m{i}>{literal})")
+    expression = "|".join(alternatives)
     if options.whole_token:
         expression = rf"(?<!\w)(?:{expression})(?!\w)"
     pattern = regex.compile(expression, flags)

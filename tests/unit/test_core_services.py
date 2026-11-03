@@ -339,3 +339,51 @@ def test_filtered_summary() -> None:
 def test_duplicate_csv_header() -> None:
     with pytest.raises(ToolError):
         inspect_logs(LogsOptions(text="x,x\n1,2", format="csv"))
+
+
+# Tree construction must reject key/path amplification before large repeated allocations.
+def test_tree_path_budget() -> None:
+    with pytest.raises(ToolError):
+        inspect_json(JsonOptions(text=dump_document({"k" * 257: [0] * 100})))
+    value = 0
+    for _ in range(6):
+        value = {"k" * 200: value}
+    with pytest.raises(ToolError):
+        inspect_json(JsonOptions(text=dump_document(value)))
+
+
+# Slice AST operands are scalar metadata, not AST nodes to dereference.
+def test_jmespath_slice() -> None:
+    result = inspect_json(JsonOptions(text='{"a":[1,2,3]}', action="query", query="a[:1]"))
+    assert load_document(result["output"]) == [1]
+    with pytest.raises(ToolError):
+        inspect_json(JsonOptions(text='{"a":[1,2]}', action="query", query="a[::0]"))
+
+
+# Spreadsheet-safe export must protect attacker-controlled header cells too.
+def test_csv_formula_header() -> None:
+    result = inspect_logs(LogsOptions(text='{"=1+1":"value"}', format="json", export="csv"))
+    assert result["output"].startswith("'=1+1")
+
+
+# Valid IPs followed by sentence punctuation or ports must still be maskable.
+@pytest.mark.parametrize("source", ["192.0.2.1.", "192.0.2.1:443", "[2001:db8::1]:443"])
+def test_pattern_ip_boundaries(source: str) -> None:
+    result = sanitize(SanitizeOptions(text=source, mode="patterns", patterns=["ip"]))
+    assert "IP_001" in result["output"]
+
+
+# Extremely large numbers must produce safe bounded failures instead of uncaught parser errors.
+@pytest.mark.parametrize("source", ["9" * 5000, "1e99999999999999999999999999999"])
+def test_oversized_numbers(source: str) -> None:
+    with pytest.raises(ToolError):
+        load_document(source)
+
+
+# Long ancestor names must not amplify change reporting beyond the path budget.
+def test_diff_path_limit() -> None:
+    a, b = 0, 1
+    for _ in range(6):
+        a, b = {"k" * 200: a}, {"k" * 200: b}
+    with pytest.raises(ToolError):
+        compare(CompareOptions(a=dump_document(a), b=dump_document(b), mode="json"))
