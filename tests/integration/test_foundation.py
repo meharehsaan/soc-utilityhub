@@ -1,35 +1,11 @@
-import asyncio
 import unittest
 
-import httpx
 from fastapi import Request
 
-from app.main import create_app
+from tests.integration.base import ASGITestCase
 
 
-class FoundationTests(unittest.IsolatedAsyncioTestCase):
-    # Create an isolated application so request counters never leak between tests.
-    async def asyncSetUp(self) -> None:
-        self.heartbeat = asyncio.create_task(self.tick_loop())
-        self.app = create_app()
-        self.client = httpx.AsyncClient(
-            transport=httpx.ASGITransport(app=self.app), base_url="http://testserver"
-        )
-
-    # Release the in-process client without opening a network connection.
-    async def asyncTearDown(self) -> None:
-        await self.client.aclose()
-        self.heartbeat.cancel()
-        try:
-            await self.heartbeat
-        except asyncio.CancelledError:
-            pass
-
-    # Keep in-process worker wakeups moving like Uvicorn's periodic server tick.
-    async def tick_loop(self) -> None:
-        while True:
-            await asyncio.sleep(0.02)
-
+class FoundationTests(ASGITestCase):
     # Verify the real templates and static files are wired to the single application.
     async def test_pages_and_assets(self) -> None:
         for path in ("/", "/guide", "/static/css/app.css", "/static/js/theme.js"):

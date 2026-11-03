@@ -1,5 +1,6 @@
 const form = document.getElementById("tool-form");
 let output = "";
+let downloadBytes = null;
 let controller = null;
 let busy = false;
 const MAX_TEXT = 1_000_000;
@@ -62,6 +63,7 @@ export async function requestHashFile(file, algorithms, expected, signal) {
 // Update result text and metadata through inert DOM nodes only.
 export function renderResult(result) {
   output = result.output ?? "";
+  downloadBytes = result.binary instanceof Uint8Array ? result.binary : null;
   if (new TextEncoder().encode(output).length > OUTPUT_LIMIT) throw new Error("Result exceeds 10 MiB; reduce the input.");
   document.getElementById("result-empty").hidden = true;
   const target = document.getElementById("result-output");
@@ -78,7 +80,7 @@ export function renderResult(result) {
   meta.hidden = meta.childElementCount === 0;
   const warnings = document.getElementById("result-warnings");
   warnings.textContent = (result.warnings ?? []).join(" "); warnings.hidden = !warnings.textContent;
-  document.getElementById("copy-result").disabled = false;
+  document.getElementById("copy-result").disabled = Boolean(downloadBytes);
   document.getElementById("download-result").disabled = false;
   document.getElementById("result-status").textContent = "Ready. Review the result before using it.";
 }
@@ -99,7 +101,7 @@ export function makeTable(headers, rows) {
 // Clear operation state without writing content or mappings to persistent storage.
 function resetResult() {
   controller?.abort(); controller = null;
-  output = "";
+  output = ""; downloadBytes = null;
   document.getElementById("result-empty").hidden = false;
   for (const id of ["result-output", "result-meta", "result-warnings", "result-detail", "tool-error"]) {
     const target = document.getElementById(id); target.replaceChildren(); target.hidden = true;
@@ -109,12 +111,21 @@ function resetResult() {
   document.getElementById("download-result").disabled = true;
   document.dispatchEvent(new Event("tool:reset"));
   updateInputCount();
+  updateFileLabels();
 }
 // Show a compact input count without storing or transmitting keystrokes.
 function updateInputCount() {
   const count = document.getElementById("input-count");
   const area = document.getElementById("source");
   if (count && area) count.textContent = `${area.value.length.toLocaleString()} characters`;
+}
+// Display selected local filenames without uploading them or inserting markup.
+function updateFileLabels() {
+  for (const input of form.querySelectorAll('input[type="file"]')) {
+    let label = input.parentElement.querySelector(".selected-file");
+    if (!label) { label = document.createElement("span"); label.className = "selected-file"; input.after(label); }
+    label.textContent = input.files[0] ? ` · ${input.files[0].name}` : "";
+  }
 }
 // Copy only the current output, with an accessible selection fallback.
 async function copyResult() {
@@ -128,9 +139,9 @@ async function copyResult() {
 }
 // Download a current result without server retention or user-controlled filesystem paths.
 function downloadResult() {
-  const url = URL.createObjectURL(new Blob([output], { type: "text/plain;charset=utf-8" }));
+  const url = URL.createObjectURL(new Blob([downloadBytes ?? output], { type: downloadBytes ? "application/octet-stream" : "text/plain;charset=utf-8" }));
   const anchor = document.createElement("a"); anchor.href = url;
-  anchor.download = `${document.querySelector(".workspace").dataset.tool}-result.txt`;
+  anchor.download = `${document.querySelector(".workspace").dataset.tool}-result.${downloadBytes ? "bin" : "txt"}`;
   anchor.click();
   // Release only the in-memory blob after the browser begins its download.
   function releaseBlob() { URL.revokeObjectURL(url); }
@@ -159,6 +170,7 @@ export function connectForm(run, example, render = renderResult) {
   function shortcut(event) { if ((event.ctrlKey || event.metaKey) && event.key === "Enter") { event.preventDefault(); form.requestSubmit(); } }
   form.addEventListener("submit", submit);
   form.addEventListener("input", updateInputCount);
+  form.addEventListener("change", updateFileLabels);
   form.addEventListener("keydown", shortcut);
   document.getElementById("reset-tool").addEventListener("click", resetTool);
   document.getElementById("load-example").addEventListener("click", loadExample);

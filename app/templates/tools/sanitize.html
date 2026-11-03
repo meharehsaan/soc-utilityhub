@@ -1,0 +1,14 @@
+{% extends "workspace.html" %}
+{% block options %}
+<div class="option-row"><label for="mode">Mode<select id="mode" name="mode"><option value="literal">Replace supplied strings</option><option value="patterns">Mask selected patterns</option><option value="json_fields">Mask exact JSON field names</option></select></label></div>
+{% endblock %}
+{% block extra %}
+<div id="literal-options"><p class="section-label">STRINGS TO REPLACE · ONE PER LINE</p><div class="replacement-fields">
+{% for key, label, example in [('email','Emails','alice@acme.test'),('username','Usernames','alice'),('company','Company names','Acme Ltd'),('domain','Domains','acme.test'),('hostname','Hostnames','workstation-01'),('ip','IP addresses','192.0.2.10')] %}<label>{{ label }}<textarea name="{{ key }}" spellcheck="false" placeholder="{{ example }}" maxlength="12000"></textarea></label>{% endfor %}</div>
+<p class="section-label">CUSTOM STRINGS · OPTIONAL</p><div id="custom-mappings"><div class="custom-mapping option-row"><label>String<input class="field-input custom-source" maxlength="512" placeholder="Exact value"></label><label>Replacement<input class="field-input custom-target" maxlength="512" placeholder="Automatic placeholder"></label></div></div><button type="button" id="add-mapping" class="small-button">+ Add custom string</button>
+<div class="check-row"><label><input type="checkbox" name="ignore_case">Ignore case</label><label><input type="checkbox" name="whole_token">Whole tokens only</label></div></div>
+<div id="pattern-options" hidden><p class="section-label">SELECT PATTERNS TO MASK</p><div class="check-row"><label><input type="checkbox" name="pattern_email">Email addresses</label><label><input type="checkbox" name="pattern_ip">IP addresses</label></div></div>
+<div id="field-options" hidden><label class="field-label" for="fields">Exact JSON field names · one per line</label><textarea id="fields" name="fields" class="source-area short" placeholder="email&#10;username" maxlength="12000"></textarea><p class="field-help">Matching keys are masked at every nesting level. JSON formatting is normalized.</p></div>
+{% endblock %}
+{% block run_label %}Replace & preview{% endblock %}
+{% block note %}Only configured values are replaced. Repeated values keep a consistent alias within this operation. Review the result before sharing it; no tool can guarantee complete anonymization.{% endblock %}

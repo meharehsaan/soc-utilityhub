@@ -10,7 +10,7 @@ class Tool:
     accent: str
     symbol: str
     processing: str = "On your server"
-    available: bool = False
+    available: bool = True
 
 
 TOOLS = (

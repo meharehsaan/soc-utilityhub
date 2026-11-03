@@ -10,6 +10,7 @@ from starlette.responses import JSONResponse
 from app.catalog import available_tools
 from app.core.errors import ToolError, error_response
 from app.core.security import SafetyMiddleware
+from app.routers import compare, encoder, hash, json, logs, sanitize, text
 from app.web import ROOT, TEMPLATES
 
 
@@ -81,5 +82,16 @@ def create_app() -> FastAPI:
     @app.get("/health")
     def health():
         return {"status": "ok"}
+
+    for router in (
+        sanitize.router,
+        text.router,
+        logs.router,
+        json.router,
+        hash.router,
+        encoder.router,
+        compare.router,
+    ):
+        app.include_router(router)
 
     return app
