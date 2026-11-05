@@ -177,3 +177,13 @@ export function connectForm(run, example, render = renderResult) {
   document.getElementById("copy-result").addEventListener("click", copyResult);
   document.getElementById("download-result").addEventListener("click", downloadResult);
 }
+
+// Upload one explicitly selected inert file without putting its name into a request URL.
+export async function requestUploadedTool(slug, file, options, signal) {
+  if (file.size > 5 * 1024 * 1024) throw new Error("Files must be 5 MiB or smaller.");
+  const data = new FormData(); data.append("file", file); data.append("options", JSON.stringify(options));
+  const response = await fetch(`/api/v1/${slug}/file`, {method:"POST",body:data,cache:"no-store",credentials:"same-origin",signal});
+  const result = await response.json();
+  if (!response.ok) throw new Error(result.error?.message || "File inspection failed.");
+  return result;
+}

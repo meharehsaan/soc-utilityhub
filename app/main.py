@@ -10,7 +10,31 @@ from starlette.responses import JSONResponse
 from app.catalog import available_tools
 from app.core.errors import ToolError, error_response
 from app.core.security import SafetyMiddleware
-from app.routers import compare, encoder, hash, json, logs, sanitize, text
+from app.routers import (
+    certificate,
+    compare,
+    email,
+    encoder,
+    events,
+    hash,
+    ioc,
+    json,
+    jwt,
+    logs,
+    process_tree,
+    query,
+    report,
+    sanitize,
+    sigma,
+    spell,
+    stix,
+    strings,
+    text,
+    timeline,
+    timestamp,
+    unicode,
+    url,
+)
 from app.web import ROOT, TEMPLATES
 
 
@@ -91,6 +115,22 @@ def create_app() -> FastAPI:
         hash.router,
         encoder.router,
         compare.router,
+        ioc.router,
+        timestamp.router,
+        url.router,
+        email.router,
+        jwt.router,
+        timeline.router,
+        events.router,
+        query.router,
+        sigma.router,
+        process_tree.router,
+        certificate.router,
+        strings.router,
+        unicode.router,
+        stix.router,
+        report.router,
+        spell.router,
     ):
         app.include_router(router)
 

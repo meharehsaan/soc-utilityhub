@@ -1,0 +1,6 @@
+{% extends "workspace.html" %}
+{% block options %}<div class="option-row"><label>KQL table<input class="field-input" name="table" type="text" value="SecurityEvent" maxlength="256"></label>
+<label>Field<input class="field-input" name="field" type="text" value="Computer" maxlength="256"></label>
+<label>Comparison<select name="operator"><option value="in">Exact case-sensitive membership</option><option value="in~">ASCII case-insensitive membership</option><option value="has_any">Term matching</option></select></label></div>{% endblock %}
+{% block extra %}{% endblock %}
+{% block note %}Copy-only output. Identifiers and values are escaped separately; no connection to a SIEM or execution takes place.{% endblock %}

@@ -1,0 +1,12 @@
+{% extends "workspace.html" %}
+{% block options %}<div class="option-row"><label>Record format<select name="format"><option value="jsonl">JSONL</option><option value="json">JSON array</option></select></label>
+<label>Timestamp field<input class="field-input" name="time_field" type="text" value="timestamp" maxlength="256"></label>
+<label>Timestamp format<select name="timestamp_format"><option value="iso">ISO</option><option value="seconds">Epoch seconds</option><option value="milliseconds">Epoch milliseconds</option><option value="microseconds">Epoch microseconds</option><option value="filetime">FILETIME</option></select></label>
+<label>Zone for naive times<input class="field-input" name="input_zone" type="text" value="UTC" maxlength="256"></label>
+<label>Ambiguous local time<select name="ambiguity"><option value="reject">Reject</option><option value="earlier">Earlier</option><option value="later">Later</option></select></label>
+<label>Host field<input class="field-input" name="host_field" type="text" value="host" maxlength="256"></label>
+<label>User field<input class="field-input" name="user_field" type="text" value="user" maxlength="256"></label>
+<label>Action field<input class="field-input" name="action_field" type="text" value="action" maxlength="256"></label></div>{% endblock %}
+{% block extra %}{% endblock %}
+{% block note %}Only explicit timestamp assumptions are used. Missing or ambiguous times remain in unparsed evidence. Batches allow at most four files and one million combined characters.{% endblock %}
+{% block input %}<label class="field-label" for="source">Pasted records</label><textarea id="source" name="text" class="source-area" spellcheck="false" maxlength="1000000"></textarea><div class="input-meta"><label class="upload-button">↑ Upload up to four files<input type="file" id="source-file" multiple class="sr-only" accept=".json,.jsonl,.log,.txt"></label><span id="input-count">0 characters</span></div>{% endblock %}

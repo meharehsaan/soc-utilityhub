@@ -1,0 +1,7 @@
+{% extends "workspace.html" %}
+{% block options %}<div class="option-row"><label>Input format<select name="format"><option value="iso">ISO date/time</option><option value="seconds">Epoch seconds</option><option value="milliseconds">Epoch milliseconds</option><option value="microseconds">Epoch microseconds</option><option value="filetime">Windows FILETIME</option></select></label>
+<label>Zone for naive input<input class="field-input" name="input_zone" type="text" value="UTC" maxlength="256"></label>
+<label>Output zone<input class="field-input" name="output_zone" type="text" value="UTC" maxlength="256"></label>
+<label>Ambiguous local time<select name="ambiguity"><option value="reject">Reject; do not guess</option><option value="earlier">Earlier instant</option><option value="later">Later instant</option></select></label></div>{% endblock %}
+{% block extra %}{% endblock %}
+{% block note %}Choose units and zones explicitly. Invalid values remain visible as error rows; no timezone is inferred from your browser.{% endblock %}

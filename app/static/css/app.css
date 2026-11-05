@@ -1246,3 +1246,51 @@ details summary {
 .tree-copy:focus-visible {
   color: var(--text);
 }
+
+.accent-ioc { --tool-color: #e2bb98; --tool-bg: #2f2922; --tool-line: #e2bb98; }
+:root[data-theme=light] .accent-ioc { --tool-color: #784b21; --tool-bg: #f6f2ee; --tool-line: #784b21; }
+
+.accent-timestamp { --tool-color: #a698e2; --tool-bg: #25222f; --tool-line: #a698e2; }
+:root[data-theme=light] .accent-timestamp { --tool-color: #312178; --tool-bg: #f0eef6; --tool-line: #312178; }
+
+.accent-url { --tool-color: #9fe298; --tool-bg: #242f22; --tool-line: #9fe298; }
+:root[data-theme=light] .accent-url { --tool-color: #2a7821; --tool-bg: #eff6ee; --tool-line: #2a7821; }
+
+.accent-email { --tool-color: #e298b5; --tool-bg: #2f2227; --tool-line: #e298b5; }
+:root[data-theme=light] .accent-email { --tool-color: #782143; --tool-bg: #f6eef1; --tool-line: #782143; }
+
+.accent-jwt { --tool-color: #98cbe2; --tool-bg: #222b2f; --tool-line: #98cbe2; }
+:root[data-theme=light] .accent-jwt { --tool-color: #215d78; --tool-bg: #eef4f6; --tool-line: #215d78; }
+
+.accent-timeline { --tool-color: #e0e298; --tool-bg: #2f2f22; --tool-line: #e0e298; }
+:root[data-theme=light] .accent-timeline { --tool-color: #767821; --tool-bg: #f6f6ee; --tool-line: #767821; }
+
+.accent-events { --tool-color: #ce98e2; --tool-bg: #2c222f; --tool-line: #ce98e2; }
+:root[data-theme=light] .accent-events { --tool-color: #602178; --tool-bg: #f4eef6; --tool-line: #602178; }
+
+.accent-query { --tool-color: #98e2b8; --tool-bg: #222f28; --tool-line: #98e2b8; }
+:root[data-theme=light] .accent-query { --tool-color: #217847; --tool-bg: #eef6f2; --tool-line: #217847; }
+
+.accent-sigma { --tool-color: #e2a298; --tool-bg: #2f2422; --tool-line: #e2a298; }
+:root[data-theme=light] .accent-sigma { --tool-color: #782e21; --tool-bg: #f6f0ee; --tool-line: #782e21; }
+
+.accent-process-tree { --tool-color: #98a2e2; --tool-bg: #22242f; --tool-line: #98a2e2; }
+:root[data-theme=light] .accent-process-tree { --tool-color: #212e78; --tool-bg: #eef0f6; --tool-line: #212e78; }
+
+.accent-certificate { --tool-color: #b8e298; --tool-bg: #282f22; --tool-line: #b8e298; }
+:root[data-theme=light] .accent-certificate { --tool-color: #477821; --tool-bg: #f2f6ee; --tool-line: #477821; }
+
+.accent-strings { --tool-color: #e298ce; --tool-bg: #2f222c; --tool-line: #e298ce; }
+:root[data-theme=light] .accent-strings { --tool-color: #782161; --tool-bg: #f6eef4; --tool-line: #782161; }
+
+.accent-unicode { --tool-color: #98e2e0; --tool-bg: #222f2f; --tool-line: #98e2e0; }
+:root[data-theme=light] .accent-unicode { --tool-color: #217876; --tool-bg: #eef6f6; --tool-line: #217876; }
+
+.accent-stix { --tool-color: #e2cb98; --tool-bg: #2f2b22; --tool-line: #e2cb98; }
+:root[data-theme=light] .accent-stix { --tool-color: #785d21; --tool-bg: #f6f4ee; --tool-line: #785d21; }
+
+.accent-report { --tool-color: #b598e2; --tool-bg: #27222f; --tool-line: #b598e2; }
+:root[data-theme=light] .accent-report { --tool-color: #432178; --tool-bg: #f1eef6; --tool-line: #432178; }
+
+.accent-spell { --tool-color: #98e29f; --tool-bg: #222f24; --tool-line: #98e29f; }
+:root[data-theme=light] .accent-spell { --tool-color: #21782a; --tool-bg: #eef6ef; --tool-line: #21782a; }

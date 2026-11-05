@@ -1,0 +1,4 @@
+{% extends "workspace.html" %}
+{% block options %}<div class="option-row"><label>Action<select name="mode"><option value="extract">Extract observations</option><option value="defang">Defang complete indicators</option><option value="refang">Refang complete indicators</option></select></label></div>{% endblock %}
+{% block extra %}{% endblock %}
+{% block note %}Observations are candidates, not threat verdicts. Direct defang/refang expects one complete indicator per line; unmatched lines stay unchanged.{% endblock %}

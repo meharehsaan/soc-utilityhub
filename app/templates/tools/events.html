@@ -1,0 +1,7 @@
+{% extends "workspace.html" %}
+{% block options %}<div class="option-row"><label>Mode<select name="mode"><option value="parse">Inspect supplied events</option><option value="lookup">Reference lookup</option></select></label>
+<label>Input format<select name="format"><option value="xml">Windows Event XML</option><option value="json">JSON export</option></select></label>
+<label>Lookup provider<select name="provider"><option value="Microsoft-Windows-Security-Auditing">Windows Security</option><option value="Microsoft-Windows-Sysmon">Sysmon</option></select></label>
+<label>Lookup event ID<input class="field-input" name="event_id" type="number" value="4624" maxlength="256"></label></div>{% endblock %}
+{% block extra %}{% endblock %}
+{% block note %}Definitions are provider-qualified; IDs alone are ambiguous. XML DTD/entities are forbidden. Binary EVTX and native Windows message catalogs are outside this version.{% endblock %}

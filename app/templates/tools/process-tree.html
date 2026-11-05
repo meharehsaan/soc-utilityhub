@@ -1,0 +1,11 @@
+{% extends "workspace.html" %}
+{% block options %}<div class="option-row"><label>Record format<select name="format"><option value="jsonl">JSONL</option><option value="json">JSON array</option></select></label>
+<label>Output<select name="export"><option value="tree">Tree preview</option><option value="json">All relationships as JSON</option></select></label>
+<label>Process GUID field<input class="field-input" name="guid_field" type="text" value="ProcessGuid" maxlength="256"></label>
+<label>Parent GUID field<input class="field-input" name="parent_field" type="text" value="ParentProcessGuid" maxlength="256"></label>
+<label>Host field<input class="field-input" name="host_field" type="text" value="Computer" maxlength="256"></label>
+<label>Image field<input class="field-input" name="image_field" type="text" value="Image" maxlength="256"></label>
+<label>Command field<input class="field-input" name="command_field" type="text" value="CommandLine" maxlength="256"></label>
+<label>PID field<input class="field-input" name="pid_field" type="text" value="ProcessId" maxlength="256"></label></div>{% endblock %}
+{% block extra %}{% endblock %}
+{% block note %}Correlates host-scoped GUIDs. PID-only links are unresolved, missing parents stay explicit, and cyclic edges are refused. Choose JSON for every relationship.{% endblock %}

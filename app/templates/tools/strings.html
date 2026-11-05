@@ -1,0 +1,6 @@
+{% extends "workspace.html" %}
+{% block options %}<div class="option-row"><label>Encoding<select name="encoding"><option value="ascii">ASCII</option><option value="utf-8">UTF-8</option><option value="utf-16le">UTF-16LE, alignment zero</option></select></label>
+<label>Minimum characters<input class="field-input" name="minimum" type="number" value="4" maxlength="256"></label></div>{% endblock %}
+{% block extra %}{% endblock %}
+{% block note %}Files are read as raw bytes. Offsets are bytes, not character positions. No file is executed; output and match counts are bounded.{% endblock %}
+{% block input %}<label class="field-label" for="source">Pasted content</label><textarea id="source" name="text" class="source-area" spellcheck="false" maxlength="1000000"></textarea><div class="input-meta"><label class="upload-button">↑ Upload an inert file<input type="file" id="source-file" class="sr-only"></label><span id="input-count">0 characters</span></div>{% endblock %}

@@ -1,0 +1,5 @@
+{% extends "workspace.html" %}
+{% block options %}{% endblock %}
+{% block extra %}{% endblock %}
+{% block note %}Paste PEM or upload PEM/DER. Metadata does not establish chain trust, hostname validity, revocation, or signature verification. Private keys are not accepted.{% endblock %}
+{% block input %}<label class="field-label" for="source">Pasted content</label><textarea id="source" name="text" class="source-area" spellcheck="false" maxlength="1000000"></textarea><div class="input-meta"><label class="upload-button">↑ Upload an inert file<input type="file" id="source-file" class="sr-only"></label><span id="input-count">0 characters</span></div>{% endblock %}

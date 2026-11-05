@@ -1,0 +1,5 @@
+{% extends "workspace.html" %}
+{% block options %}<div class="option-row"><label>Mode<select name="mode"><option value="inspect">Inspect a STIX bundle</option><option value="export">Export observable values</option></select></label>
+<label>Export type<select name="observable"><option value="ipv4-addr">IPv4 address</option><option value="ipv6-addr">IPv6 address</option><option value="domain-name">Domain</option><option value="url">URL</option><option value="email-addr">Email</option><option value="file-sha256">SHA-256 file digest</option></select></label></div>{% endblock %}
+{% block extra %}{% endblock %}
+{% block note %}Limited STIX 2.1 observable checks. No extracted value is automatically asserted malicious or promoted into a threat indicator.{% endblock %}

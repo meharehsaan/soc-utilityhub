@@ -1,0 +1,5 @@
+{% extends "workspace.html" %}
+{% block options %}<div class="option-row"><label class="checkbox-field"><input type="checkbox" name="apply_best"> Apply most likely suggestions explicitly</label>
+<label class="checkbox-field"><input type="checkbox" name="ignore_uppercase" checked> Skip uppercase acronyms</label></div>{% endblock %}
+{% block extra %}<label class="field-label">Ignore words · one per line<textarea class="source-area short" name="ignore" maxlength="10000"></textarea></label>{% endblock %}
+{% block note %}English spelling assistance, not grammar correction. Suggestions are local; choosing a candidate applies it on the next run. Ignore lists are never added to the shared dictionary.{% endblock %}

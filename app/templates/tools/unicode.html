@@ -1,0 +1,6 @@
+{% extends "workspace.html" %}
+{% block options %}<div class="option-row"><label>Action<select name="action"><option value="inspect">Inspect only</option><option value="normalize">Normalize explicitly</option></select></label>
+<label>Normalization<select name="form"><option value="NFC">NFC</option><option value="NFD">NFD</option><option value="NFKC">NFKC</option><option value="NFKD">NFKD</option></select></label>
+<label class="checkbox-field"><input type="checkbox" name="include_whitespace"> Include line breaks and tabs</label></div>{% endblock %}
+{% block extra %}{% endblock %}
+{% block note %}Inspecting never changes text. Normalization is a separate action and can change identifiers; code-point offsets are not UTF-16 offsets.{% endblock %}
