@@ -1,0 +1,21 @@
+IEEE listing redistribution notice
+
+Source: /usr/share/doc/ieee-data/copyright, ieee-data 20240722build1
+Files: iab.*
+       mam.*
+       oui36.*
+       oui.*
+Copyright: 2014, IEEE
+License: other
+ Public Domain
+ IEEE does not assert any copyright in the OUI Public Listing or attempt
+ to restrict distribution of the listing in any way. The IEEE
+ Registration Authority does, however, strongly encourage those who use
+ the list to obtain it directly from IEEE (and to update it on a regular
+ basis) to ensure the integrity of the information.
+ .
+ This means:
+ - IEEE does not assert copyright
+ - IEEE does not restrict distribution of the listing in any way
+ - IEEE strongly encourages to get the list directly from IEEE (but it's
+ only a strong encouragement)

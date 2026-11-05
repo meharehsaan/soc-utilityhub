@@ -1,0 +1,180 @@
+{
+  "schema_version": 1,
+  "dataset": "cloud-prefixes",
+  "version": "2026-11-10.1",
+  "retrieved_on": "2026-11-10",
+  "partial": true,
+  "coverage": {
+    "description": "Seventeen verified example prefixes from Cloudflare, Google Cloud, and AWS feeds. This is not a full provider list, cloud perimeter, or allowlist.",
+    "entry_count": 17,
+    "providers": [
+      "Cloudflare",
+      "Google Cloud",
+      "AWS"
+    ],
+    "missing_providers": [
+      "Azure"
+    ],
+    "unknown_means": "No matching provider prefix in this partial snapshot, not evidence that the address is outside a cloud."
+  },
+  "sources": [
+    {
+      "id": "cloudflare-v4",
+      "url": "https://www.cloudflare.com/ips-v4/",
+      "upstream_version": null,
+      "upstream_published_on": null,
+      "redistribution": "Selected factual prefix records from the provider public feed, with attribution; no broader license or endorsement is asserted. Review upstream terms before distributing a larger feed."
+    },
+    {
+      "id": "cloudflare-v6",
+      "url": "https://www.cloudflare.com/ips-v6/",
+      "upstream_version": null,
+      "upstream_published_on": null,
+      "redistribution": "Selected factual prefix records from the provider public feed, with attribution; no broader license or endorsement is asserted. Review upstream terms before distributing a larger feed."
+    },
+    {
+      "id": "google-cloud",
+      "url": "https://www.gstatic.com/ipranges/cloud.json",
+      "upstream_version": "syncToken 1794255743858",
+      "upstream_published_on": "2026-11-09T12:22:23.858512",
+      "redistribution": "Selected factual prefix records from the provider public feed, with attribution; no broader license or endorsement is asserted. Review upstream terms before distributing a larger feed."
+    },
+    {
+      "id": "aws",
+      "url": "https://ip-ranges.amazonaws.com/ip-ranges.json",
+      "upstream_version": "syncToken 1794257225",
+      "upstream_published_on": "2026-11-09-20-47-05",
+      "redistribution": "Selected factual prefix records from the provider public feed, with attribution; no broader license or endorsement is asserted. Review upstream terms before distributing a larger feed."
+    }
+  ],
+  "unavailable_sources": [
+    {
+      "provider": "Azure",
+      "url": "https://www.microsoft.com/en-us/download/details.aspx?id=56519",
+      "observed_version": "ServiceTags_Public_20261102.json",
+      "published_on": "2026-11-03",
+      "reason": "Official page was readable; binary download content type was unsupported by the research tool. No Azure ranges were inferred or bundled."
+    }
+  ],
+  "entries": [
+    {
+      "cidr": "173.245.48.0/20",
+      "provider": "Cloudflare",
+      "service": "Cloudflare published IP ranges",
+      "scope": "GLOBAL",
+      "source_id": "cloudflare-v4"
+    },
+    {
+      "cidr": "103.21.244.0/22",
+      "provider": "Cloudflare",
+      "service": "Cloudflare published IP ranges",
+      "scope": "GLOBAL",
+      "source_id": "cloudflare-v4"
+    },
+    {
+      "cidr": "103.22.200.0/22",
+      "provider": "Cloudflare",
+      "service": "Cloudflare published IP ranges",
+      "scope": "GLOBAL",
+      "source_id": "cloudflare-v4"
+    },
+    {
+      "cidr": "104.16.0.0/13",
+      "provider": "Cloudflare",
+      "service": "Cloudflare published IP ranges",
+      "scope": "GLOBAL",
+      "source_id": "cloudflare-v4"
+    },
+    {
+      "cidr": "172.64.0.0/13",
+      "provider": "Cloudflare",
+      "service": "Cloudflare published IP ranges",
+      "scope": "GLOBAL",
+      "source_id": "cloudflare-v4"
+    },
+    {
+      "cidr": "2400:cb00::/32",
+      "provider": "Cloudflare",
+      "service": "Cloudflare published IP ranges",
+      "scope": "GLOBAL",
+      "source_id": "cloudflare-v6"
+    },
+    {
+      "cidr": "2606:4700::/32",
+      "provider": "Cloudflare",
+      "service": "Cloudflare published IP ranges",
+      "scope": "GLOBAL",
+      "source_id": "cloudflare-v6"
+    },
+    {
+      "cidr": "34.1.208.0/20",
+      "provider": "Google Cloud",
+      "service": "Google Cloud",
+      "scope": "africa-south1",
+      "source_id": "google-cloud"
+    },
+    {
+      "cidr": "34.35.0.0/16",
+      "provider": "Google Cloud",
+      "service": "Google Cloud",
+      "scope": "africa-south1",
+      "source_id": "google-cloud"
+    },
+    {
+      "cidr": "34.80.0.0/15",
+      "provider": "Google Cloud",
+      "service": "Google Cloud",
+      "scope": "asia-east1",
+      "source_id": "google-cloud"
+    },
+    {
+      "cidr": "2600:1900:8000::/44",
+      "provider": "Google Cloud",
+      "service": "Google Cloud",
+      "scope": "africa-south1",
+      "source_id": "google-cloud"
+    },
+    {
+      "cidr": "2600:1900:4030::/44",
+      "provider": "Google Cloud",
+      "service": "Google Cloud",
+      "scope": "asia-east1",
+      "source_id": "google-cloud"
+    },
+    {
+      "cidr": "3.5.140.0/22",
+      "provider": "AWS",
+      "service": "AMAZON",
+      "scope": "ap-northeast-2",
+      "source_id": "aws"
+    },
+    {
+      "cidr": "35.180.0.0/16",
+      "provider": "AWS",
+      "service": "AMAZON",
+      "scope": "eu-west-3",
+      "source_id": "aws"
+    },
+    {
+      "cidr": "52.95.36.0/22",
+      "provider": "AWS",
+      "service": "AMAZON",
+      "scope": "ap-southeast-2",
+      "source_id": "aws"
+    },
+    {
+      "cidr": "2600:1fb9:c000::/40",
+      "provider": "AWS",
+      "service": "AMAZON",
+      "scope": "us-west-1",
+      "source_id": "aws"
+    },
+    {
+      "cidr": "2600:f0f0:c01::/56",
+      "provider": "AWS",
+      "service": "AMAZON",
+      "scope": "GLOBAL",
+      "source_id": "aws"
+    }
+  ]
+}

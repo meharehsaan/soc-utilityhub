@@ -6,6 +6,12 @@ python-multipart>=0.0.20,<1
 regex>=2024.11.6
 jmespath>=1.0.1,<2
 simplejson>=3.20,<4
+python-dateutil>=2.9,<3
+pyspellchecker>=0.8.2,<1
+cryptography>=43
+PyYAML>=6.0.2,<7
+jsonschema>=4.23,<5
+defusedxml>=0.7.1,<1
 
 # Development and verification tools.
 pytest>=8,<10

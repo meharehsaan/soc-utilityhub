@@ -1,0 +1,142 @@
+{
+  "schema_version": 1,
+  "dataset": "mac-assignments",
+  "version": "2026-11-10.1",
+  "retrieved_on": "2026-11-10",
+  "partial": true,
+  "coverage": {
+    "description": "Thirteen selected assignments from the installed IEEE-data snapshot, including nested MA-L/MA-M/MA-S examples. Not the full registry and not refreshed from live IEEE data.",
+    "entry_count": 13,
+    "registries": [
+      "MA-L",
+      "MA-M",
+      "MA-S"
+    ],
+    "unknown_means": "No match in this small snapshot; do not infer an unregistered or malicious device."
+  },
+  "sources": [
+    {
+      "id": "ieee-ma-l",
+      "url": "https://standards-oui.ieee.org/oui/oui.csv",
+      "local_source": "/usr/share/ieee-data/oui.csv",
+      "package": "ieee-data 20240722build1",
+      "local_file_date": "2025-12-06",
+      "upstream_published_on": null,
+      "sha256": "10eb44aeb98ae829a1fb85e772c268a94c14ba437b7663545109405f639379d2",
+      "redistribution": "IEEE public listing; installed package copyright states public domain and unrestricted distribution. See IEEE-LICENSE.txt."
+    },
+    {
+      "id": "ieee-ma-m",
+      "url": "https://standards-oui.ieee.org/oui28/mam.csv",
+      "local_source": "/usr/share/ieee-data/mam.csv",
+      "package": "ieee-data 20240722build1",
+      "local_file_date": "2025-12-06",
+      "upstream_published_on": null,
+      "sha256": "b875206fa5b2ccd229bc61da781ea838df56c34511465f620c22a1a284a5618c",
+      "redistribution": "IEEE public listing; installed package copyright states public domain and unrestricted distribution. See IEEE-LICENSE.txt."
+    },
+    {
+      "id": "ieee-ma-s",
+      "url": "https://standards-oui.ieee.org/oui36/oui36.csv",
+      "local_source": "/usr/share/ieee-data/oui36.csv",
+      "package": "ieee-data 20240722build1",
+      "local_file_date": "2025-12-06",
+      "upstream_published_on": null,
+      "sha256": "07ee8fb2324a46282fbe8b5aaf99b7567514e174c02ab3794cb1c6124e018ce1",
+      "redistribution": "IEEE public listing; installed package copyright states public domain and unrestricted distribution. See IEEE-LICENSE.txt."
+    }
+  ],
+  "entries": [
+    {
+      "prefix": "8C1F649B9",
+      "prefix_length": 36,
+      "registry": "MA-S",
+      "organization": "QUERCUS TECHNOLOGIES, S.L.",
+      "source_id": "ieee-ma-s"
+    },
+    {
+      "prefix": "8C1F64AFA",
+      "prefix_length": 36,
+      "registry": "MA-S",
+      "organization": "DATA ELECTRONIC DEVICES, INC",
+      "source_id": "ieee-ma-s"
+    },
+    {
+      "prefix": "8C1F64D0F",
+      "prefix_length": 36,
+      "registry": "MA-S",
+      "organization": "Mecco LLC",
+      "source_id": "ieee-ma-s"
+    },
+    {
+      "prefix": "B84C879",
+      "prefix_length": 28,
+      "registry": "MA-M",
+      "organization": "Airgain Inc.",
+      "source_id": "ieee-ma-m"
+    },
+    {
+      "prefix": "C85CE27",
+      "prefix_length": 28,
+      "registry": "MA-M",
+      "organization": "SYNERGY SYSTEMS AND SOLUTIONS",
+      "source_id": "ieee-ma-m"
+    },
+    {
+      "prefix": "C85CE2A",
+      "prefix_length": 28,
+      "registry": "MA-M",
+      "organization": "San Telequip (P) Ltd.,",
+      "source_id": "ieee-ma-m"
+    },
+    {
+      "prefix": "00000C",
+      "prefix_length": 24,
+      "registry": "MA-L",
+      "organization": "Cisco Systems, Inc",
+      "source_id": "ieee-ma-l"
+    },
+    {
+      "prefix": "00155D",
+      "prefix_length": 24,
+      "registry": "MA-L",
+      "organization": "Microsoft Corporation",
+      "source_id": "ieee-ma-l"
+    },
+    {
+      "prefix": "001A11",
+      "prefix_length": 24,
+      "registry": "MA-L",
+      "organization": "Google, Inc.",
+      "source_id": "ieee-ma-l"
+    },
+    {
+      "prefix": "001B63",
+      "prefix_length": 24,
+      "registry": "MA-L",
+      "organization": "Apple, Inc.",
+      "source_id": "ieee-ma-l"
+    },
+    {
+      "prefix": "005056",
+      "prefix_length": 24,
+      "registry": "MA-L",
+      "organization": "VMware, Inc.",
+      "source_id": "ieee-ma-l"
+    },
+    {
+      "prefix": "8C1F64",
+      "prefix_length": 24,
+      "registry": "MA-L",
+      "organization": "IEEE Registration Authority",
+      "source_id": "ieee-ma-l"
+    },
+    {
+      "prefix": "C85CE2",
+      "prefix_length": 24,
+      "registry": "MA-L",
+      "organization": "IEEE Registration Authority",
+      "source_id": "ieee-ma-l"
+    }
+  ]
+}

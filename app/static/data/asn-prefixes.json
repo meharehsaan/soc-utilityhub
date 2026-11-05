@@ -1,0 +1,52 @@
+{
+  "schema_version": 1,
+  "dataset": "asn-prefixes",
+  "version": "2026-11-10.1",
+  "retrieved_on": "2026-11-10",
+  "partial": true,
+  "coverage": {
+    "description": "Two RIPEstat network-info observations for public resolver examples. IPv4 only; not a current or complete BGP table. ASN origins are not inferred from cloud-provider labels.",
+    "entry_count": 2,
+    "families": [
+      "IPv4"
+    ],
+    "unknown_means": "No origin observation in this two-prefix snapshot; not evidence that the address is unrouted."
+  },
+  "sources": [
+    {
+      "id": "ripe-1.1.1.1",
+      "url": "https://stat.ripe.net/data/network-info/data.json?resource=1.1.1.1",
+      "api_version": "1.1",
+      "response_time": "2026-11-09T15:50:57.299474",
+      "cached": false,
+      "redistribution": "Two attributed factual routing observations from RIPEstat/RIPE RIS; no blanket license on underlying feeds is asserted. See source API documentation and upstream terms before expanding."
+    },
+    {
+      "id": "ripe-8.8.8.8",
+      "url": "https://stat.ripe.net/data/network-info/data.json?resource=8.8.8.8",
+      "api_version": "1.1",
+      "response_time": "2026-11-09T17:43:43.990499",
+      "cached": true,
+      "redistribution": "Two attributed factual routing observations from RIPEstat/RIPE RIS; no blanket license on underlying feeds is asserted. See source API documentation and upstream terms before expanding."
+    }
+  ],
+  "documentation_url": "https://stat.ripe.net/docs/data-api/api-endpoints/network-info/",
+  "entries": [
+    {
+      "cidr": "1.1.1.0/24",
+      "asns": [
+        13335
+      ],
+      "query_resource": "1.1.1.1",
+      "source_id": "ripe-1.1.1.1"
+    },
+    {
+      "cidr": "8.8.8.0/24",
+      "asns": [
+        15169
+      ],
+      "query_resource": "8.8.8.8",
+      "source_id": "ripe-8.8.8.8"
+    }
+  ]
+}
