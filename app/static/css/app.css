@@ -1294,3 +1294,30 @@ details summary {
 
 .accent-spell { --tool-color: #98e29f; --tool-bg: #222f24; --tool-line: #98e29f; }
 :root[data-theme=light] .accent-spell { --tool-color: #21782a; --tool-bg: #eef6ef; --tool-line: #21782a; }
+
+.accent-regex { --tool-color: #e298a6; --tool-bg: #2f2225; --tool-line: #e298a6; }
+:root[data-theme=light] .accent-regex { --tool-color: #782131; --tool-bg: #f6eef0; --tool-line: #782131; }
+
+.accent-signature { --tool-color: #98bbe2; --tool-bg: #22292f; --tool-line: #98bbe2; }
+:root[data-theme=light] .accent-signature { --tool-color: #214b78; --tool-bg: #eef2f6; --tool-line: #214b78; }
+
+.accent-user-agent { --tool-color: #d1e298; --tool-bg: #2c2f22; --tool-line: #d1e298; }
+:root[data-theme=light] .accent-user-agent { --tool-color: #647821; --tool-bg: #f4f6ee; --tool-line: #647821; }
+
+.accent-cron { --tool-color: #dd98e2; --tool-bg: #2e222f; --tool-line: #dd98e2; }
+:root[data-theme=light] .accent-cron { --tool-color: #732178; --tool-bg: #f6eef6; --tool-line: #732178; }
+
+.accent-cidr { --tool-color: #98e2c7; --tool-bg: #222f2b; --tool-line: #98e2c7; }
+:root[data-theme=light] .accent-cidr { --tool-color: #217859; --tool-bg: #eef6f3; --tool-line: #217859; }
+
+.accent-mac { --tool-color: #e2b298; --tool-bg: #2f2722; --tool-line: #e2b298; }
+:root[data-theme=light] .accent-mac { --tool-color: #784021; --tool-bg: #f6f1ee; --tool-line: #784021; }
+
+.accent-user-sid { --tool-color: #9c98e2; --tool-bg: #23222f; --tool-line: #9c98e2; }
+:root[data-theme=light] .accent-user-sid { --tool-color: #262178; --tool-bg: #efeef6; --tool-line: #262178; }
+
+.accent-http-status { --tool-color: #a9e298; --tool-bg: #252f22; --tool-line: #a9e298; }
+:root[data-theme=light] .accent-http-status { --tool-color: #357821; --tool-bg: #f0f6ee; --tool-line: #357821; }
+
+.accent-entropy { --tool-color: #e298be; --tool-bg: #2f2229; --tool-line: #e298be; }
+:root[data-theme=light] .accent-entropy { --tool-color: #78214f; --tool-bg: #f6eef2; --tool-line: #78214f; }

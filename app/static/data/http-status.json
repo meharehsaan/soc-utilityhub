@@ -1,0 +1,762 @@
+{
+  "schema_version": 1,
+  "dataset": "http-status",
+  "version": "2026-11-11.1",
+  "retrieved_on": "2026-11-11",
+  "coverage": {
+    "status_count": 62,
+    "header_count": 3,
+    "partial": true,
+    "description": "Installed Python HTTPStatus snapshot plus three selected browser-security headers; not a full/live IANA registry or security-policy evaluator.",
+    "unknown_means": "Not present in this offline glossary; consult the relevant specification rather than assuming maliciousness."
+  },
+  "sources": [
+    {
+      "id": "python-httpstatus",
+      "url": "https://docs.python.org/3.14/library/http.html#http.HTTPStatus",
+      "upstream_version": "3.14.4",
+      "retrieved_on": "2026-11-11",
+      "license": "Python Software Foundation license; local PYTHON-LICENSE.txt",
+      "scope": "Installed HTTPStatus names, phrases, and descriptions; not a live IANA registry mirror."
+    },
+    {
+      "id": "rfc9110",
+      "url": "https://www.rfc-editor.org/rfc/rfc9110.html",
+      "published_on": "2022-06",
+      "retrieved_on": "2026-11-11",
+      "scope": "Status semantics and heuristic cache eligibility; SOC notes are concise analyst context."
+    },
+    {
+      "id": "rfc9111",
+      "url": "https://www.rfc-editor.org/rfc/rfc9111.html",
+      "published_on": "2022-06",
+      "retrieved_on": "2026-11-11",
+      "scope": "Cache freshness and request/response restrictions."
+    },
+    {
+      "id": "mdn-hsts",
+      "url": "https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Headers/Strict-Transport-Security",
+      "retrieved_on": "2026-11-11"
+    },
+    {
+      "id": "rfc6797",
+      "url": "https://www.rfc-editor.org/rfc/rfc6797.html",
+      "published_on": "2012-11",
+      "retrieved_on": "2026-11-11"
+    },
+    {
+      "id": "mdn-csp",
+      "url": "https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Headers/Content-Security-Policy",
+      "retrieved_on": "2026-11-11"
+    },
+    {
+      "id": "csp-spec",
+      "url": "https://www.w3.org/TR/CSP3/",
+      "retrieved_on": "2026-11-11"
+    },
+    {
+      "id": "mdn-xfo",
+      "url": "https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Headers/X-Frame-Options",
+      "retrieved_on": "2026-11-11"
+    },
+    {
+      "id": "rfc7034",
+      "url": "https://www.rfc-editor.org/rfc/rfc7034.html",
+      "published_on": "2013-10",
+      "retrieved_on": "2026-11-11"
+    }
+  ],
+  "cache_rules": {
+    "heuristic_eligible": "Heuristic freshness may be used when method and other caching rules permit; explicit cache controls take precedence.",
+    "explicit_policy_required": "This code alone does not permit heuristic freshness; inspect explicit caching directives, method, authorization, and other constraints.",
+    "interim": "Interim response, not a standalone reusable representation.",
+    "validation": "Validates an existing cached representation; updates its metadata rather than supplying a new response body."
+  },
+  "statuses": [
+    {
+      "code": 100,
+      "name": "CONTINUE",
+      "phrase": "Continue",
+      "description": "Request received, please continue",
+      "category": "Informational",
+      "heuristically_cacheable": false,
+      "cache_rule": "interim",
+      "soc_note": ""
+    },
+    {
+      "code": 101,
+      "name": "SWITCHING_PROTOCOLS",
+      "phrase": "Switching Protocols",
+      "description": "Switching to new protocol; obey Upgrade header",
+      "category": "Informational",
+      "heuristically_cacheable": false,
+      "cache_rule": "interim",
+      "soc_note": ""
+    },
+    {
+      "code": 102,
+      "name": "PROCESSING",
+      "phrase": "Processing",
+      "description": "Server is processing the request",
+      "category": "Informational",
+      "heuristically_cacheable": false,
+      "cache_rule": "interim",
+      "soc_note": ""
+    },
+    {
+      "code": 103,
+      "name": "EARLY_HINTS",
+      "phrase": "Early Hints",
+      "description": "Headers sent to prepare for the response",
+      "category": "Informational",
+      "heuristically_cacheable": false,
+      "cache_rule": "interim",
+      "soc_note": ""
+    },
+    {
+      "code": 200,
+      "name": "OK",
+      "phrase": "OK",
+      "description": "Request fulfilled, document follows",
+      "category": "Success",
+      "heuristically_cacheable": true,
+      "cache_rule": "heuristic_eligible",
+      "soc_note": "Success alone does not establish a safe response."
+    },
+    {
+      "code": 201,
+      "name": "CREATED",
+      "phrase": "Created",
+      "description": "Document created, URL follows",
+      "category": "Success",
+      "heuristically_cacheable": false,
+      "cache_rule": "explicit_policy_required",
+      "soc_note": ""
+    },
+    {
+      "code": 202,
+      "name": "ACCEPTED",
+      "phrase": "Accepted",
+      "description": "Request accepted, processing continues off-line",
+      "category": "Success",
+      "heuristically_cacheable": false,
+      "cache_rule": "explicit_policy_required",
+      "soc_note": ""
+    },
+    {
+      "code": 203,
+      "name": "NON_AUTHORITATIVE_INFORMATION",
+      "phrase": "Non-Authoritative Information",
+      "description": "Request fulfilled from cache",
+      "category": "Success",
+      "heuristically_cacheable": true,
+      "cache_rule": "heuristic_eligible",
+      "soc_note": ""
+    },
+    {
+      "code": 204,
+      "name": "NO_CONTENT",
+      "phrase": "No Content",
+      "description": "Request fulfilled, nothing follows",
+      "category": "Success",
+      "heuristically_cacheable": true,
+      "cache_rule": "heuristic_eligible",
+      "soc_note": "Successful response without a message body."
+    },
+    {
+      "code": 205,
+      "name": "RESET_CONTENT",
+      "phrase": "Reset Content",
+      "description": "Clear input form for further input",
+      "category": "Success",
+      "heuristically_cacheable": false,
+      "cache_rule": "explicit_policy_required",
+      "soc_note": ""
+    },
+    {
+      "code": 206,
+      "name": "PARTIAL_CONTENT",
+      "phrase": "Partial Content",
+      "description": "Partial content follows",
+      "category": "Success",
+      "heuristically_cacheable": true,
+      "cache_rule": "heuristic_eligible",
+      "soc_note": "Partial response; range validation matters for cache recombination."
+    },
+    {
+      "code": 207,
+      "name": "MULTI_STATUS",
+      "phrase": "Multi-Status",
+      "description": "Response contains multiple statuses in the body",
+      "category": "Success",
+      "heuristically_cacheable": false,
+      "cache_rule": "explicit_policy_required",
+      "soc_note": ""
+    },
+    {
+      "code": 208,
+      "name": "ALREADY_REPORTED",
+      "phrase": "Already Reported",
+      "description": "Operation has already been reported",
+      "category": "Success",
+      "heuristically_cacheable": false,
+      "cache_rule": "explicit_policy_required",
+      "soc_note": ""
+    },
+    {
+      "code": 226,
+      "name": "IM_USED",
+      "phrase": "IM Used",
+      "description": "Request completed using instance manipulations",
+      "category": "Success",
+      "heuristically_cacheable": false,
+      "cache_rule": "explicit_policy_required",
+      "soc_note": ""
+    },
+    {
+      "code": 300,
+      "name": "MULTIPLE_CHOICES",
+      "phrase": "Multiple Choices",
+      "description": "Object has several resources -- see URI list",
+      "category": "Redirection",
+      "heuristically_cacheable": true,
+      "cache_rule": "heuristic_eligible",
+      "soc_note": ""
+    },
+    {
+      "code": 301,
+      "name": "MOVED_PERMANENTLY",
+      "phrase": "Moved Permanently",
+      "description": "Object moved permanently -- see URI list",
+      "category": "Redirection",
+      "heuristically_cacheable": true,
+      "cache_rule": "heuristic_eligible",
+      "soc_note": "Permanent redirects may persist in caches."
+    },
+    {
+      "code": 302,
+      "name": "FOUND",
+      "phrase": "Found",
+      "description": "Object moved temporarily -- see URI list",
+      "category": "Redirection",
+      "heuristically_cacheable": false,
+      "cache_rule": "explicit_policy_required",
+      "soc_note": "Temporary redirect; inspect Location without following it."
+    },
+    {
+      "code": 303,
+      "name": "SEE_OTHER",
+      "phrase": "See Other",
+      "description": "Object moved -- see Method and URL list",
+      "category": "Redirection",
+      "heuristically_cacheable": false,
+      "cache_rule": "explicit_policy_required",
+      "soc_note": ""
+    },
+    {
+      "code": 304,
+      "name": "NOT_MODIFIED",
+      "phrase": "Not Modified",
+      "description": "Document has not changed since given time",
+      "category": "Redirection",
+      "heuristically_cacheable": false,
+      "cache_rule": "validation",
+      "soc_note": "Cache validation, not a new response body."
+    },
+    {
+      "code": 305,
+      "name": "USE_PROXY",
+      "phrase": "Use Proxy",
+      "description": "You must use proxy specified in Location to access this resource",
+      "category": "Redirection",
+      "heuristically_cacheable": false,
+      "cache_rule": "explicit_policy_required",
+      "soc_note": ""
+    },
+    {
+      "code": 307,
+      "name": "TEMPORARY_REDIRECT",
+      "phrase": "Temporary Redirect",
+      "description": "Object moved temporarily -- see URI list",
+      "category": "Redirection",
+      "heuristically_cacheable": false,
+      "cache_rule": "explicit_policy_required",
+      "soc_note": "Temporary redirect preserves the request method."
+    },
+    {
+      "code": 308,
+      "name": "PERMANENT_REDIRECT",
+      "phrase": "Permanent Redirect",
+      "description": "Object moved permanently -- see URI list",
+      "category": "Redirection",
+      "heuristically_cacheable": true,
+      "cache_rule": "heuristic_eligible",
+      "soc_note": "Permanent redirect preserves the request method."
+    },
+    {
+      "code": 400,
+      "name": "BAD_REQUEST",
+      "phrase": "Bad Request",
+      "description": "Bad request syntax or unsupported method",
+      "category": "Client error",
+      "heuristically_cacheable": false,
+      "cache_rule": "explicit_policy_required",
+      "soc_note": "Malformed request; correlate surrounding traffic before attributing intent."
+    },
+    {
+      "code": 401,
+      "name": "UNAUTHORIZED",
+      "phrase": "Unauthorized",
+      "description": "No permission -- see authorization schemes",
+      "category": "Client error",
+      "heuristically_cacheable": false,
+      "cache_rule": "explicit_policy_required",
+      "soc_note": "Authentication challenge; distinguish from an authorization refusal."
+    },
+    {
+      "code": 402,
+      "name": "PAYMENT_REQUIRED",
+      "phrase": "Payment Required",
+      "description": "No payment -- see charging schemes",
+      "category": "Client error",
+      "heuristically_cacheable": false,
+      "cache_rule": "explicit_policy_required",
+      "soc_note": ""
+    },
+    {
+      "code": 403,
+      "name": "FORBIDDEN",
+      "phrase": "Forbidden",
+      "description": "Request forbidden -- authorization will not help",
+      "category": "Client error",
+      "heuristically_cacheable": false,
+      "cache_rule": "explicit_policy_required",
+      "soc_note": "Refusal does not necessarily mean missing credentials."
+    },
+    {
+      "code": 404,
+      "name": "NOT_FOUND",
+      "phrase": "Not Found",
+      "description": "Nothing matches the given URI",
+      "category": "Client error",
+      "heuristically_cacheable": true,
+      "cache_rule": "heuristic_eligible",
+      "soc_note": "Absence can be deliberate; consider expected application routes."
+    },
+    {
+      "code": 405,
+      "name": "METHOD_NOT_ALLOWED",
+      "phrase": "Method Not Allowed",
+      "description": "Specified method is invalid for this resource",
+      "category": "Client error",
+      "heuristically_cacheable": true,
+      "cache_rule": "heuristic_eligible",
+      "soc_note": "Check Allow for supported methods."
+    },
+    {
+      "code": 406,
+      "name": "NOT_ACCEPTABLE",
+      "phrase": "Not Acceptable",
+      "description": "URI not available in preferred format",
+      "category": "Client error",
+      "heuristically_cacheable": false,
+      "cache_rule": "explicit_policy_required",
+      "soc_note": ""
+    },
+    {
+      "code": 407,
+      "name": "PROXY_AUTHENTICATION_REQUIRED",
+      "phrase": "Proxy Authentication Required",
+      "description": "You must authenticate with this proxy before proceeding",
+      "category": "Client error",
+      "heuristically_cacheable": false,
+      "cache_rule": "explicit_policy_required",
+      "soc_note": "Proxy authentication differs from origin-server authentication."
+    },
+    {
+      "code": 408,
+      "name": "REQUEST_TIMEOUT",
+      "phrase": "Request Timeout",
+      "description": "Request timed out; try again later",
+      "category": "Client error",
+      "heuristically_cacheable": false,
+      "cache_rule": "explicit_policy_required",
+      "soc_note": ""
+    },
+    {
+      "code": 409,
+      "name": "CONFLICT",
+      "phrase": "Conflict",
+      "description": "Request conflict",
+      "category": "Client error",
+      "heuristically_cacheable": false,
+      "cache_rule": "explicit_policy_required",
+      "soc_note": ""
+    },
+    {
+      "code": 410,
+      "name": "GONE",
+      "phrase": "Gone",
+      "description": "URI no longer exists and has been permanently removed",
+      "category": "Client error",
+      "heuristically_cacheable": true,
+      "cache_rule": "heuristic_eligible",
+      "soc_note": ""
+    },
+    {
+      "code": 411,
+      "name": "LENGTH_REQUIRED",
+      "phrase": "Length Required",
+      "description": "Client must specify Content-Length",
+      "category": "Client error",
+      "heuristically_cacheable": false,
+      "cache_rule": "explicit_policy_required",
+      "soc_note": ""
+    },
+    {
+      "code": 412,
+      "name": "PRECONDITION_FAILED",
+      "phrase": "Precondition Failed",
+      "description": "Precondition in headers is false",
+      "category": "Client error",
+      "heuristically_cacheable": false,
+      "cache_rule": "explicit_policy_required",
+      "soc_note": ""
+    },
+    {
+      "code": 413,
+      "name": "CONTENT_TOO_LARGE",
+      "phrase": "Content Too Large",
+      "description": "Content is too large",
+      "category": "Client error",
+      "heuristically_cacheable": false,
+      "cache_rule": "explicit_policy_required",
+      "soc_note": "Request content exceeds an accepted size."
+    },
+    {
+      "code": 414,
+      "name": "URI_TOO_LONG",
+      "phrase": "URI Too Long",
+      "description": "URI is too long",
+      "category": "Client error",
+      "heuristically_cacheable": true,
+      "cache_rule": "heuristic_eligible",
+      "soc_note": ""
+    },
+    {
+      "code": 415,
+      "name": "UNSUPPORTED_MEDIA_TYPE",
+      "phrase": "Unsupported Media Type",
+      "description": "Entity body in unsupported format",
+      "category": "Client error",
+      "heuristically_cacheable": false,
+      "cache_rule": "explicit_policy_required",
+      "soc_note": ""
+    },
+    {
+      "code": 416,
+      "name": "RANGE_NOT_SATISFIABLE",
+      "phrase": "Range Not Satisfiable",
+      "description": "Cannot satisfy request range",
+      "category": "Client error",
+      "heuristically_cacheable": false,
+      "cache_rule": "explicit_policy_required",
+      "soc_note": ""
+    },
+    {
+      "code": 417,
+      "name": "EXPECTATION_FAILED",
+      "phrase": "Expectation Failed",
+      "description": "Expect condition could not be satisfied",
+      "category": "Client error",
+      "heuristically_cacheable": false,
+      "cache_rule": "explicit_policy_required",
+      "soc_note": ""
+    },
+    {
+      "code": 418,
+      "name": "IM_A_TEAPOT",
+      "phrase": "I'm a Teapot",
+      "description": "Server refuses to brew coffee because it is a teapot",
+      "category": "Client error",
+      "heuristically_cacheable": false,
+      "cache_rule": "explicit_policy_required",
+      "soc_note": "Legacy teapot label; RFC 9110 reserves 418 as unused."
+    },
+    {
+      "code": 421,
+      "name": "MISDIRECTED_REQUEST",
+      "phrase": "Misdirected Request",
+      "description": "Server is not able to produce a response",
+      "category": "Client error",
+      "heuristically_cacheable": false,
+      "cache_rule": "explicit_policy_required",
+      "soc_note": ""
+    },
+    {
+      "code": 422,
+      "name": "UNPROCESSABLE_CONTENT",
+      "phrase": "Unprocessable Content",
+      "description": "Server is not able to process the contained instructions",
+      "category": "Client error",
+      "heuristically_cacheable": false,
+      "cache_rule": "explicit_policy_required",
+      "soc_note": ""
+    },
+    {
+      "code": 423,
+      "name": "LOCKED",
+      "phrase": "Locked",
+      "description": "Resource of a method is locked",
+      "category": "Client error",
+      "heuristically_cacheable": false,
+      "cache_rule": "explicit_policy_required",
+      "soc_note": ""
+    },
+    {
+      "code": 424,
+      "name": "FAILED_DEPENDENCY",
+      "phrase": "Failed Dependency",
+      "description": "Dependent action of the request failed",
+      "category": "Client error",
+      "heuristically_cacheable": false,
+      "cache_rule": "explicit_policy_required",
+      "soc_note": ""
+    },
+    {
+      "code": 425,
+      "name": "TOO_EARLY",
+      "phrase": "Too Early",
+      "description": "Server refuses to process a request that might be replayed",
+      "category": "Client error",
+      "heuristically_cacheable": false,
+      "cache_rule": "explicit_policy_required",
+      "soc_note": ""
+    },
+    {
+      "code": 426,
+      "name": "UPGRADE_REQUIRED",
+      "phrase": "Upgrade Required",
+      "description": "Server refuses to perform the request using the current protocol",
+      "category": "Client error",
+      "heuristically_cacheable": false,
+      "cache_rule": "explicit_policy_required",
+      "soc_note": ""
+    },
+    {
+      "code": 428,
+      "name": "PRECONDITION_REQUIRED",
+      "phrase": "Precondition Required",
+      "description": "The origin server requires the request to be conditional",
+      "category": "Client error",
+      "heuristically_cacheable": false,
+      "cache_rule": "explicit_policy_required",
+      "soc_note": ""
+    },
+    {
+      "code": 429,
+      "name": "TOO_MANY_REQUESTS",
+      "phrase": "Too Many Requests",
+      "description": "The user has sent too many requests in a given amount of time (\"rate limiting\")",
+      "category": "Client error",
+      "heuristically_cacheable": false,
+      "cache_rule": "explicit_policy_required",
+      "soc_note": "Rate limiting may include Retry-After; investigate request patterns."
+    },
+    {
+      "code": 431,
+      "name": "REQUEST_HEADER_FIELDS_TOO_LARGE",
+      "phrase": "Request Header Fields Too Large",
+      "description": "The server is unwilling to process the request because its header fields are too large",
+      "category": "Client error",
+      "heuristically_cacheable": false,
+      "cache_rule": "explicit_policy_required",
+      "soc_note": ""
+    },
+    {
+      "code": 451,
+      "name": "UNAVAILABLE_FOR_LEGAL_REASONS",
+      "phrase": "Unavailable For Legal Reasons",
+      "description": "The server is denying access to the resource as a consequence of a legal demand",
+      "category": "Client error",
+      "heuristically_cacheable": false,
+      "cache_rule": "explicit_policy_required",
+      "soc_note": ""
+    },
+    {
+      "code": 500,
+      "name": "INTERNAL_SERVER_ERROR",
+      "phrase": "Internal Server Error",
+      "description": "Server got itself in trouble",
+      "category": "Server error",
+      "heuristically_cacheable": false,
+      "cache_rule": "explicit_policy_required",
+      "soc_note": "Unexpected server condition; correlate server diagnostics."
+    },
+    {
+      "code": 501,
+      "name": "NOT_IMPLEMENTED",
+      "phrase": "Not Implemented",
+      "description": "Server does not support this operation",
+      "category": "Server error",
+      "heuristically_cacheable": true,
+      "cache_rule": "heuristic_eligible",
+      "soc_note": ""
+    },
+    {
+      "code": 502,
+      "name": "BAD_GATEWAY",
+      "phrase": "Bad Gateway",
+      "description": "Invalid responses from another server/proxy",
+      "category": "Server error",
+      "heuristically_cacheable": false,
+      "cache_rule": "explicit_policy_required",
+      "soc_note": "Invalid upstream response; distinguish gateway from application failures."
+    },
+    {
+      "code": 503,
+      "name": "SERVICE_UNAVAILABLE",
+      "phrase": "Service Unavailable",
+      "description": "The server cannot process the request due to a high load",
+      "category": "Server error",
+      "heuristically_cacheable": false,
+      "cache_rule": "explicit_policy_required",
+      "soc_note": "Temporary unavailability may include Retry-After."
+    },
+    {
+      "code": 504,
+      "name": "GATEWAY_TIMEOUT",
+      "phrase": "Gateway Timeout",
+      "description": "The gateway server did not receive a timely response",
+      "category": "Server error",
+      "heuristically_cacheable": false,
+      "cache_rule": "explicit_policy_required",
+      "soc_note": "Upstream timeout; inspect dependency behavior."
+    },
+    {
+      "code": 505,
+      "name": "HTTP_VERSION_NOT_SUPPORTED",
+      "phrase": "HTTP Version Not Supported",
+      "description": "Cannot fulfill request",
+      "category": "Server error",
+      "heuristically_cacheable": false,
+      "cache_rule": "explicit_policy_required",
+      "soc_note": ""
+    },
+    {
+      "code": 506,
+      "name": "VARIANT_ALSO_NEGOTIATES",
+      "phrase": "Variant Also Negotiates",
+      "description": "Server has an internal configuration error",
+      "category": "Server error",
+      "heuristically_cacheable": false,
+      "cache_rule": "explicit_policy_required",
+      "soc_note": ""
+    },
+    {
+      "code": 507,
+      "name": "INSUFFICIENT_STORAGE",
+      "phrase": "Insufficient Storage",
+      "description": "Server is not able to store the representation",
+      "category": "Server error",
+      "heuristically_cacheable": false,
+      "cache_rule": "explicit_policy_required",
+      "soc_note": ""
+    },
+    {
+      "code": 508,
+      "name": "LOOP_DETECTED",
+      "phrase": "Loop Detected",
+      "description": "Server encountered an infinite loop while processing a request",
+      "category": "Server error",
+      "heuristically_cacheable": false,
+      "cache_rule": "explicit_policy_required",
+      "soc_note": ""
+    },
+    {
+      "code": 510,
+      "name": "NOT_EXTENDED",
+      "phrase": "Not Extended",
+      "description": "Request does not meet the resource access policy",
+      "category": "Server error",
+      "heuristically_cacheable": false,
+      "cache_rule": "explicit_policy_required",
+      "soc_note": ""
+    },
+    {
+      "code": 511,
+      "name": "NETWORK_AUTHENTICATION_REQUIRED",
+      "phrase": "Network Authentication Required",
+      "description": "The client needs to authenticate to gain network access",
+      "category": "Server error",
+      "heuristically_cacheable": false,
+      "cache_rule": "explicit_policy_required",
+      "soc_note": ""
+    }
+  ],
+  "headers": [
+    {
+      "name": "Strict-Transport-Security",
+      "purpose": "Remember an HTTPS-only host policy in supporting browsers.",
+      "common_values": [
+        "max-age=<seconds>",
+        "includeSubDomains",
+        "preload"
+      ],
+      "notes": [
+        "Browsers accept this policy over HTTPS, not HTTP. It does not validate the current response.",
+        "max-age=0 removes the host policy after secure receipt; subdomain policies can remain independent.",
+        "includeSubDomains expands scope. The preload token alone does not establish preload-list membership.",
+        "Header presence does not prove secure TLS configuration."
+      ],
+      "source_ids": [
+        "mdn-hsts",
+        "rfc6797"
+      ]
+    },
+    {
+      "name": "Content-Security-Policy",
+      "purpose": "Constrain resource loading and other document capabilities through explicit directives.",
+      "common_values": [
+        "default-src 'self'",
+        "script-src 'self'",
+        "object-src 'none'",
+        "frame-ancestors 'none'"
+      ],
+      "notes": [
+        "Evaluate individual directives and effective fallbacks; a policy name alone says little about protection.",
+        "Content-Security-Policy-Report-Only reports violations without enforcing its restrictions.",
+        "frame-ancestors controls embedding and is not a default-src fallback.",
+        "Inline-script exceptions and broad sources need application-specific review; no vulnerability verdict is automatic."
+      ],
+      "source_ids": [
+        "mdn-csp",
+        "csp-spec"
+      ]
+    },
+    {
+      "name": "X-Frame-Options",
+      "purpose": "Control document embedding in supporting browsers.",
+      "common_values": [
+        "DENY",
+        "SAMEORIGIN"
+      ],
+      "notes": [
+        "DENY blocks framing; SAMEORIGIN restricts it to same-origin ancestors.",
+        "ALLOW-FROM is obsolete and is ignored by modern browsers; do not treat it as effective protection.",
+        "Use CSP frame-ancestors for richer embedding policy. A meta element does not enforce this header.",
+        "Embedding controls are not general authentication or cross-origin data controls."
+      ],
+      "source_ids": [
+        "mdn-xfo",
+        "rfc7034"
+      ]
+    }
+  ],
+  "limitations": [
+    "Status, cache eligibility, and header presence are observations, not security verdicts.",
+    "Cache behavior depends on method, request/response directives, authorization, and context; no-store and other restrictions still apply.",
+    "Legacy or extension names in the installed Python enum may differ from the current registry. No requests are sent and references are not refreshed automatically."
+  ],
+  "redistribution": "Status names/descriptions originate from PSF-licensed Python data; retain PYTHON-LICENSE.txt. Other explanatory notes are short original summaries with cited MDN/RFC references, not copied documentation bodies."
+}

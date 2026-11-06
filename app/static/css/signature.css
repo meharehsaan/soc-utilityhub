@@ -1,0 +1,26 @@
+@font-face {
+  font-family: "Utility Signature Serif";
+  src: url("/static/fonts/DejaVuSerif.ttf") format("truetype");
+  font-display: swap;
+}
+.signature-text { min-height: 90px; }
+#signature-pad {
+  display: block;
+  width: 100%;
+  aspect-ratio: 3 / 1;
+  height: auto;
+  background: #ffffff;
+  border: 2px solid var(--line-strong);
+  border-radius: 7px;
+  touch-action: none;
+  cursor: crosshair;
+}
+.signature-preview {
+  display: block;
+  width: 100%;
+  height: auto;
+  border: 1px solid var(--line-strong);
+  background: #cbd2cc;
+}
+
+#signature-pad.light-ink { background: #17231c; }

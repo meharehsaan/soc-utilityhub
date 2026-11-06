@@ -33,3 +33,13 @@ Keep cloud-provider labels separate from observed ASN origins. A Cloudflare ASN 
 - `mac-assignments.json`: SHA-256 `24ae1b02ff1799cc957e33ef6e49684f423745b6da2e72b162488d7403c9c5ee`.
 - `cloud-prefixes.json`: SHA-256 `8a1f5b2348f1279a2db9949c1e3ecc3b001b71a949a461b70543d2f4aa7b22fd`.
 - `asn-prefixes.json`: SHA-256 `79558965cea601e44e2ce2f66247c1b0269766c280830f6f6715aba2ac342a43`.
+
+## HTTP Status and Security-Header Glossary
+
+[http-status.json](http-status.json) contains the 62 unique statuses in installed Python 3.14.4's `HTTPStatus` enum and original concise context for HSTS, CSP, and X-Frame-Options. Status names/descriptions are PSF-licensed; retain [PYTHON-LICENSE.txt](PYTHON-LICENSE.txt). MDN/RFC source URLs and the review date (2026-11-11) are recorded in the file.
+
+The top-level keys are `schema_version`, `dataset`, `version`, `retrieved_on`, `coverage`, `sources`, `cache_rules`, `statuses`, `headers`, `limitations`, and `redistribution`. Status entries have `code`, `name`, `phrase`, `description`, `category`, `heuristically_cacheable`, `cache_rule`, and `soc_note`. Header entries have `name`, `purpose`, `common_values`, `notes`, and `source_ids`.
+
+The glossary is not a live/full IANA mirror or a policy evaluator. Unknown codes remain unknown. Heuristic eligibility does not override cache directives, method, authentication, or other restrictions; 304 is validation metadata, not a new cacheable body. Presence of a security header is not proof of correct or safe configuration. Values are explanatory data and must remain inert in the UI.
+
+- `http-status.json`: SHA-256 `50591ca38b6402496deb2a1f4a0d78d9a01fae325fa10d1a73c3ed98cc233463`.

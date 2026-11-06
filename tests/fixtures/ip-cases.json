@@ -1,0 +1,502 @@
+[
+  {
+    "input": "103.75.228.13/2",
+    "network": "64.0.0.0/2",
+    "last": "127.255.255.255"
+  },
+  {
+    "input": "220.66.84.181/25",
+    "network": "220.66.84.128/25",
+    "last": "220.66.84.255"
+  },
+  {
+    "input": "250.93.52.223/22",
+    "network": "250.93.52.0/22",
+    "last": "250.93.55.255"
+  },
+  {
+    "input": "72.187.64.13/17",
+    "network": "72.187.0.0/17",
+    "last": "72.187.127.255"
+  },
+  {
+    "input": "27.36.152.56/12",
+    "network": "27.32.0.0/12",
+    "last": "27.47.255.255"
+  },
+  {
+    "input": "127.126.254.125/4",
+    "network": "112.0.0.0/4",
+    "last": "127.255.255.255"
+  },
+  {
+    "input": "244.116.94.224/16",
+    "network": "244.116.0.0/16",
+    "last": "244.116.255.255"
+  },
+  {
+    "input": "251.241.62.218/14",
+    "network": "251.240.0.0/14",
+    "last": "251.243.255.255"
+  },
+  {
+    "input": "106.40.216.207/20",
+    "network": "106.40.208.0/20",
+    "last": "106.40.223.255"
+  },
+  {
+    "input": "104.200.171.210/0",
+    "network": "0.0.0.0/0",
+    "last": "255.255.255.255"
+  },
+  {
+    "input": "96.159.115.74/21",
+    "network": "96.159.112.0/21",
+    "last": "96.159.119.255"
+  },
+  {
+    "input": "205.165.225.25/19",
+    "network": "205.165.224.0/19",
+    "last": "205.165.255.255"
+  },
+  {
+    "input": "7.116.168.73/16",
+    "network": "7.116.0.0/16",
+    "last": "7.116.255.255"
+  },
+  {
+    "input": "209.32.123.27/1",
+    "network": "128.0.0.0/1",
+    "last": "255.255.255.255"
+  },
+  {
+    "input": "243.105.65.176/21",
+    "network": "243.105.64.0/21",
+    "last": "243.105.71.255"
+  },
+  {
+    "input": "151.193.193.145/11",
+    "network": "151.192.0.0/11",
+    "last": "151.223.255.255"
+  },
+  {
+    "input": "130.26.91.37/4",
+    "network": "128.0.0.0/4",
+    "last": "143.255.255.255"
+  },
+  {
+    "input": "253.228.248.52/17",
+    "network": "253.228.128.0/17",
+    "last": "253.228.255.255"
+  },
+  {
+    "input": "252.236.103.175/15",
+    "network": "252.236.0.0/15",
+    "last": "252.237.255.255"
+  },
+  {
+    "input": "111.5.28.204/27",
+    "network": "111.5.28.192/27",
+    "last": "111.5.28.223"
+  },
+  {
+    "input": "161.23.0.84/29",
+    "network": "161.23.0.80/29",
+    "last": "161.23.0.87"
+  },
+  {
+    "input": "190.204.22.190/8",
+    "network": "190.0.0.0/8",
+    "last": "190.255.255.255"
+  },
+  {
+    "input": "96.236.253.62/23",
+    "network": "96.236.252.0/23",
+    "last": "96.236.253.255"
+  },
+  {
+    "input": "138.160.19.235/20",
+    "network": "138.160.16.0/20",
+    "last": "138.160.31.255"
+  },
+  {
+    "input": "0.209.86.142/26",
+    "network": "0.209.86.128/26",
+    "last": "0.209.86.191"
+  },
+  {
+    "input": "144.34.50.6/30",
+    "network": "144.34.50.4/30",
+    "last": "144.34.50.7"
+  },
+  {
+    "input": "62.120.139.33/2",
+    "network": "0.0.0.0/2",
+    "last": "63.255.255.255"
+  },
+  {
+    "input": "166.194.148.87/9",
+    "network": "166.128.0.0/9",
+    "last": "166.255.255.255"
+  },
+  {
+    "input": "233.52.84.253/9",
+    "network": "233.0.0.0/9",
+    "last": "233.127.255.255"
+  },
+  {
+    "input": "192.13.105.143/30",
+    "network": "192.13.105.140/30",
+    "last": "192.13.105.143"
+  },
+  {
+    "input": "71.62.2.242/29",
+    "network": "71.62.2.240/29",
+    "last": "71.62.2.247"
+  },
+  {
+    "input": "200.154.133.193/15",
+    "network": "200.154.0.0/15",
+    "last": "200.155.255.255"
+  },
+  {
+    "input": "244.181.212.19/25",
+    "network": "244.181.212.0/25",
+    "last": "244.181.212.127"
+  },
+  {
+    "input": "69.74.133.179/29",
+    "network": "69.74.133.176/29",
+    "last": "69.74.133.183"
+  },
+  {
+    "input": "109.203.226.100/12",
+    "network": "109.192.0.0/12",
+    "last": "109.207.255.255"
+  },
+  {
+    "input": "139.0.74.77/18",
+    "network": "139.0.64.0/18",
+    "last": "139.0.127.255"
+  },
+  {
+    "input": "82.82.23.239/16",
+    "network": "82.82.0.0/16",
+    "last": "82.82.255.255"
+  },
+  {
+    "input": "189.231.162.135/0",
+    "network": "0.0.0.0/0",
+    "last": "255.255.255.255"
+  },
+  {
+    "input": "169.214.248.230/3",
+    "network": "160.0.0.0/3",
+    "last": "191.255.255.255"
+  },
+  {
+    "input": "122.128.250.203/14",
+    "network": "122.128.0.0/14",
+    "last": "122.131.255.255"
+  },
+  {
+    "input": "139.147.240.233/24",
+    "network": "139.147.240.0/24",
+    "last": "139.147.240.255"
+  },
+  {
+    "input": "49.95.212.79/25",
+    "network": "49.95.212.0/25",
+    "last": "49.95.212.127"
+  },
+  {
+    "input": "108.254.216.230/28",
+    "network": "108.254.216.224/28",
+    "last": "108.254.216.239"
+  },
+  {
+    "input": "71.156.30.132/19",
+    "network": "71.156.0.0/19",
+    "last": "71.156.31.255"
+  },
+  {
+    "input": "124.44.6.190/32",
+    "network": "124.44.6.190/32",
+    "last": "124.44.6.190"
+  },
+  {
+    "input": "55.86.12.1/1",
+    "network": "0.0.0.0/1",
+    "last": "127.255.255.255"
+  },
+  {
+    "input": "235.140.196.101/21",
+    "network": "235.140.192.0/21",
+    "last": "235.140.199.255"
+  },
+  {
+    "input": "227.112.173.149/0",
+    "network": "0.0.0.0/0",
+    "last": "255.255.255.255"
+  },
+  {
+    "input": "200.9.22.228/20",
+    "network": "200.9.16.0/20",
+    "last": "200.9.31.255"
+  },
+  {
+    "input": "198.34.47.32/27",
+    "network": "198.34.47.32/27",
+    "last": "198.34.47.63"
+  },
+  {
+    "input": "c66:713a:d646:81da:8c6d:c422:79f9:ed6c/118",
+    "network": "c66:713a:d646:81da:8c6d:c422:79f9:ec00/118",
+    "last": "c66:713a:d646:81da:8c6d:c422:79f9:efff"
+  },
+  {
+    "input": "9962:4e2d:b185:ab27:d492:7b04:d96b:7aeb/23",
+    "network": "9962:4e00::/23",
+    "last": "9962:4fff:ffff:ffff:ffff:ffff:ffff:ffff"
+  },
+  {
+    "input": "3e5b:b650:4de3:1da0:ad09:45b4:f155:a158/94",
+    "network": "3e5b:b650:4de3:1da0:ad09:45b4::/94",
+    "last": "3e5b:b650:4de3:1da0:ad09:45b7:ffff:ffff"
+  },
+  {
+    "input": "4c07:7798:378:6cfd:194c:ebcd:161a:5739/112",
+    "network": "4c07:7798:378:6cfd:194c:ebcd:161a:0/112",
+    "last": "4c07:7798:378:6cfd:194c:ebcd:161a:ffff"
+  },
+  {
+    "input": "ee7e:6b40:c310:1693:d79a:43f8:bc26:dddb/38",
+    "network": "ee7e:6b40:c000::/38",
+    "last": "ee7e:6b40:c3ff:ffff:ffff:ffff:ffff:ffff"
+  },
+  {
+    "input": "cb85:1546:9145:f126:759:fdb7:4c88:45ab/15",
+    "network": "cb84::/15",
+    "last": "cb85:ffff:ffff:ffff:ffff:ffff:ffff:ffff"
+  },
+  {
+    "input": "ac8a:37c4:506e:e046:a832:b5a8:fe46:2499/70",
+    "network": "ac8a:37c4:506e:e046:a800::/70",
+    "last": "ac8a:37c4:506e:e046:abff:ffff:ffff:ffff"
+  },
+  {
+    "input": "9d7c:f78f:ec9e:57ac:1f71:5ebc:2494:9796/41",
+    "network": "9d7c:f78f:ec80::/41",
+    "last": "9d7c:f78f:ecff:ffff:ffff:ffff:ffff:ffff"
+  },
+  {
+    "input": "6ade:2ff1:cd41:f9a:2041:a2f:fd78:cbe/102",
+    "network": "6ade:2ff1:cd41:f9a:2041:a2f:fc00:0/102",
+    "last": "6ade:2ff1:cd41:f9a:2041:a2f:ffff:ffff"
+  },
+  {
+    "input": "84e8:9f7c:89a2:f9f5:cd0f:9e9a:9473:e275/20",
+    "network": "84e8:9000::/20",
+    "last": "84e8:9fff:ffff:ffff:ffff:ffff:ffff:ffff"
+  },
+  {
+    "input": "31a3:2703:14c2:6bee:feea:7ca9:502b:8cfa/108",
+    "network": "31a3:2703:14c2:6bee:feea:7ca9:5020:0/108",
+    "last": "31a3:2703:14c2:6bee:feea:7ca9:502f:ffff"
+  },
+  {
+    "input": "ee3c:2e5:1d6e:4408:33af:fb17:6199:7cb7/20",
+    "network": "ee3c::/20",
+    "last": "ee3c:fff:ffff:ffff:ffff:ffff:ffff:ffff"
+  },
+  {
+    "input": "8ed6:dcbb:3d15:1682:ec62:e2c6:92f4:a09e/83",
+    "network": "8ed6:dcbb:3d15:1682:ec62:e000::/83",
+    "last": "8ed6:dcbb:3d15:1682:ec62:ffff:ffff:ffff"
+  },
+  {
+    "input": "88e:5e79:cdd5:a08f:581c:cec0:caf1:6fec/60",
+    "network": "88e:5e79:cdd5:a080::/60",
+    "last": "88e:5e79:cdd5:a08f:ffff:ffff:ffff:ffff"
+  },
+  {
+    "input": "29f6:35e6:a302:40d6:d492:e397:4f4a:b239/36",
+    "network": "29f6:35e6:a000::/36",
+    "last": "29f6:35e6:afff:ffff:ffff:ffff:ffff:ffff"
+  },
+  {
+    "input": "79c0:1b3:cdcd:f8ad:88ec:fdd7:800:d0fb/124",
+    "network": "79c0:1b3:cdcd:f8ad:88ec:fdd7:800:d0f0/124",
+    "last": "79c0:1b3:cdcd:f8ad:88ec:fdd7:800:d0ff"
+  },
+  {
+    "input": "9b0e:fe7b:65e9:6c20:b7ea:e834:103f:d57b/118",
+    "network": "9b0e:fe7b:65e9:6c20:b7ea:e834:103f:d400/118",
+    "last": "9b0e:fe7b:65e9:6c20:b7ea:e834:103f:d7ff"
+  },
+  {
+    "input": "7d1a:12ad:e6be:aec1:9f58:4b04:e330:cf48/37",
+    "network": "7d1a:12ad:e000::/37",
+    "last": "7d1a:12ad:e7ff:ffff:ffff:ffff:ffff:ffff"
+  },
+  {
+    "input": "ec98:72d2:bf2f:e97e:d67a:d35c:145f:6f8c/69",
+    "network": "ec98:72d2:bf2f:e97e:d000::/69",
+    "last": "ec98:72d2:bf2f:e97e:d7ff:ffff:ffff:ffff"
+  },
+  {
+    "input": "1963:2f41:9bda:f35e:b727:79c2:3e1b:4ec7/43",
+    "network": "1963:2f41:9bc0::/43",
+    "last": "1963:2f41:9bdf:ffff:ffff:ffff:ffff:ffff"
+  },
+  {
+    "input": "7d5b:f893:faf1:d012:7866:f549:5e5e:419f/101",
+    "network": "7d5b:f893:faf1:d012:7866:f549:5800:0/101",
+    "last": "7d5b:f893:faf1:d012:7866:f549:5fff:ffff"
+  },
+  {
+    "input": "a7ea:79e2:1a49:e3a3:3754:4525:c7a2:991d/126",
+    "network": "a7ea:79e2:1a49:e3a3:3754:4525:c7a2:991c/126",
+    "last": "a7ea:79e2:1a49:e3a3:3754:4525:c7a2:991f"
+  },
+  {
+    "input": "9869:5db6:596a:ccc6:1c21:3ce8:f99d:438b/24",
+    "network": "9869:5d00::/24",
+    "last": "9869:5dff:ffff:ffff:ffff:ffff:ffff:ffff"
+  },
+  {
+    "input": "2c3:6cb:8e90:c2ce:234b:125b:d991:e332/45",
+    "network": "2c3:6cb:8e90::/45",
+    "last": "2c3:6cb:8e97:ffff:ffff:ffff:ffff:ffff"
+  },
+  {
+    "input": "35db:f350:2698:ac29:9b8e:4cd4:5e43:bdaf/32",
+    "network": "35db:f350::/32",
+    "last": "35db:f350:ffff:ffff:ffff:ffff:ffff:ffff"
+  },
+  {
+    "input": "e50b:6cc0:5013:9df4:6a4b:cf82:3bd8:8cbd/112",
+    "network": "e50b:6cc0:5013:9df4:6a4b:cf82:3bd8:0/112",
+    "last": "e50b:6cc0:5013:9df4:6a4b:cf82:3bd8:ffff"
+  },
+  {
+    "input": "fae:f10e:2ff9:2658:11f4:5149:5a69:58a1/70",
+    "network": "fae:f10e:2ff9:2658:1000::/70",
+    "last": "fae:f10e:2ff9:2658:13ff:ffff:ffff:ffff"
+  },
+  {
+    "input": "79a6:88b0:27bb:87fe:a5c2:b5dc:2622:5bfe/27",
+    "network": "79a6:88a0::/27",
+    "last": "79a6:88bf:ffff:ffff:ffff:ffff:ffff:ffff"
+  },
+  {
+    "input": "bb47:a584:6247:6df9:2b2f:fd37:bab2:a66a/1",
+    "network": "8000::/1",
+    "last": "ffff:ffff:ffff:ffff:ffff:ffff:ffff:ffff"
+  },
+  {
+    "input": "677a:d131:4998:14a2:8bbd:ee94:738d:856a/62",
+    "network": "677a:d131:4998:14a0::/62",
+    "last": "677a:d131:4998:14a3:ffff:ffff:ffff:ffff"
+  },
+  {
+    "input": "908e:dd04:c877:2db8:7aae:c5e8:9263:86e1/55",
+    "network": "908e:dd04:c877:2c00::/55",
+    "last": "908e:dd04:c877:2dff:ffff:ffff:ffff:ffff"
+  },
+  {
+    "input": "a196:3fe1:184a:6dd5:cada:3247:74fa:e28b/40",
+    "network": "a196:3fe1:1800::/40",
+    "last": "a196:3fe1:18ff:ffff:ffff:ffff:ffff:ffff"
+  },
+  {
+    "input": "3bbb:e48a:aa61:897e:e2cd:a65b:9e2a:cb8a/39",
+    "network": "3bbb:e48a:aa00::/39",
+    "last": "3bbb:e48a:abff:ffff:ffff:ffff:ffff:ffff"
+  },
+  {
+    "input": "9d22:3634:3241:5560:bb43:8416:2524:e98c/52",
+    "network": "9d22:3634:3241:5000::/52",
+    "last": "9d22:3634:3241:5fff:ffff:ffff:ffff:ffff"
+  },
+  {
+    "input": "98d:cc0c:4eda:9573:ebfa:6b1f:aaad:8f7b/30",
+    "network": "98d:cc0c::/30",
+    "last": "98d:cc0f:ffff:ffff:ffff:ffff:ffff:ffff"
+  },
+  {
+    "input": "c252:6d31:6994:f0cc:b8a7:f941:eb15:78/122",
+    "network": "c252:6d31:6994:f0cc:b8a7:f941:eb15:40/122",
+    "last": "c252:6d31:6994:f0cc:b8a7:f941:eb15:7f"
+  },
+  {
+    "input": "76b0:daa4:7de0:a4e2:8198:7c0b:5e71:d4fe/36",
+    "network": "76b0:daa4:7000::/36",
+    "last": "76b0:daa4:7fff:ffff:ffff:ffff:ffff:ffff"
+  },
+  {
+    "input": "8b62:3dae:ad66:c90d:1d4f:c111:b954:2c25/45",
+    "network": "8b62:3dae:ad60::/45",
+    "last": "8b62:3dae:ad67:ffff:ffff:ffff:ffff:ffff"
+  },
+  {
+    "input": "867b:bb69:5f9:e1d0:57f:fd6:c86b:709b/55",
+    "network": "867b:bb69:5f9:e000::/55",
+    "last": "867b:bb69:5f9:e1ff:ffff:ffff:ffff:ffff"
+  },
+  {
+    "input": "76c9:da7a:95cb:4357:366:a122:1c92:7f04/48",
+    "network": "76c9:da7a:95cb::/48",
+    "last": "76c9:da7a:95cb:ffff:ffff:ffff:ffff:ffff"
+  },
+  {
+    "input": "fe10:f459:5c96:1c9a:c4dc:7f39:23b0:28b5/51",
+    "network": "fe10:f459:5c96::/51",
+    "last": "fe10:f459:5c96:1fff:ffff:ffff:ffff:ffff"
+  },
+  {
+    "input": "9d44:e947:89c4:12d3:6554:ae12:ea2d:b0fc/9",
+    "network": "9d00::/9",
+    "last": "9d7f:ffff:ffff:ffff:ffff:ffff:ffff:ffff"
+  },
+  {
+    "input": "3f88:4a22:2d40:e0d7:f6:a993:e5fc:53b4/46",
+    "network": "3f88:4a22:2d40::/46",
+    "last": "3f88:4a22:2d43:ffff:ffff:ffff:ffff:ffff"
+  },
+  {
+    "input": "2d86:672a:121b:4ed3:4bf:f174:9a27:2ff7/14",
+    "network": "2d84::/14",
+    "last": "2d87:ffff:ffff:ffff:ffff:ffff:ffff:ffff"
+  },
+  {
+    "input": "cc1e:7a1c:4116:e793:10e0:85a3:c843:afe5/96",
+    "network": "cc1e:7a1c:4116:e793:10e0:85a3::/96",
+    "last": "cc1e:7a1c:4116:e793:10e0:85a3:ffff:ffff"
+  },
+  {
+    "input": "de5f:1788:a7be:190a:eadb:6a41:9a7a:67cb/46",
+    "network": "de5f:1788:a7bc::/46",
+    "last": "de5f:1788:a7bf:ffff:ffff:ffff:ffff:ffff"
+  },
+  {
+    "input": "5d63:1a7a:926c:5c1c:760:7682:5d6c:2975/111",
+    "network": "5d63:1a7a:926c:5c1c:760:7682:5d6c:0/111",
+    "last": "5d63:1a7a:926c:5c1c:760:7682:5d6d:ffff"
+  },
+  {
+    "input": "9eb2:3377:3de3:a2:abfa:208d:5cf6:fd58/34",
+    "network": "9eb2:3377::/34",
+    "last": "9eb2:3377:3fff:ffff:ffff:ffff:ffff:ffff"
+  },
+  {
+    "input": "262b:34f6:b63c:e353:9daa:75ad:a651:2121/118",
+    "network": "262b:34f6:b63c:e353:9daa:75ad:a651:2000/118",
+    "last": "262b:34f6:b63c:e353:9daa:75ad:a651:23ff"
+  },
+  {
+    "input": "fe19:4d84:3b18:5129:5c27:a494:43cc:a987/56",
+    "network": "fe19:4d84:3b18:5100::/56",
+    "last": "fe19:4d84:3b18:51ff:ffff:ffff:ffff:ffff"
+  }
+]

@@ -1,0 +1,3 @@
+{% extends "workspace.html" %}
+{% block options %}<div class="option-row"><label>Status codes, separated by spaces<input class="field-input" name="code" maxlength="1000" value="401 403 429 502"></label></div>{% endblock %}
+{% block note %}Offline status and security-header reference. Paste headers as inert text; no requests or policy execution. Processing happens entirely in your browser.{% endblock %}
