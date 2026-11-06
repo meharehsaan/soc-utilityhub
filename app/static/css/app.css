@@ -1321,3 +1321,5 @@ details summary {
 
 .accent-entropy { --tool-color: #e298be; --tool-bg: #2f2229; --tool-line: #e298be; }
 :root[data-theme=light] .accent-entropy { --tool-color: #78214f; --tool-bg: #f6eef2; --tool-line: #78214f; }
+
+.json-pins { padding: 10px; margin-bottom: 12px; border: 1px solid var(--line); border-radius: 7px; font: 11px/1.8 var(--mono); overflow-wrap: anywhere; }

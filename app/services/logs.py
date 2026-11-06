@@ -7,6 +7,7 @@ from typing import Any
 from app.core.documents import DuplicateKey, dump_document, load_document
 from app.core.errors import ToolError
 from app.schemas.logs import LogsOptions
+from app.utils import get_field
 
 RECORD_LIMIT = 5000
 SYSLOG = re.compile(
@@ -81,6 +82,7 @@ def line_records(text: str, format: str) -> list[dict]:
 
 # Read CSV records with quoting and multiline boundaries while rejecting ambiguous headers.
 def csv_records(text: str, delimiter: str) -> list[dict]:
+    physical_lines = text.splitlines(keepends=True)
     reader = csv.reader(io.StringIO(text, newline=""), delimiter=delimiter, strict=True)
     try:
         headers = next(reader, [])
@@ -101,7 +103,7 @@ def csv_records(text: str, delimiter: str) -> list[dict]:
                         "line": line,
                         "value": {},
                         "error": "Column count differs from the header.",
-                        "raw": dump_document(row, pretty=False),
+                        "raw": "".join(physical_lines[line - 1 : reader.line_num]),
                     }
                 )
             else:
@@ -130,6 +132,66 @@ def spreadsheet_cell(value: str) -> str:
     if value.lstrip().startswith(("=", "+", "-", "@")) or value.startswith(("\t", "\r", "\n")):
         return "'" + value
     return value
+
+
+# Summarize explicitly selected network fields without inferring event safety.
+def network_summary(records: list[dict], options: LogsOptions) -> dict:
+    if options.network_preset == "none":
+        return {}
+    presets = {
+        "zeek": ("id.orig_h", "id.resp_h", "id.resp_p", ["orig_bytes", "resp_bytes"]),
+        "suricata": (
+            "src_ip",
+            "dest_ip",
+            "dest_port",
+            ["flow.bytes_toserver", "flow.bytes_toclient"],
+        ),
+        "custom": (
+            options.source_field,
+            options.destination_field,
+            options.port_field,
+            [options.bytes_field],
+        ),
+    }
+    source, destination, port, byte_fields = presets[options.network_preset]
+    result = {}
+    for label, field in (
+        ("sources", source),
+        ("destinations", destination),
+        ("destination_ports", port),
+    ):
+        values = [get_field(record["value"], field) for record in records]
+        present = [cell_text(value) for value in values if value is not None]
+        result[label] = {
+            "field": field,
+            "missing": len(records) - len(present),
+            "top": Counter(present).most_common(10),
+        }
+    total, parsed, invalid = 0, 0, 0
+    for record in records:
+        for field in byte_fields:
+            value = get_field(record["value"], field)
+            if value is None:
+                continue
+            if (
+                type(value) is int
+                and 0 <= value <= 18446744073709551615
+                or isinstance(value, str)
+                and re.fullmatch(r"[0-9]{1,20}", value)
+                and int(value) <= 18446744073709551615
+            ):
+                total += int(value)
+                parsed += 1
+            else:
+                invalid += 1
+    result["bytes"] = {
+        "fields": byte_fields,
+        "total": str(total),
+        "numeric_values": parsed,
+        "invalid_values": invalid,
+    }
+    result["records"] = len(records)
+    return result
 
 
 # Inspect records, choose a view, and export only explicitly selected transformations.
@@ -186,6 +248,12 @@ def inspect_logs(options: LogsOptions) -> dict:
     projected = [
         {key: record["value"][key] for key in columns if key in record["value"]} for record in valid
     ]
+    network = network_summary(valid, options)
+    if set(options.renames) - set(columns):
+        raise ToolError("Rename keys must be selected source columns.")
+    renamed_columns = [options.renames.get(column, column) for column in columns]
+    if len(set(renamed_columns)) != len(renamed_columns):
+        raise ToolError("Renaming would create duplicate column names.")
     summary = {}
     for column in columns:
         present = [record[column] for record in projected if column in record]
@@ -193,6 +261,12 @@ def inspect_logs(options: LogsOptions) -> dict:
             "missing": len(projected) - len(present),
             "top": Counter(cell_text(value) for value in present).most_common(10),
         }
+    projected = [
+        {options.renames.get(key, key): value for key, value in record.items()}
+        for record in projected
+    ]
+    source_columns = columns
+    columns = renamed_columns
     warnings = ["Column/filter choices affect exported records. Original input remains unchanged."]
     if errors:
         warnings.append(
@@ -227,11 +301,13 @@ def inspect_logs(options: LogsOptions) -> dict:
             else "\n".join(dump_document(record, pretty=False) for record in exported)
         )
     rows = [
-        [str(record["line"])] + [cell_text(record["value"].get(column, "")) for column in columns]
+        [str(record["line"])]
+        + [cell_text(record["value"].get(column, "")) for column in source_columns]
         for record in valid
     ]
     return {
         "output": output,
+        "extension": "ndjson" if options.export == "jsonl" else options.export,
         "meta": {
             "source_records": len(records),
             "matching_records": len(valid),
@@ -243,5 +319,6 @@ def inspect_logs(options: LogsOptions) -> dict:
             "rows": rows,
             "errors": errors,
             "summary": summary,
+            "network": network,
         },
     }

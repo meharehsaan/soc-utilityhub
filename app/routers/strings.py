@@ -1,5 +1,6 @@
 from fastapi import APIRouter, Request
 from starlette.concurrency import run_in_threadpool
+from starlette.responses import Response
 
 from app.core.documents import respond
 from app.core.uploads import read_upload
@@ -13,19 +14,19 @@ router = APIRouter()
 
 # Render the dedicated strings controls without evaluating input.
 @router.get("/strings")
-def page(request: Request):
+def page(request: Request) -> Response:
     return tool_page(request, "strings")
 
 
 # Validate options before running this tool on the bounded worker pool.
 @router.post("/api/v1/strings")
-def run(payload: StringsOptions):
+def run(payload: StringsOptions) -> Response:
     return respond(extract_strings(payload))
 
 
 # Read one inert upload and reuse the same request schema and transformation.
 @router.post("/api/v1/strings/file")
-async def run_file(request: Request):
+async def run_file(request: Request) -> Response:
     async with upload_form(request) as (file, form):
         content = await read_upload(file)
         payload = file_options(StringsOptions, str(form.get("options", "{}")), "")

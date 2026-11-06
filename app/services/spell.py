@@ -1,4 +1,8 @@
 from functools import lru_cache
+from typing import TYPE_CHECKING
+
+if TYPE_CHECKING:
+    from spellchecker import SpellChecker
 
 import regex
 
@@ -8,7 +12,7 @@ from app.schemas.spell import SpellOptions
 
 # Load the fixed read-only English dictionary lazily without recording user vocabulary.
 @lru_cache(maxsize=1)
-def dictionary():
+def dictionary() -> "SpellChecker":
     try:
         from spellchecker import SpellChecker
     except ImportError as exc:

@@ -67,7 +67,7 @@ def transform_text(options: TextOptions) -> dict:
             values = [item for item in values if item.strip()]
         if options.action == "sort":
             # Build stable keys while avoiding integer conversion of huge numeric chunks.
-            def key(item: str):
+            def key(item: str) -> str | list[tuple[int, str | tuple[int, str]]]:
                 item = item if options.case_sensitive else item.casefold()
                 if options.natural and options.unit != "graphemes":
                     return [

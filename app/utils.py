@@ -6,7 +6,12 @@ from app.core.errors import ToolError
 
 # Build a consistent readable result without storing the underlying operation.
 def json_result(data: Any, meta: dict | None = None, warnings: list[str] | None = None) -> dict:
-    return {"output": dump_document(data), "meta": meta or {}, "warnings": warnings or []}
+    return {
+        "extension": "json",
+        "output": dump_document(data),
+        "meta": meta or {},
+        "warnings": warnings or [],
+    }
 
 
 # Read an exact top-level field first, then a simple dotted nested field path.

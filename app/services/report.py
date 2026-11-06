@@ -18,6 +18,7 @@ def build_report(options: ReportOptions) -> dict:
     for title, body in sections:
         output.append(f"## {title}\n\n{body if body else 'Not provided.'}")
     return {
+        "extension": "md",
         "output": "\n\n".join(output) + "\n",
         "meta": {"sections": len(sections)},
         "warnings": [

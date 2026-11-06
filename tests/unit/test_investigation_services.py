@@ -289,7 +289,12 @@ def test_sigma_structural_and_unsafe_yaml() -> None:
     assert load_document(inspect_sigma(SigmaOptions(text=rule))["output"])[
         "structural_subset_valid"
     ]
-    for text in ("a: &a [*a]", "!!python/object/apply:os.system [echo blocked]"):
+    for text in (
+        "a: &a [*a]",
+        "!!python/object/apply:os.system [echo blocked]",
+        "title: first\ntitle: second",
+        "1: value",
+    ):
         with pytest.raises(ToolError):
             inspect_sigma(SigmaOptions(text=text))
 

@@ -11,6 +11,8 @@ class ASGITestCase(unittest.IsolatedAsyncioTestCase):
     async def asyncSetUp(self) -> None:
         self.heartbeat = asyncio.create_task(self.tick_loop())
         self.app = create_app()
+        self.lifecycle = self.app.router.lifespan_context(self.app)
+        await self.lifecycle.__aenter__()
         self.client = httpx.AsyncClient(
             transport=httpx.ASGITransport(app=self.app), base_url="http://testserver"
         )
@@ -18,6 +20,7 @@ class ASGITestCase(unittest.IsolatedAsyncioTestCase):
     # Release the in-process client without opening a network connection.
     async def asyncTearDown(self) -> None:
         await self.client.aclose()
+        await self.lifecycle.__aexit__(None, None, None)
         self.heartbeat.cancel()
         try:
             await self.heartbeat

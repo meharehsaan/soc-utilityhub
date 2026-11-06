@@ -1,17 +1,20 @@
 import json
+from collections.abc import AsyncIterator
 from contextlib import asynccontextmanager
 
 from fastapi import Request
-from pydantic import ValidationError
-from starlette.datastructures import UploadFile
+from pydantic import BaseModel, ValidationError
+from starlette.datastructures import FormData, UploadFile
 
-from app.core.documents import DuplicateKey, unique_object
+from app.core.documents import DuplicateKey, check_depth, unique_object
 from app.core.errors import ToolError
 
 
 # Validate one bounded upload form instead of accepting an unlimited multipart collection.
 @asynccontextmanager
-async def upload_form(request: Request, *, hash_file: bool = False):
+async def upload_form(
+    request: Request, *, hash_file: bool = False
+) -> AsyncIterator[tuple[UploadFile, FormData]]:
     allowed = {"file", "algorithms", "expected"} if hash_file else {"file", "options", "encoding"}
     async with request.form(max_files=1, max_fields=3, max_part_size=131072) as form:
         if set(form.keys()) - allowed or any(len(form.getlist(key)) != 1 for key in form):
@@ -23,9 +26,10 @@ async def upload_form(request: Request, *, hash_file: bool = False):
 
 
 # Validate file options using the same schema as pasted content without allowing two sources.
-def file_options(model, options: str, text: str):
+def file_options[T: BaseModel](model: type[T], options: str, text: str) -> T:
     if len(options) > 131072:
         raise ToolError("Upload options are too large.", "input_too_large", 413)
+    check_depth(options)
     try:
         values = json.loads(options, object_pairs_hook=unique_object)
     except (ValueError, DuplicateKey) as exc:

@@ -1,9 +1,11 @@
+import logging
 from urllib.parse import urlsplit
 
 from starlette.types import ASGIApp, Message, Receive, Scope, Send
 
 from app.core.errors import ToolError, error_response
 
+LOGGER = logging.getLogger("utility_hub")
 MIB = 1024 * 1024
 
 
@@ -99,3 +101,14 @@ class SafetyMiddleware:
             if started:
                 raise
             await error_response(exc)(scope, receive, secured_send)
+        except Exception as exc:
+            if started:
+                raise
+            LOGGER.error("Tool processing failed (%s)", type(exc).__name__)
+            await error_response(
+                ToolError(
+                    "Processing failed. Check the input or report this tool error.",
+                    "processing_failed",
+                    500,
+                )
+            )(scope, receive, secured_send)

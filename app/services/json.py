@@ -121,9 +121,23 @@ def inspect_json(options: JsonOptions) -> dict:
             "Output is the explicitly requested projection, not the full source document."
         )
     output = dump_document(document, pretty=options.action != "minify")
+    pending = [document]
+    counts = {"objects": 0, "arrays": 0, "scalars": 0}
+    while pending:
+        item = pending.pop()
+        if isinstance(item, dict):
+            counts["objects"] += 1
+            pending.extend(item.values())
+        elif isinstance(item, list):
+            counts["arrays"] += 1
+            pending.extend(item)
+        else:
+            counts["scalars"] += 1
+    meta.update(counts)
     meta["output_characters"] = len(output)
     return {
         "output": output,
+        "extension": "json",
         "meta": meta,
         "warnings": warnings,
         "data": {"tree": tree_node(document), "compact": dump_document(document, pretty=False)},

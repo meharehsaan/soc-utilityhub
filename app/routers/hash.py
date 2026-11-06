@@ -2,6 +2,7 @@ import json
 
 from fastapi import APIRouter, Request
 from starlette.concurrency import run_in_threadpool
+from starlette.responses import Response
 
 from app.core.documents import respond
 from app.core.errors import ToolError
@@ -15,19 +16,19 @@ router = APIRouter()
 
 # Render explicit browser/server hashing controls.
 @router.get("/hash")
-def page(request: Request):
+def page(request: Request) -> Response:
     return tool_page(request, "hash")
 
 
 # Hash exact submitted text without trimming, newline conversion, or normalization.
 @router.post("/api/v1/hash")
-def run(payload: HashOptions):
+def run(payload: HashOptions) -> Response:
     return respond(hash_text(payload))
 
 
 # Stream one inert uploaded file through all selected algorithms and close it on exit.
 @router.post("/api/v1/hash/file")
-async def run_file(request: Request):
+async def run_file(request: Request) -> Response:
     async with upload_form(request, hash_file=True) as (file, form):
         try:
             names = json.loads(str(form.get("algorithms", '["md5","sha1","sha256"]')))

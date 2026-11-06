@@ -387,3 +387,39 @@ def test_diff_path_limit() -> None:
         a, b = {"k" * 200: a}, {"k" * 200: b}
     with pytest.raises(ToolError):
         compare(CompareOptions(a=dump_document(a), b=dump_document(b), mode="json"))
+
+
+# Renaming and network summaries preserve source values while exports use selected names.
+def test_log_renames_and_network_summary() -> None:
+    source = '{"src_ip":"192.0.2.1","dest_ip":"198.51.100.1","dest_port":443,"bytes":20}\n{"src_ip":"192.0.2.1","bytes":-1}'
+    result = inspect_logs(
+        LogsOptions(
+            text=source, renames={"src_ip": "source"}, network_preset="custom", export="json"
+        )
+    )
+    assert result["data"]["columns"][1] == "source"
+    assert result["data"]["network"]["bytes"]["total"] == "20"
+    assert result["data"]["network"]["bytes"]["invalid_values"] == 1
+    assert load_document(result["output"])[0]["source"] == "192.0.2.1"
+    with pytest.raises(ToolError):
+        inspect_logs(LogsOptions(text=source, renames={"src_ip": "dest_ip"}))
+
+
+# Vendor presets select explicit dotted or nested JSON fields without guessing formats.
+def test_log_network_presets_and_csv_original() -> None:
+    result = inspect_logs(
+        LogsOptions(
+            text='{"id.orig_h":"192.0.2.1","id.resp_h":"198.51.100.1","orig_bytes":10,"resp_bytes":20}',
+            network_preset="zeek",
+        )
+    )
+    assert result["data"]["network"]["bytes"]["total"] == "30"
+    result = inspect_logs(
+        LogsOptions(
+            text='{"flow":{"bytes_toserver":40,"bytes_toclient":50}}', network_preset="suricata"
+        )
+    )
+    assert result["data"]["network"]["bytes"]["total"] == "90"
+    raw = 'a,b\n"two\nlines",value,extra\n'
+    result = inspect_logs(LogsOptions(text=raw, format="csv"))
+    assert result["data"]["errors"][0]["raw"] == '"two\nlines",value,extra\n'
