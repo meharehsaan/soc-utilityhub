@@ -20,7 +20,7 @@ TOOLS = (
         "Replace sensitive details before your next prompt.",
         "Text & privacy",
         "coral",
-        "shield",
+        "sanitize",
     ),
     Tool(
         "text",
@@ -28,7 +28,7 @@ TOOLS = (
         "Sort, deduplicate, and clean up the little things.",
         "Text & privacy",
         "mint",
-        "lines",
+        "text",
     ),
     Tool(
         "logs",
@@ -36,7 +36,7 @@ TOOLS = (
         "Give raw records structure, context, and breathing room.",
         "Data & logs",
         "amber",
-        "terminal",
+        "logs",
     ),
     Tool(
         "json",
@@ -44,7 +44,7 @@ TOOLS = (
         "Open the branch you need. Close the noise.",
         "Data & logs",
         "violet",
-        "braces",
+        "json",
     ),
     Tool(
         "hash",
@@ -61,7 +61,7 @@ TOOLS = (
         "Unwrap encodings one deliberate layer at a time.",
         "Files & encoding",
         "rose",
-        "arrows",
+        "encoder",
         "In your browser",
     ),
     Tool(
@@ -78,7 +78,7 @@ TOOLS = (
         "Extract observations and share safely defanged indicators.",
         "Investigation",
         "ioc",
-        "shield",
+        "ioc",
     ),
     Tool(
         "timestamp",
@@ -86,7 +86,7 @@ TOOLS = (
         "Put mixed clock formats on one explicit timeline.",
         "Investigation",
         "timestamp",
-        "clock",
+        "timestamp",
     ),
     Tool(
         "url",
@@ -94,7 +94,7 @@ TOOLS = (
         "Inspect components without opening the destination.",
         "Investigation",
         "url",
-        "link",
+        "url",
     ),
     Tool(
         "email",
@@ -102,7 +102,7 @@ TOOLS = (
         "Unpack headers and MIME as inert evidence.",
         "Investigation",
         "email",
-        "mail",
+        "email",
     ),
     Tool(
         "jwt",
@@ -110,7 +110,7 @@ TOOLS = (
         "Read claims while keeping verification explicit.",
         "Investigation",
         "jwt",
-        "key",
+        "jwt",
     ),
     Tool(
         "timeline",
@@ -118,7 +118,7 @@ TOOLS = (
         "Order source events and preserve the gaps.",
         "Data & logs",
         "timeline",
-        "clock",
+        "timeline",
     ),
     Tool(
         "events",
@@ -126,7 +126,7 @@ TOOLS = (
         "Read provider-aware Windows and Sysmon event context.",
         "Data & logs",
         "events",
-        "terminal",
+        "events",
     ),
     Tool(
         "query",
@@ -134,7 +134,7 @@ TOOLS = (
         "Quote and chunk indicators for your next search.",
         "Investigation",
         "query",
-        "search",
+        "query",
     ),
     Tool(
         "sigma",
@@ -142,7 +142,7 @@ TOOLS = (
         "Check a safe structural subset of detection rules.",
         "Investigation",
         "sigma",
-        "shield",
+        "sigma",
     ),
     Tool(
         "process-tree",
@@ -150,7 +150,7 @@ TOOLS = (
         "Follow GUID relationships within each host.",
         "Data & logs",
         "process-tree",
-        "tree",
+        "process-tree",
     ),
     Tool(
         "certificate",
@@ -158,7 +158,7 @@ TOOLS = (
         "Read uploaded public certificate metadata offline.",
         "Files & encoding",
         "certificate",
-        "key",
+        "certificate",
     ),
     Tool(
         "strings",
@@ -166,7 +166,7 @@ TOOLS = (
         "Find readable strings with exact byte offsets.",
         "Files & encoding",
         "strings",
-        "lines",
+        "strings",
     ),
     Tool(
         "unicode",
@@ -174,7 +174,7 @@ TOOLS = (
         "Reveal invisible characters and deliberate normalization.",
         "Text & privacy",
         "unicode",
-        "braces",
+        "unicode",
     ),
     Tool(
         "stix",
@@ -182,7 +182,7 @@ TOOLS = (
         "Inspect bundles and export a limited observable subset.",
         "Investigation",
         "stix",
-        "braces",
+        "stix",
     ),
     Tool(
         "report",
@@ -190,7 +190,7 @@ TOOLS = (
         "Turn your supplied facts into a concise Markdown handover.",
         "Text & privacy",
         "report",
-        "lines",
+        "report",
     ),
     Tool(
         "spell",
@@ -198,7 +198,7 @@ TOOLS = (
         "Review local English suggestions before accepting changes.",
         "Text & privacy",
         "spell",
-        "lines",
+        "spell",
     ),
     Tool(
         "regex",
@@ -206,7 +206,7 @@ TOOLS = (
         "Build escaped snippets and inspect bounded local matches.",
         "Text & privacy",
         "regex",
-        "search",
+        "regex",
         "In your browser",
     ),
     Tool(
@@ -215,7 +215,7 @@ TOOLS = (
         "Type or draw a visual signature and export a PNG.",
         "Text & privacy",
         "signature",
-        "pen",
+        "signature",
         "In your browser",
     ),
     Tool(
@@ -224,7 +224,7 @@ TOOLS = (
         "Inspect claimed client markers with offline rules.",
         "Investigation",
         "user-agent",
-        "terminal",
+        "user-agent",
         "In your browser",
     ),
     Tool(
@@ -233,7 +233,7 @@ TOOLS = (
         "Understand schedules and preview real execution instants.",
         "Data & logs",
         "cron",
-        "clock",
+        "cron",
         "In your browser",
     ),
     Tool(
@@ -242,7 +242,7 @@ TOOLS = (
         "Calculate ranges and inspect dated offline context.",
         "Investigation",
         "cidr",
-        "network",
+        "cidr",
         "In your browser",
     ),
     Tool(
@@ -251,7 +251,7 @@ TOOLS = (
         "Normalize addresses and inspect partial IEEE assignments.",
         "Investigation",
         "mac",
-        "network",
+        "mac",
         "In your browser",
     ),
     Tool(
@@ -260,7 +260,7 @@ TOOLS = (
         "Read SID structure and contextual reference labels.",
         "Investigation",
         "user-sid",
-        "key",
+        "user-sid",
         "In your browser",
     ),
     Tool(
@@ -269,7 +269,7 @@ TOOLS = (
         "Look up status codes and inspect inert headers.",
         "Investigation",
         "http-status",
-        "link",
+        "http-status",
         "In your browser",
     ),
     Tool(
@@ -278,7 +278,7 @@ TOOLS = (
         "Measure byte uncertainty without a threat verdict.",
         "Files & encoding",
         "entropy",
-        "bars",
+        "entropy",
         "In your browser",
     ),
 )
