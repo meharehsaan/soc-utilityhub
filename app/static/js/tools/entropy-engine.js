@@ -1,3 +1,5 @@
+import { wellFormed } from "./encoder-engine.js";
+
 // Measure empirical uncertainty without assigning a security verdict.
 export function shannon(counts, total) {
   if (!total) {
@@ -13,7 +15,7 @@ export function shannon(counts, total) {
 
 // Separate byte entropy from Unicode code-point entropy.
 export function operate({text: text = "", bytes: bytes = null}) {
-  const source = bytes ? new Uint8Array(bytes) : (new TextEncoder).encode(text);
+  const source = bytes ? new Uint8Array(bytes) : (new TextEncoder).encode(wellFormed(text));
   if (source.length > 5 * 1024 * 1024) {
     throw new Error("Input is limited to 5 MiB.");
   }

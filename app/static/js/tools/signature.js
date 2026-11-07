@@ -95,6 +95,7 @@ function pngBlob(canvas) {
 
 // Render the selected signature mode into a fixed-size PNG.
 async function runTool() {
+  if (value("background") === value("pen")) { throw new Error("Choose different pen and background colors."); }
   const canvas = document.createElement("canvas");
   canvas.width = 1800;
   canvas.height = 600;
@@ -152,6 +153,7 @@ function renderSignature(result) {
   img.src = previewUrl;
   img.alt = "Generated signature preview";
   img.className = "signature-preview";
+  img.classList.toggle("light-ink", value("pen") === "#ffffff");
   const detail = document.getElementById("result-detail");
   detail.replaceChildren(img);
   detail.hidden = false;

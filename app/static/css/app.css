@@ -9,7 +9,7 @@
   --line-strong: #465048;
   --text: #edf0e9;
   --muted: #a1aaa1;
-  --subtle: #7d897e;
+  --subtle: #8f9b90;
   --input: #161916;
   --accent: #ef9b7d;
   --accent-text: #171b17;
@@ -31,7 +31,7 @@
   --line-strong: #b5bcae;
   --text: #242b24;
   --muted: #626d61;
-  --subtle: #70796c;
+  --subtle: #626d61;
   --input: #fafbf6;
   --accent: #b34828;
   --accent-text: #fff;
@@ -1248,78 +1248,78 @@ details summary {
 }
 
 .accent-ioc { --tool-color: #e2bb98; --tool-bg: #2f2922; --tool-line: #e2bb98; }
-:root[data-theme=light] .accent-ioc { --tool-color: #784b21; --tool-bg: #f6f2ee; --tool-line: #784b21; }
+:root[data-theme=light] .accent-ioc { --tool-color: #6c431e; --tool-bg: #f6f2ee; --tool-line: #784b21; }
 
 .accent-timestamp { --tool-color: #a698e2; --tool-bg: #25222f; --tool-line: #a698e2; }
-:root[data-theme=light] .accent-timestamp { --tool-color: #312178; --tool-bg: #f0eef6; --tool-line: #312178; }
+:root[data-theme=light] .accent-timestamp { --tool-color: #2c1e6c; --tool-bg: #f0eef6; --tool-line: #312178; }
 
 .accent-url { --tool-color: #9fe298; --tool-bg: #242f22; --tool-line: #9fe298; }
-:root[data-theme=light] .accent-url { --tool-color: #2a7821; --tool-bg: #eff6ee; --tool-line: #2a7821; }
+:root[data-theme=light] .accent-url { --tool-color: #266c1e; --tool-bg: #eff6ee; --tool-line: #2a7821; }
 
 .accent-email { --tool-color: #e298b5; --tool-bg: #2f2227; --tool-line: #e298b5; }
-:root[data-theme=light] .accent-email { --tool-color: #782143; --tool-bg: #f6eef1; --tool-line: #782143; }
+:root[data-theme=light] .accent-email { --tool-color: #6c1e3d; --tool-bg: #f6eef1; --tool-line: #782143; }
 
 .accent-jwt { --tool-color: #98cbe2; --tool-bg: #222b2f; --tool-line: #98cbe2; }
-:root[data-theme=light] .accent-jwt { --tool-color: #215d78; --tool-bg: #eef4f6; --tool-line: #215d78; }
+:root[data-theme=light] .accent-jwt { --tool-color: #1e546c; --tool-bg: #eef4f6; --tool-line: #215d78; }
 
 .accent-timeline { --tool-color: #e0e298; --tool-bg: #2f2f22; --tool-line: #e0e298; }
-:root[data-theme=light] .accent-timeline { --tool-color: #767821; --tool-bg: #f6f6ee; --tool-line: #767821; }
+:root[data-theme=light] .accent-timeline { --tool-color: #6a6c1e; --tool-bg: #f6f6ee; --tool-line: #767821; }
 
 .accent-events { --tool-color: #ce98e2; --tool-bg: #2c222f; --tool-line: #ce98e2; }
-:root[data-theme=light] .accent-events { --tool-color: #602178; --tool-bg: #f4eef6; --tool-line: #602178; }
+:root[data-theme=light] .accent-events { --tool-color: #571e6c; --tool-bg: #f4eef6; --tool-line: #602178; }
 
 .accent-query { --tool-color: #98e2b8; --tool-bg: #222f28; --tool-line: #98e2b8; }
-:root[data-theme=light] .accent-query { --tool-color: #217847; --tool-bg: #eef6f2; --tool-line: #217847; }
+:root[data-theme=light] .accent-query { --tool-color: #1e6c40; --tool-bg: #eef6f2; --tool-line: #217847; }
 
 .accent-sigma { --tool-color: #e2a298; --tool-bg: #2f2422; --tool-line: #e2a298; }
-:root[data-theme=light] .accent-sigma { --tool-color: #782e21; --tool-bg: #f6f0ee; --tool-line: #782e21; }
+:root[data-theme=light] .accent-sigma { --tool-color: #6c291e; --tool-bg: #f6f0ee; --tool-line: #782e21; }
 
 .accent-process-tree { --tool-color: #98a2e2; --tool-bg: #22242f; --tool-line: #98a2e2; }
-:root[data-theme=light] .accent-process-tree { --tool-color: #212e78; --tool-bg: #eef0f6; --tool-line: #212e78; }
+:root[data-theme=light] .accent-process-tree { --tool-color: #1e296c; --tool-bg: #eef0f6; --tool-line: #212e78; }
 
 .accent-certificate { --tool-color: #b8e298; --tool-bg: #282f22; --tool-line: #b8e298; }
-:root[data-theme=light] .accent-certificate { --tool-color: #477821; --tool-bg: #f2f6ee; --tool-line: #477821; }
+:root[data-theme=light] .accent-certificate { --tool-color: #406c1e; --tool-bg: #f2f6ee; --tool-line: #477821; }
 
 .accent-strings { --tool-color: #e298ce; --tool-bg: #2f222c; --tool-line: #e298ce; }
-:root[data-theme=light] .accent-strings { --tool-color: #782161; --tool-bg: #f6eef4; --tool-line: #782161; }
+:root[data-theme=light] .accent-strings { --tool-color: #6c1e57; --tool-bg: #f6eef4; --tool-line: #782161; }
 
 .accent-unicode { --tool-color: #98e2e0; --tool-bg: #222f2f; --tool-line: #98e2e0; }
-:root[data-theme=light] .accent-unicode { --tool-color: #217876; --tool-bg: #eef6f6; --tool-line: #217876; }
+:root[data-theme=light] .accent-unicode { --tool-color: #1e6c6a; --tool-bg: #eef6f6; --tool-line: #217876; }
 
 .accent-stix { --tool-color: #e2cb98; --tool-bg: #2f2b22; --tool-line: #e2cb98; }
-:root[data-theme=light] .accent-stix { --tool-color: #785d21; --tool-bg: #f6f4ee; --tool-line: #785d21; }
+:root[data-theme=light] .accent-stix { --tool-color: #6c541e; --tool-bg: #f6f4ee; --tool-line: #785d21; }
 
 .accent-report { --tool-color: #b598e2; --tool-bg: #27222f; --tool-line: #b598e2; }
-:root[data-theme=light] .accent-report { --tool-color: #432178; --tool-bg: #f1eef6; --tool-line: #432178; }
+:root[data-theme=light] .accent-report { --tool-color: #3d1e6c; --tool-bg: #f1eef6; --tool-line: #432178; }
 
 .accent-spell { --tool-color: #98e29f; --tool-bg: #222f24; --tool-line: #98e29f; }
-:root[data-theme=light] .accent-spell { --tool-color: #21782a; --tool-bg: #eef6ef; --tool-line: #21782a; }
+:root[data-theme=light] .accent-spell { --tool-color: #1e6c26; --tool-bg: #eef6ef; --tool-line: #21782a; }
 
 .accent-regex { --tool-color: #e298a6; --tool-bg: #2f2225; --tool-line: #e298a6; }
-:root[data-theme=light] .accent-regex { --tool-color: #782131; --tool-bg: #f6eef0; --tool-line: #782131; }
+:root[data-theme=light] .accent-regex { --tool-color: #6c1e2c; --tool-bg: #f6eef0; --tool-line: #782131; }
 
 .accent-signature { --tool-color: #98bbe2; --tool-bg: #22292f; --tool-line: #98bbe2; }
-:root[data-theme=light] .accent-signature { --tool-color: #214b78; --tool-bg: #eef2f6; --tool-line: #214b78; }
+:root[data-theme=light] .accent-signature { --tool-color: #1e436c; --tool-bg: #eef2f6; --tool-line: #214b78; }
 
 .accent-user-agent { --tool-color: #d1e298; --tool-bg: #2c2f22; --tool-line: #d1e298; }
-:root[data-theme=light] .accent-user-agent { --tool-color: #647821; --tool-bg: #f4f6ee; --tool-line: #647821; }
+:root[data-theme=light] .accent-user-agent { --tool-color: #5a6c1e; --tool-bg: #f4f6ee; --tool-line: #647821; }
 
 .accent-cron { --tool-color: #dd98e2; --tool-bg: #2e222f; --tool-line: #dd98e2; }
-:root[data-theme=light] .accent-cron { --tool-color: #732178; --tool-bg: #f6eef6; --tool-line: #732178; }
+:root[data-theme=light] .accent-cron { --tool-color: #671e6c; --tool-bg: #f6eef6; --tool-line: #732178; }
 
 .accent-cidr { --tool-color: #98e2c7; --tool-bg: #222f2b; --tool-line: #98e2c7; }
-:root[data-theme=light] .accent-cidr { --tool-color: #217859; --tool-bg: #eef6f3; --tool-line: #217859; }
+:root[data-theme=light] .accent-cidr { --tool-color: #1e6c50; --tool-bg: #eef6f3; --tool-line: #217859; }
 
 .accent-mac { --tool-color: #e2b298; --tool-bg: #2f2722; --tool-line: #e2b298; }
-:root[data-theme=light] .accent-mac { --tool-color: #784021; --tool-bg: #f6f1ee; --tool-line: #784021; }
+:root[data-theme=light] .accent-mac { --tool-color: #6c391e; --tool-bg: #f6f1ee; --tool-line: #784021; }
 
 .accent-user-sid { --tool-color: #9c98e2; --tool-bg: #23222f; --tool-line: #9c98e2; }
-:root[data-theme=light] .accent-user-sid { --tool-color: #262178; --tool-bg: #efeef6; --tool-line: #262178; }
+:root[data-theme=light] .accent-user-sid { --tool-color: #221e6c; --tool-bg: #efeef6; --tool-line: #262178; }
 
 .accent-http-status { --tool-color: #a9e298; --tool-bg: #252f22; --tool-line: #a9e298; }
-:root[data-theme=light] .accent-http-status { --tool-color: #357821; --tool-bg: #f0f6ee; --tool-line: #357821; }
+:root[data-theme=light] .accent-http-status { --tool-color: #306c1e; --tool-bg: #f0f6ee; --tool-line: #357821; }
 
 .accent-entropy { --tool-color: #e298be; --tool-bg: #2f2229; --tool-line: #e298be; }
-:root[data-theme=light] .accent-entropy { --tool-color: #78214f; --tool-bg: #f6eef2; --tool-line: #78214f; }
+:root[data-theme=light] .accent-entropy { --tool-color: #6c1e47; --tool-bg: #f6eef2; --tool-line: #78214f; }
 
 .json-pins { padding: 10px; margin-bottom: 12px; border: 1px solid var(--line); border-radius: 7px; font: 11px/1.8 var(--mono); overflow-wrap: anywhere; }

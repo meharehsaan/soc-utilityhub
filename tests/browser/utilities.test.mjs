@@ -30,6 +30,7 @@ async function dataset(name) {
 }
 
 test("byte entropy covers empty, constant, binary and Unicode samples", () => {
+  assert.throws(() => entropy({text:"\ud800"}));
   assert.equal(JSON.parse(entropy({
     text: ""
   }).output).bits_per_byte, null);
@@ -97,6 +98,7 @@ test("UA precedence, legacy engines, unknowns and explicit baseline", () => {
 });
 
 test("regex templates, literal escaping and UTF16 groups", () => {
+  assert.equal(JSON.parse(regex({text:"999.192.0.2.1",template:"ipv4"}).output).matches.length,0);
   const literal = "a.b+[x]";
   assert.equal(new RegExp(escapeRegex(literal)).exec(literal)[0], literal);
   assert.equal(JSON.parse(regex({

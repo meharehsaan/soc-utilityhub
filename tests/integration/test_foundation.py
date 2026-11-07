@@ -1,4 +1,5 @@
 import unittest
+from collections.abc import AsyncIterator
 
 from fastapi import Request
 
@@ -33,12 +34,12 @@ class FoundationTests(ASGITestCase):
     async def test_streamed_body_limit(self) -> None:
         # Consume the actual ASGI body to exercise enforcement during reads.
         @self.app.post("/consume")
-        async def consume(request: Request):
+        async def consume(request: Request) -> dict[str, str]:
             await request.body()
             return {"status": "accepted"}
 
         # Stream an oversized payload rather than constructing a misleading declaration.
-        async def chunks():
+        async def chunks() -> AsyncIterator[bytes]:
             for _ in range(6):
                 yield b"x" * 1024 * 1024
 

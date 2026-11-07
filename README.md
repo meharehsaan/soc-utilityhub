@@ -1,42 +1,37 @@
 # Utility Hub
 
-A lightweight, self-hosted Python website for daily SOC utilities: inspect logs/JSON, prepare LLM input, handle indicators, and support investigations.
+A lightweight, self-hosted Python workbench for everyday SOC tasks. **32 dedicated services** share a searchable card homepage, dark/light themes, and one launcher. No database, accounts, saved investigation history, telemetry, or external service dependencies.
 
-**Status: final planning review; application implementation has not started.** Commands and capabilities below are targets until delivered.
+## Run Locally
 
-## Scope
+Use Python 3.12+ in an isolated environment. In this workspace, the provided environment is /home/ubuntu/pyenv:
 
-- **32 canonical services**, consolidated from 44 proposed cards without dropping capabilities. Related actions use explicit modes on one page.
-- Searchable service cards, separate service modules, shared helpers, and one `run.py` launcher.
-- Equal dark/light theme support, solid surfaces, distinct service accents, and small per-page assets.
-- No database, accounts, saved investigation history, or external API requirements.
-- Sanitizer fields for supplied sensitive strings; optional field/pattern masking, consistent aliases, preview, and replaced-output export.
+    cd /home/ubuntu/codex-projects/utility-hub
+    /home/ubuntu/pyenv/bin/python -m pip install -r requirements.txt
+    /home/ubuntu/pyenv/bin/python run.py
+
+Open **http://127.0.0.1:8000**. In another activated environment, use Python to install requirements.txt and run [run.py](run.py). There is no frontend build step.
+
+Optional launcher arguments: --port 8080, --host 127.0.0.1, --reload for development. No environment variables or credentials are required. The application has no authentication; bind it to networks you control.
+
+## Use the Workbench
+
+Search or filter cards, open a service, paste content or select a file, choose explicit options, then Run. Results offer Copy/Download; Reset clears operation state. Ctrl/Cmd+Enter runs a tool. The theme button switches modes; theme preference alone is stored.
 
 
-## Documentation
+**Processing:** Encoder, Regex, Signature, User-Agent, Cron, CIDR, MAC, SID, HTTP Status, and Entropy stay in the browser. Hash explicitly selects browser/server processing. Other services submit only to this Python instance. Browser tools never silently switch engines.
 
-| Document | Purpose |
-| --- | --- |
+**Limits:** generally 5 MiB / one million characters for text, 50 MiB server hash files, 5 MiB browser files, 20,000 spelling characters, and 10 MiB API results. Tools impose smaller record/depth/time budgets where needed. Uploads are request-scoped; names never become filesystem paths.
 
-## Planned Local Startup
+Review sanitized output before sharing. Hash guesses, entropy, vendor/ASN context, JWT claims, and certificate metadata are observations rather than trust verdicts. Offline lookup snapshots are dated and intentionally partial.
 
-Once Python 3.12+, `uv`, the manifest, and launcher exist, run from this directory:
+## Validation and Delivery Status
 
-```bash
-uv sync --group dev
-uv run python run.py
-```
 
-`python run.py` must also work in the activated environment. One process serves all implemented services, binding to localhost by default. Startup is not available yet.
+This workspace blocks network socket binding and lacks Chromium, so live-server/browser/theme interaction QA remains pending. Spelling and safe XML tests require missing packages; install the complete requirements before using those modes. Dependency locking also remains pending because package-index metadata is unavailable. A resolved uv.lock has not been fabricated.
 
-## Sensitive Data and Processing
+Advanced logfmt/CEF/LEEF/native Zeek adapters, fuzzy/PE hashes, EVTX, and Sigma backend conversion remain explicitly deferred. Existing Zeek/Suricata network summaries accept their JSON field mappings.
 
-The catalog labels each service's processing mode. Ten tools run in-browser; Hash has explicit browser/server modes; the remaining tools use the self-hosted Python server. Browser workflows never upload inputs or silently fall back to server processing.
+## Project Documentation
 
-Keep content and mappings out of logs, URLs, persistent storage, and third-party services. Only theme preference may persist in browser storage. Offline reference files are separate read-only assets; custom corporate ranges remain operation-local.
-
-Sanitizer replaces only configured matches. Review its output before sharing; it cannot guarantee complete anonymization.
-
-## Next Step
-
-Review the finalized plan and instruct us to begin implementation when ready. During development, update this README with actual setup/configuration and delivered features rather than treating planned behavior as working software.
+- [Reference data](app/static/data/README.md) and [fonts](app/static/fonts/README.md): provenance and redistribution notices.
