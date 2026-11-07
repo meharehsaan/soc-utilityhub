@@ -56,9 +56,9 @@ def check_spelling(options: SpellOptions) -> dict:
                     )
                 candidates = checker.candidates(key) or set()
 
-                # Rank by the dictionary's fixed probability with a deterministic tie break.
+                # Rank by the dictionary's fixed frequency with a deterministic tie break.
                 def rank(candidate: str) -> tuple:
-                    return (-checker.word_probability(candidate), candidate)
+                    return (-checker[candidate], candidate)
 
                 suggestions[key] = sorted(candidates, key=rank)[:5]
             positions.append((match.start(), match.end(), word, key))
