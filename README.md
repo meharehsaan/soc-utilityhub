@@ -1,6 +1,6 @@
 # Utility Hub
 
-A lightweight, self-hosted Python workbench for everyday SOC tasks. **32 dedicated services** share a searchable card homepage, dark/light themes, and one launcher. No database, accounts, saved investigation history, telemetry, or external service dependencies.
+A lightweight, self-hosted Python workbench for everyday SOC tasks. **32 dedicated services** share a searchable card homepage, dark/light console themes, and one launcher. No database, accounts, saved investigation history, telemetry, or external service dependencies.
 
 ## Run Locally
 
@@ -16,7 +16,7 @@ Optional launcher arguments: --port 8080, --host 127.0.0.1, --reload for develop
 
 ## Use the Workbench
 
-Search or filter cards, open a service, paste content or select a file, choose explicit options, then Run. Results offer Copy/Download; Reset clears operation state. Ctrl/Cmd+Enter runs a tool. The theme button switches modes; theme preference alone is stored.
+Search or filter cards, open a service, paste content or select a file, choose explicit options, then Run. Results offer Copy/Download; Reset clears operation state. Ctrl/Cmd+Enter runs a tool. The theme button switches modes; theme preference alone is stored. Desktop navigation collapses to an icon rail, and mobile navigation opens as a keyboard-accessible drawer.
 
 
 **Processing:** Encoder, Regex, Signature, User-Agent, Cron, CIDR, MAC, SID, HTTP Status, and Entropy stay in the browser. Hash explicitly selects browser/server processing. Other services submit only to this Python instance. Browser tools never silently switch engines.
@@ -28,9 +28,13 @@ Review sanitized output before sharing. Hash guesses, entropy, vendor/ASN contex
 ## Validation and Delivery Status
 
 
-This workspace blocks network socket binding and lacks Chromium, so live-server/browser/theme interaction QA remains pending. Spelling and safe XML tests require missing packages; install the complete requirements before using those modes. Dependency locking also remains pending because package-index metadata is unavailable. A resolved uv.lock has not been fabricated.
+This workspace blocks network socket binding and lacks Chromium, so live-server/browser/theme interaction QA remains pending. All runtime packages are now installed and unit/API checks include spelling and safe XML. Dependency locking remains pending because package-index metadata is unavailable.
 
 Advanced logfmt/CEF/LEEF/native Zeek adapters, fuzzy/PE hashes, EVTX, and Sigma backend conversion remain explicitly deferred. Existing Zeek/Suricata network summaries accept their JSON field mappings.
+
+## Visual Design
+
+The supplied UI_STYLE_GUIDE.md is adapted using existing Jinja/CSS/JavaScript: graphite and slate themes, gold interactions, blue actions, restrained gradients, and 32 distinct service colors/SVG icons. No React/Tailwind runtime, icon package, chart library, or remote font request was added. Font fallbacks and provenance are documented beside the assets.
 
 ## Project Documentation
 
