@@ -5,9 +5,9 @@
 {% block content %}
 <section class="home-hero" aria-labelledby="hero-title">
   <div class="hero-copy">
-    <p class="eyebrow hero-eyebrow">{{ icon('brand', 13) }} YOUR DAILY SOC WORKSPACE</p>
+    <p class="eyebrow hero-eyebrow">{{ icon('brand', 13) }} UTILITY TOOLS FOR SOC ANALYSTS</p>
     <h1 id="hero-title">Less busywork.<br><span>More clarity.</span></h1>
-    <p class="hero-description">A sharper toolkit for the everyday.<br>Inspect, transform, and investigate — one task at a time.</p>
+    <p class="hero-description">Practical utilities for everyday SOC work.<br>Inspect, transform, and investigate — one task at a time.</p>
     <div class="hero-actions">
       <a class="primary-button" href="#catalog">Explore the tools {{ icon('arrow-right', 16) }}</a>
       <a class="hero-guide" href="/guide">Built around your data {{ icon('arrow-right', 14) }}</a>
@@ -51,6 +51,7 @@
   <div class="tool-grid" id="tool-grid">
     {% for tool in tools %}
     <a class="tool-card accent-{{ tool.accent }}" href="/{{ tool.slug }}" data-category="{{ tool.category }}" data-search="{{ tool.name }} {{ tool.description }} {{ tool.slug }}">
+      <span class="card-watermark" aria-hidden="true">{{ icon(tool.symbol, 176) }}</span>
       <div class="card-top"><span class="tool-icon">{{ icon(tool.symbol, 25) }}</span><span class="card-index">{{ '%02d'|format(loop.index) }} <span>/</span> {{ '%02d'|format(tools|length) }}</span></div>
       <h3>{{ tool.name }}</h3>
       <p>{{ tool.description }}</p>

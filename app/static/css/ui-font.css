@@ -1,0 +1,8 @@
+/* Loaded only when the local Ubuntu Sans font and its license are present. */
+@font-face {
+  font-family: "Ubuntu Sans";
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("/static/fonts/UbuntuSans-Regular.woff2") format("woff2");
+}

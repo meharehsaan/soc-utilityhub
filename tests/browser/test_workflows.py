@@ -129,3 +129,27 @@ def test_category_entry_point_and_empty_search(page: Page, hub_url: str) -> None
     expect(page.locator("#visible-count")).to_have_text("0")
     page.locator("#tool-search").fill("")
     expect(page.locator("#empty-search")).to_be_hidden()
+
+
+# Card feedback uses service colors and a small desktop tilt without changing navigation.
+@pytest.mark.parametrize("theme", ["dark", "light"])
+def test_card_hover_and_soc_branding(page: Page, hub_url: str, theme: str) -> None:
+    page.set_viewport_size({"width": 1440, "height": 900})
+    page.goto(hub_url)
+    if theme == "light":
+        page.get_by_role("button", name="Switch to light mode", exact=True).click()
+    card = page.locator(".tool-card").first
+    before = card.evaluate("node => getComputedStyle(node).backgroundColor")
+    expect(card.locator(".card-watermark")).to_have_attribute("aria-hidden", "true")
+    expect(card).to_have_css("border-left-width", "5px")
+    card.hover()
+    expect(card).not_to_have_css("transform", "none")
+    expect(card).not_to_have_css("background-color", before)
+    expect(page.locator(".footer-credit")).to_contain_text("Created by Ehsaan Mehar")
+    expect(page.locator(".github-button")).to_have_attribute(
+        "href", "https://github.com/meharehsaan"
+    )
+    expect(page.locator(".github-button")).to_have_attribute("rel", "noopener noreferrer")
+    page.emulate_media(reduced_motion="reduce")
+    expect(card).to_have_css("transform", "none")
+    expect(card.locator(".card-watermark")).to_have_css("transform", "none")

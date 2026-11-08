@@ -9,6 +9,10 @@ from app.catalog import available_tools, find_tool
 ROOT = Path(__file__).resolve().parent
 TEMPLATES = Jinja2Templates(directory=str(ROOT / "templates"))
 TEMPLATES.env.globals["navigation_tools"] = tuple(available_tools())
+TEMPLATES.env.globals["ubuntu_sans_available"] = all(
+    (ROOT / "static" / "fonts" / name).is_file()
+    for name in ("UbuntuSans-Regular.woff2", "Ubuntu-FONT-LICENCE.txt")
+)
 
 
 # Render a dedicated service template with shared navigation and catalog metadata.

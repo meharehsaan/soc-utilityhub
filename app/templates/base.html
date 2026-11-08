@@ -7,10 +7,11 @@
   <meta name="color-scheme" content="dark light">
   <meta name="theme-color" id="theme-color" content="#0b0d10">
   <meta name="description" content="Focused utilities for everyday security operations. No account. No saved history.">
-  <title>{% block title %}Utility Hub · Your analyst workbench{% endblock %}</title>
+  <title>{% block title %}SOC UtilityHub · Utility tools for SOC{% endblock %}</title>
   <script src="/static/js/theme.js"></script>
   <link rel="icon" href="/static/favicon.svg" type="image/svg+xml">
   <link rel="stylesheet" href="/static/css/app.css">
+  {% if ubuntu_sans_available %}<link rel="stylesheet" href="/static/css/ui-font.css">{% endif %}
   <script src="/static/js/shell.js" defer></script>
   {% block head %}{% endblock %}
 </head>
@@ -20,9 +21,9 @@
 
   <aside id="app-sidebar" class="app-sidebar" aria-label="Workbench navigation">
     <div class="sidebar-header">
-      <a class="brand" href="/" aria-label="Utility Hub home" title="Utility Hub home">
+      <a class="brand" href="/" aria-label="SOC UtilityHub home" title="SOC UtilityHub home">
         <span class="brand-mark">{{ icon('brand', 24) }}</span>
-        <span class="brand-copy">Utility<span>Hub</span><small>THE ANALYST'S WORKBENCH</small></span>
+        <span class="brand-copy"><span class="brand-kicker">SOC</span><span class="brand-name">Utility<span>Hub</span></span><small>UTILITY TOOLS FOR SOC</small></span>
       </a>
       <button id="nav-close" class="icon-button mobile-only" type="button" aria-label="Close navigation">{{ icon('close', 18) }}</button>
     </div>
@@ -71,7 +72,7 @@
         </div>
       </div>
       <div class="topbar-actions">
-        <span class="instance-badge">{{ icon('server', 13) }} Self-hosted</span>
+        <a class="github-button" href="https://github.com/meharehsaan" target="_blank" rel="noopener noreferrer" aria-label="Ehsaan Mehar on GitHub (opens in a new tab)">{{ icon('repository', 15) }}<span>GitHub</span>{{ icon('external', 11) }}</a>
         <button id="theme-toggle" class="icon-button" type="button" aria-label="Switch to light mode" title="Switch to light mode">
           <span class="theme-sun">{{ icon('sun', 18) }}</span><span class="theme-moon">{{ icon('moon', 18) }}</span>
         </button>
@@ -80,7 +81,7 @@
 
     <main id="main" class="site-main" tabindex="-1">{% block content %}{% endblock %}</main>
     <footer class="site-footer">
-      <span>{{ icon('brand', 14) }} UtilityHub <span class="footer-divider">/</span> Focused tools. Clear results.</span>
+      <div class="footer-identity"><span class="footer-brand">{{ icon('brand', 14) }} SOC UtilityHub <span class="footer-divider">/</span> Utility tools for SOC</span><span class="footer-credit">Created by <strong>Ehsaan Mehar</strong></span></div>
       <a href="/guide">Processing is always labeled {{ icon('arrow-right', 13) }}</a>
     </footer>
   </div>

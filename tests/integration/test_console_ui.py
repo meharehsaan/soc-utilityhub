@@ -53,6 +53,8 @@ class ConsoleUITests(ASGITestCase):
         self.assertTrue(parser.resources)
         self.assertTrue(all(path.startswith("/static/") for path in parser.resources))
         self.assertNotIn("fonts.googleapis.com", response.text)
+        for resource in parser.resources:
+            self.assertEqual((await self.client.get(resource)).status_code, 200, resource)
         self.assertLess(Path("app/static/css/app.css").stat().st_size, 48 * 1024)
         self.assertLess(Path("app/static/js/shell.js").stat().st_size, 5 * 1024)
         self.assertNotIn("unsafe-inline", response.headers["content-security-policy"])
@@ -67,3 +69,13 @@ class ConsoleUITests(ASGITestCase):
         )
         self.assertIn('id="visible-count"', response.text)
         self.assertIn('class="dark" data-theme="dark"', response.text)
+
+    # Branding and credits stay visible, and the external link opens only on user action.
+    async def test_soc_branding_and_external_profile(self) -> None:
+        response = await self.client.get("/")
+        self.assertIn("SOC UtilityHub", response.text)
+        self.assertIn("UTILITY TOOLS FOR SOC", response.text)
+        self.assertIn("Created by <strong>Ehsaan Mehar</strong>", response.text)
+        self.assertIn('href="https://github.com/meharehsaan"', response.text)
+        self.assertIn('target="_blank" rel="noopener noreferrer"', response.text)
+        self.assertEqual(response.text.count('class="card-watermark" aria-hidden="true"'), 32)

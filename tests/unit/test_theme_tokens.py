@@ -59,3 +59,30 @@ def test_text_and_service_contrast(theme: str) -> None:
         assert contrast(accent["--tool-color"], accent["--tool-bg"]) >= 4.5, tool.slug
         assert contrast(accent["--tool-color"], base["--surface"]) >= 4.5, tool.slug
     assert len(accents) == len(TOOLS) == 32
+
+
+# Blend foreground overlays to conservatively check text beneath decorative watermarks.
+def blend_color(foreground: str, background: str, amount: float) -> str:
+    return "#" + "".join(
+        f"{round(int(foreground[index : index + 2], 16) * amount + int(background[index : index + 2], 16) * (1 - amount)):02x}"
+        for index in (1, 3, 5)
+    )
+
+
+# Keep card labels legible on service tints and the darkest possible watermark overlap.
+@pytest.mark.parametrize("theme", ["dark", "light"])
+def test_card_hover_contrast(theme: str) -> None:
+    root = ":root" if theme == "dark" else ":root[data-theme=light]"
+    base = tokens(root)
+    for tool in TOOLS:
+        selector = ("" if theme == "dark" else root + " ") + ".accent-" + tool.accent
+        accent = tokens(selector)
+        hover = blend_color(accent["--tool-color"], base["--surface"], 0.09)
+        covered = blend_color(accent["--tool-color"], hover, 0.045)
+        for foreground in (
+            base["--text"],
+            base["--muted"],
+            base["--subtle"],
+            accent["--tool-color"],
+        ):
+            assert contrast(foreground, covered) >= 4.5, (theme, tool.slug, foreground)
