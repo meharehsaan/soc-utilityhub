@@ -1,6 +1,73 @@
-{% extends "base.html" %}{% from "icons.html" import icon %}
+{% extends "base.html" %}
+{% from "icons.html" import icon %}
+{% set browser_count = tools|selectattr('processing', 'equalto', 'In your browser')|list|length %}
+{% set server_count = tools|selectattr('processing', 'equalto', 'On your server')|list|length %}
 {% block content %}
-<section class="home-hero"><div><p class="eyebrow"><span class="tiny-square"></span>LESS FRICTION. MORE FOCUS.</p><h1>Your daily analyst<br><span>workbench.</span></h1><p class="hero-description">The small tasks between the big investigations.<br>Focused tools for your logs, text, and everyday details.</p></div><aside class="hero-note"><span class="note-label">BUILT FOR THE EVERYDAY</span><div class="note-grid"><span>01 / Inspect</span><span>02 / Transform</span><span>03 / Compare</span><span>04 / Move on</span></div><p>One task. One clear result.</p></aside></section>
-<section aria-label="Available tools" class="catalog-section"><div class="catalog-heading"><h2>Pick your tool <span class="tool-count">{{ '%02d'|format(tools|length) }}</span></h2><span class="small-label">YOUR DATA. YOUR WORKSPACE.</span></div><div class="catalog-controls"><label class="search-box"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5"/><path d="m16 16 5 5"/></svg><span class="sr-only">Search tools</span><input id="tool-search" type="search" placeholder="Find a tool…" autocomplete="off"><kbd>/</kbd></label><div class="filters" role="group" aria-label="Tool categories"><button class="filter active" type="button" data-category="all" aria-pressed="true">All tools</button>{% for category in tools|map(attribute='category')|unique %}<button class="filter" type="button" data-category="{{ category }}" aria-pressed="false">{{ category }}</button>{% endfor %}</div></div><div class="tool-grid" id="tool-grid">{% for tool in tools %}<a class="tool-card accent-{{ tool.accent }}" href="/{{ tool.slug }}" data-category="{{ tool.category }}" data-search="{{ tool.name }} {{ tool.description }} {{ tool.slug }}"><div class="card-top"><span class="tool-icon">{{ icon(tool.symbol) }}</span><span class="card-index">{{ '%02d'|format(loop.index) }}</span></div><h3>{{ tool.name }}</h3><p>{{ tool.description }}</p><div class="card-bottom"><span>{{ tool.category }}</span><span class="card-arrow" aria-hidden="true">↗</span></div></a>{% endfor %}</div><p id="empty-search" class="empty-search" {% if tools %}hidden{% endif %}>{% if tools %}No tools match. Try a different name or category.{% else %}The workbench is being prepared. Check back shortly.{% endif %}</p></section>
-<div class="privacy-strip"><span class="privacy-symbol" aria-hidden="true">↳</span><div><strong>A clear boundary for every tool.</strong><p>Browser tools stay in your browser. Server tools run on this instance. Processing is always labeled.</p></div><a href="/guide">Read the guide <span aria-hidden="true">→</span></a></div>
-{% endblock %}{% block scripts %}<script type="module" src="/static/js/home.js"></script>{% endblock %}
+<section class="home-hero" aria-labelledby="hero-title">
+  <div class="hero-copy">
+    <p class="eyebrow hero-eyebrow">{{ icon('brand', 13) }} YOUR DAILY SOC WORKSPACE</p>
+    <h1 id="hero-title">Less busywork.<br><span>More clarity.</span></h1>
+    <p class="hero-description">A sharper toolkit for the everyday.<br>Inspect, transform, and investigate — one task at a time.</p>
+    <div class="hero-actions">
+      <a class="primary-button" href="#catalog">Explore the tools {{ icon('arrow-right', 16) }}</a>
+      <a class="hero-guide" href="/guide">Built around your data {{ icon('arrow-right', 14) }}</a>
+    </div>
+  </div>
+
+  <aside class="hero-console" aria-label="Workbench overview">
+    <div class="console-bar"><span class="console-dots" aria-hidden="true"><i></i><i></i><i></i></span><span>utilityhub / workspace</span>{{ icon('brand', 15) }}</div>
+    <div class="console-body">
+      <p class="console-command"><span>›</span> ready for the details.</p>
+      <div class="console-row"><span class="console-icon">{{ icon('logs', 20) }}</span><div><strong>Make sense of the noise</strong><span>Logs, JSON, headers & timelines</span></div><span class="console-tag">INSPECT</span></div>
+      <div class="console-row"><span class="console-icon">{{ icon('sanitize', 20) }}</span><div><strong>Prepare what comes next</strong><span>Sanitize, encode, compare & organize</span></div><span class="console-tag">REFINE</span></div>
+      <div class="console-bottom"><span class="status-dot" aria-hidden="true"></span> One workspace. {{ tools|length }} focused tools.</div>
+    </div>
+  </aside>
+</section>
+
+<section class="stat-grid" aria-label="Available processing modes">
+  <article class="stat-card"><span class="stat-icon">{{ icon('grid', 20) }}</span><div><strong>{{ '%02d'|format(tools|length) }}</strong><span>Focused services</span></div></article>
+  <article class="stat-card"><span class="stat-icon stat-blue">{{ icon('browser', 20) }}</span><div><strong>{{ '%02d'|format(browser_count) }}</strong><span>In your browser</span></div></article>
+  <article class="stat-card"><span class="stat-icon stat-green">{{ icon('server', 20) }}</span><div><strong>{{ '%02d'|format(server_count) }}</strong><span>On your server</span></div></article>
+  <article class="stat-card"><span class="stat-icon stat-orange">{{ icon('layers', 20) }}</span><div><strong>{{ '%02d'|format(tools|length - browser_count - server_count) }}</strong><span>Choose either mode</span></div></article>
+</section>
+
+<section id="catalog" class="catalog-section" aria-labelledby="catalog-title">
+  <div class="catalog-heading">
+    <div><p class="section-eyebrow">THE TOOLKIT</p><h2 id="catalog-title">Find your next shortcut <span class="tool-count">{{ tools|length }}</span></h2></div>
+    <span class="catalog-counter">Showing <strong id="visible-count" role="status" aria-live="polite">{{ tools|length }}</strong> of {{ tools|length }}</span>
+  </div>
+
+  <div class="catalog-controls">
+    <label class="search-box">{{ icon('search', 18) }}<span class="sr-only">Search tools</span><input id="tool-search" type="search" placeholder="Search tools, tasks, or keywords…" autocomplete="off"><kbd>/</kbd></label>
+    <div class="filters" role="group" aria-label="Tool categories">
+      <button class="filter active" type="button" data-category="all" aria-pressed="true">All tools</button>
+      {% for category in tools|map(attribute='category')|unique %}
+      <button class="filter" type="button" data-category="{{ category }}" aria-pressed="false">{{ category }}</button>
+      {% endfor %}
+    </div>
+  </div>
+
+  <div class="tool-grid" id="tool-grid">
+    {% for tool in tools %}
+    <a class="tool-card accent-{{ tool.accent }}" href="/{{ tool.slug }}" data-category="{{ tool.category }}" data-search="{{ tool.name }} {{ tool.description }} {{ tool.slug }}">
+      <div class="card-top"><span class="tool-icon">{{ icon(tool.symbol, 25) }}</span><span class="card-index">{{ '%02d'|format(loop.index) }} <span>/</span> {{ '%02d'|format(tools|length) }}</span></div>
+      <h3>{{ tool.name }}</h3>
+      <p>{{ tool.description }}</p>
+      <div class="card-bottom">
+        <span class="processing-chip">{% if tool.processing == 'In your browser' %}{{ icon('browser', 12) }} Browser{% elif tool.processing == 'On your server' %}{{ icon('server', 12) }} Server{% else %}{{ icon('layers', 12) }} Choose mode{% endif %}</span>
+        <span class="card-arrow">{{ icon('arrow-right', 16) }}</span>
+      </div>
+    </a>
+    {% endfor %}
+  </div>
+  <p id="empty-search" class="empty-search" hidden>{{ icon('search', 25) }}<strong>No matching tools</strong><span>Try another keyword or choose a different category.</span></p>
+</section>
+
+<aside class="privacy-strip">
+  <span class="privacy-symbol">{{ icon('sanitize', 23) }}</span>
+  <div><strong>A clear boundary for every tool.</strong><p>Browser tools stay in your browser. Server tools run on this instance. No saved investigation history.</p></div>
+  <a href="/guide">How it works {{ icon('arrow-right', 15) }}</a>
+</aside>
+{% endblock %}
+{% block scripts %}<script type="module" src="/static/js/home.js"></script>{% endblock %}

@@ -1,24 +1,89 @@
+{% from "icons.html" import icon %}
 <!doctype html>
-<html lang="en" data-theme="dark">
+<html lang="en" class="dark" data-theme="dark">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <meta name="color-scheme" content="dark light">
+  <meta name="theme-color" id="theme-color" content="#0b0d10">
   <meta name="description" content="Focused utilities for everyday security operations. No account. No saved history.">
   <title>{% block title %}Utility Hub · Your analyst workbench{% endblock %}</title>
   <script src="/static/js/theme.js"></script>
   <link rel="icon" href="/static/favicon.svg" type="image/svg+xml">
   <link rel="stylesheet" href="/static/css/app.css">
+  <script src="/static/js/shell.js" defer></script>
   {% block head %}{% endblock %}
 </head>
 <body data-page="{{ page }}">
   <a class="skip-link" href="#main">Skip to content</a>
-  <header class="site-header">
-    <a class="brand" href="/" aria-label="Utility Hub home"><span class="brand-mark" aria-hidden="true">u<span>h</span></span><span>utility<span class="brand-muted">hub</span><small>THE ANALYST'S WORKBENCH</small></span></a>
-    <nav aria-label="Main navigation"><a class="nav-link {% if page == 'home' %}active{% endif %}" href="/">Workbench</a><a class="nav-link {% if page == 'guide' %}active{% endif %}" href="/guide">How it works</a><span class="nav-divider"></span><button id="theme-toggle" class="icon-button" type="button" aria-label="Switch to light mode"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2m0 16v2M2 12h2m16 0h2M5 5l1.5 1.5m11 11L19 19M5 19l1.5-1.5m11-11L19 5"/></svg></button></nav>
-  </header>
-  <main id="main" class="site-main">{% block content %}{% endblock %}</main>
-  <footer class="site-footer"><span><span class="status-dot"></span>No accounts. No saved history.</span><span>Small tools for the details that matter.<span class="footer-mark"> UH / 01</span></span></footer>
+  <button id="nav-backdrop" class="nav-backdrop" type="button" aria-label="Close navigation" hidden></button>
+
+  <aside id="app-sidebar" class="app-sidebar" aria-label="Workbench navigation">
+    <div class="sidebar-header">
+      <a class="brand" href="/" aria-label="Utility Hub home" title="Utility Hub home">
+        <span class="brand-mark">{{ icon('brand', 24) }}</span>
+        <span class="brand-copy">Utility<span>Hub</span><small>THE ANALYST'S WORKBENCH</small></span>
+      </a>
+      <button id="nav-close" class="icon-button mobile-only" type="button" aria-label="Close navigation">{{ icon('close', 18) }}</button>
+    </div>
+
+    <nav class="sidebar-nav" aria-label="Main navigation">
+      <p class="nav-heading">Workspace</p>
+      <a class="sidebar-link {% if page == 'home' %}active{% endif %}" href="/" title="All tools" aria-label="All tools" {% if page == 'home' %}aria-current="page"{% endif %}>
+        {{ icon('grid', 19) }}<span class="nav-text">All tools</span><span class="nav-count">{{ navigation_tools|length }}</span>
+      </a>
+
+      <p class="nav-heading">Explore by category</p>
+      {% for category, symbol, label in [('Text & privacy','text','Text & privacy'),('Data & logs','logs','Data & logs'),('Files & encoding','encoder','Files & encoding'),('Investigation','ioc','Investigation')] %}
+      <a class="sidebar-link category-link" href="/?category={{ category|urlencode }}#catalog" data-category="{{ category }}" title="{{ label }}" aria-label="{{ label }}">
+        {{ icon(symbol, 19) }}<span class="nav-text">{{ label }}</span><span class="nav-count">{{ navigation_tools|selectattr('category', 'equalto', category)|list|length }}</span>
+      </a>
+      {% endfor %}
+
+      <p class="nav-heading">Quick access</p>
+      {% for item in navigation_tools if item.slug in ['sanitize', 'logs', 'json', 'hash'] %}
+      <a class="sidebar-link quick-link accent-{{ item.accent }} {% if page == item.slug %}active{% endif %}" href="/{{ item.slug }}" title="{{ item.name }}" aria-label="{{ item.name }}" {% if page == item.slug %}aria-current="page"{% endif %}>
+        <span class="nav-tool-icon">{{ icon(item.symbol, 19) }}</span><span class="nav-text">{{ item.name }}</span>
+      </a>
+      {% endfor %}
+
+      <div class="nav-bottom">
+        <a class="sidebar-link {% if page == 'guide' %}active{% endif %}" href="/guide" title="How it works" aria-label="How it works" {% if page == 'guide' %}aria-current="page"{% endif %}>
+          {{ icon('book', 19) }}<span class="nav-text">How it works</span>
+        </a>
+      </div>
+    </nav>
+
+    <div class="sidebar-foot">
+      <span class="sidebar-foot-icon">{{ icon('server', 18) }}</span>
+      <div class="nav-text"><strong>Your instance. Your tools.</strong><span>No accounts. No saved history.</span></div>
+    </div>
+  </aside>
+
+  <div id="app-column" class="app-column">
+    <header class="site-header">
+      <div class="topbar-left">
+        <button id="menu-toggle" class="icon-button mobile-only" type="button" aria-label="Open navigation" aria-controls="app-sidebar" aria-expanded="false">{{ icon('menu', 18) }}</button>
+        <button id="sidebar-toggle" class="icon-button desktop-only" type="button" aria-label="Collapse sidebar" aria-controls="app-sidebar" aria-expanded="true">{{ icon('panel', 18) }}</button>
+        <div class="topbar-title">
+          <span class="topbar-path">WORKSPACE <span>/</span></span>
+          <strong>{% if page == 'home' %}Workbench{% elif page == 'guide' %}How it works{% else %}{{ tool.name }}{% endif %}</strong>
+        </div>
+      </div>
+      <div class="topbar-actions">
+        <span class="instance-badge">{{ icon('server', 13) }} Self-hosted</span>
+        <button id="theme-toggle" class="icon-button" type="button" aria-label="Switch to light mode" title="Switch to light mode">
+          <span class="theme-sun">{{ icon('sun', 18) }}</span><span class="theme-moon">{{ icon('moon', 18) }}</span>
+        </button>
+      </div>
+    </header>
+
+    <main id="main" class="site-main" tabindex="-1">{% block content %}{% endblock %}</main>
+    <footer class="site-footer">
+      <span>{{ icon('brand', 14) }} UtilityHub <span class="footer-divider">/</span> Focused tools. Clear results.</span>
+      <a href="/guide">Processing is always labeled {{ icon('arrow-right', 13) }}</a>
+    </footer>
+  </div>
   {% block scripts %}{% endblock %}
 </body>
 </html>

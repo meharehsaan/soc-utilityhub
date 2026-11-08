@@ -80,3 +80,52 @@ def test_home_layout_and_search(page: Page, hub_url: str, width: int, theme: str
     page.locator("#tool-search").fill("sanitize")
     expect(page.locator(".tool-card:visible")).to_have_count(1)
     assert page.evaluate("document.documentElement.scrollWidth <= window.innerWidth")
+
+
+# Desktop collapse must not leave an offset when the same page becomes mobile.
+def test_sidebar_collapse_and_mobile_resize(page: Page, hub_url: str) -> None:
+    page.set_viewport_size({"width": 1440, "height": 900})
+    page.goto(hub_url + "/json")
+    page.get_by_role("button", name="Collapse sidebar", exact=True).click()
+    expect(page.get_by_role("button", name="Expand sidebar", exact=True)).to_be_visible()
+    page.set_viewport_size({"width": 390, "height": 844})
+    page.wait_for_timeout(350)
+    assert page.locator("#app-column").evaluate("node => node.getBoundingClientRect().left") == 0
+    assert page.evaluate("document.documentElement.scrollWidth <= innerWidth")
+
+
+# Mobile navigation traps focus, supports Escape, and retains service input.
+def test_mobile_navigation_keeps_workbench_state(page: Page, hub_url: str) -> None:
+    page.set_viewport_size({"width": 390, "height": 844})
+    page.goto(hub_url + "/text")
+    page.locator("#source").fill("Retain this synthetic input")
+    page.get_by_role("button", name="Open navigation", exact=True).click()
+    expect(page.locator("#app-sidebar")).to_have_class("app-sidebar open")
+    assert page.locator("#app-column").evaluate("node => node.inert")
+    page.keyboard.press("Escape")
+    expect(page.get_by_role("button", name="Open navigation", exact=True)).to_be_focused()
+    expect(page.locator("#source")).to_have_value("Retain this synthetic input")
+    assert not page.locator("#app-column").evaluate("node => node.inert")
+
+
+# Both theme selectors stay synchronized without resetting form content.
+def test_theme_switch_preserves_service_input(page: Page, hub_url: str) -> None:
+    page.goto(hub_url + "/text")
+    page.locator("#source").fill("Keep this content")
+    page.get_by_role("button", name="Switch to light mode", exact=True).click()
+    expect(page.locator("html")).to_have_attribute("data-theme", "light")
+    expect(page.locator("html")).not_to_have_class("dark")
+    expect(page.locator("#source")).to_have_value("Keep this content")
+
+
+# Sidebar category entry points and local search share the same catalog state.
+def test_category_entry_point_and_empty_search(page: Page, hub_url: str) -> None:
+    page.goto(hub_url + "/?category=Investigation#catalog")
+    expect(page.locator('.filter[data-category="Investigation"]')).to_have_attribute(
+        "aria-pressed", "true"
+    )
+    page.locator("#tool-search").fill("no-such-synthetic-tool")
+    expect(page.locator("#empty-search")).to_be_visible()
+    expect(page.locator("#visible-count")).to_have_text("0")
+    page.locator("#tool-search").fill("")
+    expect(page.locator("#empty-search")).to_be_hidden()

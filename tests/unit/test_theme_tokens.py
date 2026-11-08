@@ -36,7 +36,7 @@ def contrast(first: str, second: str) -> float:
     return (high + 0.05) / (low + 0.05)
 
 
-# Protect small body text and service actions in both supported solid-color themes.
+# Protect body text, service glyphs, and shared actions in both console themes.
 @pytest.mark.parametrize("theme", ["dark", "light"])
 def test_text_and_service_contrast(theme: str) -> None:
     root = ":root" if theme == "dark" else ":root[data-theme=light]"
@@ -48,11 +48,14 @@ def test_text_and_service_contrast(theme: str) -> None:
                 foreground,
                 background,
             )
+    assert contrast(base["--primary-text"], base["--primary"]) >= 4.5
+    assert contrast(base["--accent-text"], base["--accent"]) >= 4.5
+    assert contrast(base["--gold-text"], base["--gold-bg"]) >= 4.5
     accents = set()
     for tool in TOOLS:
         selector = ("" if theme == "dark" else root + " ") + ".accent-" + tool.accent
         accent = tokens(selector)
         accents.add(accent["--tool-color"])
         assert contrast(accent["--tool-color"], accent["--tool-bg"]) >= 4.5, tool.slug
-        assert contrast(base["--accent-text"], accent["--tool-color"]) >= 4.5, tool.slug
+        assert contrast(accent["--tool-color"], base["--surface"]) >= 4.5, tool.slug
     assert len(accents) == len(TOOLS) == 32

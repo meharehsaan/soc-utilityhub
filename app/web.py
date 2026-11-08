@@ -4,10 +4,11 @@ from fastapi import Request
 from fastapi.templating import Jinja2Templates
 from starlette.responses import Response
 
-from app.catalog import find_tool
+from app.catalog import available_tools, find_tool
 
 ROOT = Path(__file__).resolve().parent
 TEMPLATES = Jinja2Templates(directory=str(ROOT / "templates"))
+TEMPLATES.env.globals["navigation_tools"] = tuple(available_tools())
 
 
 # Render a dedicated service template with shared navigation and catalog metadata.

@@ -1,34 +1,44 @@
-// Apply the single persisted preference before the page paints.
+// Apply both the guide's class and the existing theme attribute before the first paint.
+function applyTheme(theme) {
+  document.documentElement.dataset.theme = theme;
+  document.documentElement.classList.toggle("dark", theme === "dark");
+  const color = document.getElementById("theme-color");
+  if (color) color.content = theme === "dark" ? "#0b0d10" : "#eef2f6";
+}
+
+// Read the only persisted UI preference without storing tool contents.
 function applyInitialTheme() {
   let theme = "dark";
   try {
-    if (localStorage.getItem("utility-hub-theme") === "light") {
-      theme = "light";
-    }
-  } catch {/* Storage may be disabled. */}
-  document.documentElement.dataset.theme = theme;
+    if (localStorage.getItem("utility-hub-theme") === "light") theme = "light";
+  } catch { /* The default theme also works when storage is disabled. */ }
+  applyTheme(theme);
 }
 
-// Keep theme choice and the accessible toggle label in sync.
+// Keep the theme button's accessible label and icon state synchronized.
 function connectThemeToggle() {
   const button = document.getElementById("theme-toggle");
-  // Describe the action the theme button will perform.
+  if (!button) return;
+
+  // Describe the next theme action to keyboard and assistive-technology users.
   function updateLabel() {
-    button.setAttribute("aria-label", `Switch to ${document.documentElement.dataset.theme === "dark" ? "light" : "dark"} mode`);
+    const label = "Switch to " + (document.documentElement.dataset.theme === "dark" ? "light" : "dark") + " mode";
+    button.setAttribute("aria-label", label);
+    button.title = label;
   }
-  // Persist only a UI preference, never tool contents.
+
+  // Switch visual tokens while leaving all service inputs and results intact.
   function toggleTheme() {
     const theme = document.documentElement.dataset.theme === "dark" ? "light" : "dark";
-    document.documentElement.dataset.theme = theme;
-    try {
-      localStorage.setItem("utility-hub-theme", theme);
-    } catch {/* Theme still works without storage. */}
+    applyTheme(theme);
+    try { localStorage.setItem("utility-hub-theme", theme); }
+    catch { /* Theme switching does not depend on persistence. */ }
     updateLabel();
   }
+
   button.addEventListener("click", toggleTheme);
   updateLabel();
 }
 
 applyInitialTheme();
-
 document.addEventListener("DOMContentLoaded", connectThemeToggle);

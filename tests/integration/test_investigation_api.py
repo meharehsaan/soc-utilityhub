@@ -112,9 +112,9 @@ class InvestigationAPITests(ASGITestCase):
                 parser = ControlParser()
                 parser.feed(page.text)
                 script = (Path("app/static/js/tools") / (tool.slug + ".js")).read_text()
-                for element_id in re.findall(r'getElementById\\("([^"]+)"\\)', script):
+                for element_id in re.findall(r'getElementById\("([^"]+)"\)', script):
                     self.assertIn(element_id, parser.ids, tool.slug + ": " + element_id)
-                for field in re.findall(r'(?:value|checked)\\("([^"]+)"\\)', script):
+                for field in re.findall(r'(?:value|checked)\("([^"]+)"\)', script):
                     self.assertIn(field, parser.names, tool.slug + ": " + field)
         signature = await self.client.get("/signature")
         self.assertIn('id="signature-pad"', signature.text)
