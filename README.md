@@ -34,7 +34,7 @@ Advanced logfmt/CEF/LEEF/native Zeek adapters, fuzzy/PE hashes, EVTX, and Sigma 
 
 ## Visual Design
 
-The supplied UI_STYLE_GUIDE.md is adapted using existing Jinja/CSS/JavaScript: graphite and slate themes, gold interactions, blue actions, restrained gradients, and 32 distinct service colors/SVG icons. Cards add a small desktop hover tilt, stronger service-colored edges, and large decorative SVG watermarks. Touch/reduced-motion users retain color feedback without tilt. Ubuntu Sans Regular is preferred for UI text; the logo uses a distinct serif wordmark. The actual Ubuntu font file is pending an enabled-terminal download; [font setup](app/static/fonts/README.md) explains the offline-safe loading path. No React/Tailwind runtime, icon package, chart library, or remote font request was added.
+The supplied UI_STYLE_GUIDE.md is adapted using existing Jinja/CSS/JavaScript: graphite and slate themes, gold interactions, blue actions, restrained gradients, and 32 distinct service colors/SVG icons. Cards add a small desktop hover tilt, stronger service-colored edges, and large decorative SVG watermarks. Touch/reduced-motion users retain color feedback without tilt. Ubuntu Sans Regular is preferred for UI text; the logo uses a distinct serif wordmark. The 16.3 KiB regular WOFF2 font is bundled locally with its license; [font provenance](app/static/fonts/README.md) records its version and checksums. No React/Tailwind runtime, icon package, chart library, or remote font request was added.
 
 ## Project Documentation
 

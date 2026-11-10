@@ -15,15 +15,17 @@ Suggested CSS family name: `Utility Signature Serif`, sourced from `/static/font
 
 The latest UI direction uses **Ubuntu Sans Regular (400)** for interface text and headings. The logo uses a distinct italic serif stack (Georgia / Palatino / system serif), with no additional font payload. Data retains a monospace stack.
 
-Ubuntu Sans is preferred in CSS but is **not bundled yet**: no local copy exists, and agent-shell downloads fail DNS. Until the files below are available, browsers use the documented local fallback stack. No font-CDN request is made at runtime.
+Ubuntu Sans Regular is bundled locally. No font-CDN request is made at runtime.
 
-From an enabled terminal inside foo:
+- File: [UbuntuSans-Regular.woff2](UbuntuSans-Regular.woff2), regular 400, Latin subset, unchanged from the user-downloaded Fontsource asset.
+- Family/PostScript name: Ubuntu Sans / UbuntuSans-Regular; embedded font version 1.006 (Fontconfig value 65929).
+- Source: https://cdn.jsdelivr.net/fontsource/fonts/ubuntu-sans@latest/latin-400-normal.woff2 ; upstream [Canonical Ubuntu Sans](https://github.com/canonical/Ubuntu-Sans-fonts).
+- Size: 16,692 bytes; SHA-256: 048644555a97c54450f7cb7a9e1c6728a20e447f8895d6c66ee9bbdbd92db8be.
+- License: full [Ubuntu Font Licence 1.0](Ubuntu-FONT-LICENCE.txt), downloaded unchanged from https://raw.githubusercontent.com/canonical/Ubuntu-Sans-fonts/main/LICENCE.txt .
+- License size: 4,673 bytes; SHA-256: 2f0015108d68627bd788d313f529c21ff4da2c2c42a5e1f3883acc83480f9002.
+- Verified with Fontconfig metadata, WOFF2 signature/header length, and in-process HTTP delivery matching the local bytes. The CDN URL used a latest alias; the checked-in file, embedded version, and checksum identify the exact delivered asset.
 
-    cd /home/ubuntu/codex-projects/utility-hub
-    curl -fL 'https://cdn.jsdelivr.net/fontsource/fonts/ubuntu-sans@latest/latin-400-normal.woff2' -o app/static/fonts/UbuntuSans-Regular.woff2
-    curl -fL 'https://raw.githubusercontent.com/canonical/Ubuntu-Sans-fonts/main/LICENCE.txt' -o app/static/fonts/Ubuntu-FONT-LICENCE.txt
-
-The [Fontsource regular Latin file](https://fontsource.org/fonts/ubuntu-sans) derives from [Canonical Ubuntu Sans](https://github.com/canonical/Ubuntu-Sans-fonts). Retain the full Ubuntu Font Licence. Before committing, verify the font family/weight, WOFF2 header, size, and checksum; record its resolved version and provenance here.
+For deliberate future updates, retain the full license, verify the new family/weight/version and file size, update checksums, and review the font before committing. Do not refresh it automatically.
 
 The shared template includes ui-font.css only when both local font and license files exist at startup. Restart the server after installing them. The stylesheet uses font-display: swap and weight 400. Existing signature assets stay separate.
 
