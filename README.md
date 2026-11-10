@@ -1,6 +1,6 @@
-# Utility Hub
+# SOC UtilityHub
 
-A lightweight, self-hosted Python workbench for everyday SOC tasks. **32 dedicated services** share a searchable card homepage, dark/light console themes, and one launcher. No database, accounts, saved investigation history, telemetry, or external service dependencies.
+Utility tools for SOC analysts, created by **Ehsaan Mehar**. A lightweight, self-hosted Python workbench for everyday SOC tasks. **32 dedicated services** share a searchable card homepage, dark/light console themes, and one launcher. No database, accounts, saved investigation history, telemetry, or external service dependencies.
 
 ## Run Locally
 
@@ -34,8 +34,10 @@ Advanced logfmt/CEF/LEEF/native Zeek adapters, fuzzy/PE hashes, EVTX, and Sigma 
 
 ## Visual Design
 
-The supplied UI_STYLE_GUIDE.md is adapted using existing Jinja/CSS/JavaScript: graphite and slate themes, gold interactions, blue actions, restrained gradients, and 32 distinct service colors/SVG icons. No React/Tailwind runtime, icon package, chart library, or remote font request was added. Font fallbacks and provenance are documented beside the assets.
+The supplied UI_STYLE_GUIDE.md is adapted using existing Jinja/CSS/JavaScript: graphite and slate themes, gold interactions, blue actions, restrained gradients, and 32 distinct service colors/SVG icons. Cards add a small desktop hover tilt, stronger service-colored edges, and large decorative SVG watermarks. Touch/reduced-motion users retain color feedback without tilt. Ubuntu Sans Regular is preferred for UI text; the logo uses a distinct serif wordmark. The actual Ubuntu font file is pending an enabled-terminal download; [font setup](app/static/fonts/README.md) explains the offline-safe loading path. No React/Tailwind runtime, icon package, chart library, or remote font request was added.
 
 ## Project Documentation
 
 - [Reference data](app/static/data/README.md) and [fonts](app/static/fonts/README.md): provenance and redistribution notices.
+
+[GitHub — Ehsaan Mehar](https://github.com/meharehsaan)

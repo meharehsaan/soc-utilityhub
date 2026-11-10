@@ -11,14 +11,26 @@ This is a regular serif face, not a handwriting font. Load it only on the signat
 
 Suggested CSS family name: `Utility Signature Serif`, sourced from `/static/fonts/DejaVuSerif.ttf` with `format("truetype")`, regular weight/style, and `font-display: swap`. The application owns the CSS declaration.
 
-## Console UI Typography
+## SOC UtilityHub Typography
 
-The console style guide specifies IBM Plex Sans for interface text, IBM Plex Mono for data, and Syne for display headings. These three families are **not bundled**: no authentic local copies were available and the download source could not be resolved in this environment.
+The latest UI direction uses **Ubuntu Sans Regular (400)** for interface text and headings. The logo uses a distinct italic serif stack (Georgia / Palatino / system serif), with no additional font payload. Data retains a monospace stack.
 
-Use system fallbacks without making external font requests:
+Ubuntu Sans is preferred in CSS but is **not bundled yet**: no local copy exists, and agent-shell downloads fail DNS. Until the files below are available, browsers use the documented local fallback stack. No font-CDN request is made at runtime.
 
-- Interface: `"IBM Plex Sans", "Segoe UI", Arial, sans-serif`.
-- Data: `"IBM Plex Mono", "SFMono-Regular", Consolas, "Liberation Mono", monospace`.
-- Display: `Syne, "Arial Black", "Segoe UI", sans-serif`.
+From an enabled terminal inside foo:
 
-Do not declare font-face URLs or preload files that do not exist. When licensed local WOFF2 assets become available, prefer Latin subsets or variable files with only required weights, retain their upstream license notices and checksums, and keep the combined UI font payload below 200 KiB. The existing DejaVu signature asset remains separate and loads only on the signature page.
+    cd /home/ubuntu/codex-projects/utility-hub
+    curl -fL 'https://cdn.jsdelivr.net/fontsource/fonts/ubuntu-sans@latest/latin-400-normal.woff2' -o app/static/fonts/UbuntuSans-Regular.woff2
+    curl -fL 'https://raw.githubusercontent.com/canonical/Ubuntu-Sans-fonts/main/LICENCE.txt' -o app/static/fonts/Ubuntu-FONT-LICENCE.txt
+
+The [Fontsource regular Latin file](https://fontsource.org/fonts/ubuntu-sans) derives from [Canonical Ubuntu Sans](https://github.com/canonical/Ubuntu-Sans-fonts). Retain the full Ubuntu Font Licence. Before committing, verify the font family/weight, WOFF2 header, size, and checksum; record its resolved version and provenance here.
+
+The shared template includes ui-font.css only when both local font and license files exist at startup. Restart the server after installing them. The stylesheet uses font-display: swap and weight 400. Existing signature assets stay separate.
+
+Local fallback stacks:
+
+- Interface/headings: Ubuntu Sans, Ubuntu, system-ui, Segoe UI, Arial, sans-serif.
+- Data: IBM Plex Mono, SFMono-Regular, Consolas, Liberation Mono, monospace.
+- Logo: Georgia, Palatino Linotype, Book Antiqua, serif.
+
+Keep the combined UI font payload below 200 KiB. Do not create a placeholder font or add a missing-file request to the rendered page.
