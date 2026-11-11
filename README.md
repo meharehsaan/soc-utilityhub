@@ -1,18 +1,34 @@
 # SOC UtilityHub
 
-Utility tools for SOC analysts, created by **Ehsaan Mehar**. A lightweight, self-hosted Python workbench for everyday SOC tasks. **32 dedicated services** share a searchable card homepage, dark/light console themes, and one launcher. No database, accounts, saved investigation history, telemetry, or external service dependencies.
+Utility tools for SOC analysts, created by **[Ehsaan Mehar](https://github.com/meharehsaan)**. A lightweight, self-hosted Python workbench for everyday SOC tasks. **32 dedicated services** share a searchable card homepage, dark/light console themes, and one launcher. No database, accounts, saved investigation history, telemetry, or external service dependencies.
 
 ## Run Locally
 
-Use Python 3.12+ in an isolated environment. In this workspace, the provided environment is /home/ubuntu/pyenv:
+Use Python 3.12+ and run these commands from the repository root:
 
-    cd /home/ubuntu/codex-projects/utility-hub
-    /home/ubuntu/pyenv/bin/python -m pip install -r requirements.txt
-    /home/ubuntu/pyenv/bin/python run.py
+    python3 -m venv .venv
+    source .venv/bin/activate
+    python -m pip install -r requirements.txt
+    python run.py
 
-Open **http://127.0.0.1:8000**. In another activated environment, use Python to install requirements.txt and run [run.py](run.py). There is no frontend build step.
+Open **http://127.0.0.1:8000**. An existing activated Python environment also works. There is no frontend build or database setup.
 
-Optional launcher arguments: --port 8080, --host 127.0.0.1, --reload for development. No environment variables or credentials are required. The application has no authentication; bind it to networks you control.
+Launcher options: --port 8080, --host 127.0.0.1, and --reload for development. No environment variables or credentials are required.
+
+For a Multipass VM such as foo, run the server inside the VM with:
+
+    python run.py --host 0.0.0.0 --port 8000
+
+On the host, use the VM's IPv4 from multipass info foo and open http://VM_IP:8000. The application has no authentication; use networks you control. Some browser capabilities, including native SHA hashing and clipboard access, require HTTPS or a browser-trusted localhost origin.
+
+## Repository Layout
+
+- app/: per-service Python modules, templates, local JavaScript/CSS, fonts, and offline reference data.
+- tests/: synthetic unit/API/browser checks and fixtures.
+- docs/: architecture and development guidance.
+- run.py, pyproject.toml, requirements.txt: launcher and dependency configuration.
+
+Virtual environments, caches, test reports, local configuration, and working data are excluded through .gitignore. Publish this repository directory, utility-hub/, rather than its parent workspace. Licensed assets and their notices are required parts of the application.
 
 ## Use the Workbench
 
@@ -40,4 +56,6 @@ The supplied UI_STYLE_GUIDE.md is adapted using existing Jinja/CSS/JavaScript: g
 
 - [Reference data](app/static/data/README.md) and [fonts](app/static/fonts/README.md): provenance and redistribution notices.
 
-[GitHub — Ehsaan Mehar](https://github.com/meharehsaan)
+## License and Author
+
+Original project code is licensed under the [MIT License](LICENSE), copyright © 2026 [Ehsaan Mehar](https://github.com/meharehsaan). Bundled fonts, MD5 implementation, and reference assets retain the licenses/notices stored beside them.
