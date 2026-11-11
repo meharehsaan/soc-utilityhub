@@ -1,4 +1,4 @@
-# Runtime dependencies; install with Python 3.12 or newer.
+# Runtime dependencies mirrored from pyproject.toml; Python 3.12+.
 fastapi>=0.118,<1
 starlette>=0.47.2,<2
 pydantic>=2.10,<3
@@ -15,11 +15,3 @@ cryptography>=43
 PyYAML>=6.0.2,<7
 jsonschema>=4.23,<5
 defusedxml>=0.7.1,<1
-
-# Development and verification tools.
-pytest>=8,<10
-httpx>=0.28,<1
-ruff>=0.11,<1
-playwright>=1.50,<2
-pytest-playwright>=0.7,<1
-uv>=0.6,<1
