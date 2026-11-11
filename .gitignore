@@ -1,16 +1,41 @@
-.venv/
-.runtime-venv/
+# Local Python environments
+/.venv/
+/.runtime-venv/
+/.local-venv/
+/venv/
+/env/
+/__pypackages__/
+
+# Generated Python and test files
 __pycache__/
 *.py[cod]
 .pytest_cache/
 .ruff_cache/
+.mypy_cache/
+.tox/
+.nox/
 .coverage
+.coverage.*
+coverage.xml
 htmlcov/
-.env
 *.egg-info/
 build/
 dist/
 test-results/
 playwright-report/
+
+# Local configuration and working data
+.env
+.env.*
+!.env.example
+.aws/
+.codex/
+.agents/
+.cache/
+tmp/
+temp/
+uploads/
 *.log
+*.pid
 .DS_Store
+Thumbs.db
