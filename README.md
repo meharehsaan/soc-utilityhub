@@ -26,8 +26,7 @@ On the host, use the VM's IPv4 from multipass info foo and open http://VM_IP:800
 - app/: per-service Python modules, templates, local JavaScript/CSS, fonts, and offline reference data.
 - tests/: synthetic unit/API/browser checks and fixtures.
 - run.py: single launcher for every service.
-- pyproject.toml, requirements.txt: project metadata and runtime dependencies.
-- requirements.txt: runtime dependencies plus development and testing tools.
+- pyproject.toml, requirements.txt: project metadata, runtime packages, and development/testing tools.
 
 Virtual environments, caches, test reports, local configuration, and working data are excluded through .gitignore. Publish only this project's repository to [soc-utilityhub](https://github.com/meharehsaan/soc-utilityhub), rather than its parent workspace. Licensed assets and their notices are required parts of the application.
 
@@ -66,7 +65,7 @@ From an activated Python 3.12+ environment:
     node --experimental-default-type=module tests/browser/engines.test.mjs
     node --experimental-default-type=module tests/browser/utilities.test.mjs
 
-Node checks require Node 22+ and no npm installation. Runtime dependencies in requirements.txt mirror project.dependencies in pyproject.toml; requirements.txt mirrors its dev group and includes the runtime file. Keep both formats synchronized when changing packages. A uv.lock still needs resolution and review with package-index access; requirements files currently declare compatible ranges rather than a fully pinned environment.
+Node checks require Node 22+ and no npm installation. The single requirements.txt includes project.dependencies and the dev group from pyproject.toml. Keep both formats synchronized when changing packages. A uv.lock still needs resolution and review with package-index access; requirements.txt currently declares compatible ranges rather than a fully pinned environment.
 
 For browser workflows, run the server in another terminal, then:
 
